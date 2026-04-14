@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refrigerator door — Griffin Somaratne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f3ee;
+    --muted: #888078;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(245,243,238,0.06);
+  }
+
+  .nav-logo {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(245,243,238,0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: color 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+  .nav-links a.active { color: var(--white); }
+
+  /* PAGE */
+  .page-header {
+    padding: 9rem 3rem 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .page-eyebrow {
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  .page-title {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1.25rem;
+  }
+
+  .page-desc {
+    font-size: 0.95rem;
+    color: rgba(245,243,238,0.45);
+    max-width: 520px;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  /* FRIDGE GRID */
+  .fridge-body {
+    padding: 3rem 3rem 8rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  /* Category headers */
+  .fridge-category {
+    margin-bottom: 3rem;
+  }
+
+  .fridge-category-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(245,243,238,0.07);
+  }
+
+  .fridge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .fridge-item {
+    padding: 1.25rem;
+    border: 1px solid rgba(245,243,238,0.07);
+    border-radius: 6px;
+    background: rgba(245,243,238,0.02);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .fridge-item:hover {
+    border-color: rgba(245,243,238,0.18);
+    background: rgba(245,243,238,0.04);
+  }
+
+  .fridge-item-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .fridge-item-type {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .fridge-item-arrow {
+    opacity: 0;
+    transition: opacity 0.2s;
+    color: var(--muted);
+  }
+
+  .fridge-item:hover .fridge-item-arrow { opacity: 1; }
+
+  .fridge-item-arrow svg { width: 12px; height: 12px; }
+
+  .fridge-item-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.3;
+    color: var(--white);
+  }
+
+  .fridge-item-desc {
+    font-size: 0.82rem;
+    color: rgba(245,243,238,0.4);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* no-link item (no href) */
+  .fridge-item.static {
+    cursor: default;
+  }
+
+  .fridge-item.static:hover {
+    border-color: rgba(245,243,238,0.07);
+    background: rgba(245,243,238,0.02);
+  }
+
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid rgba(245,243,238,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  footer p { font-size: 0.8rem; color: rgba(245,243,238,0.25); }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .page-header { padding: 7rem 1.5rem 2rem; }
+    .fridge-body { padding: 2rem 1.5rem 5rem; }
+    footer { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Griffin Somaratne</a>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="fridge.html" class="active">Refrigerator door</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+<div class="page-header">
+  <p class="page-eyebrow">Refrigerator door</p>
+  <h1 class="page-title">The smaller stuff.</h1>
+  <p class="page-desc">Projects, experiments, and sketches that didn't grow into full case studies — but are worth showing anyway. Consider this my scratchpad made public.</p>
+</div>
+
+<div class="fridge-body">
+
+  <div class="fridge-category">
+    <p class="fridge-category-label">Explorations</p>
+    <div class="fridge-grid">
+
+      <a href="#" class="fridge-item">
+        <div class="fridge-item-top">
+          <span class="fridge-item-type">Workshop</span>
+          <span class="fridge-item-arrow">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+        <h3 class="fridge-item-title">Design system audit for an internal tool</h3>
+        <p class="fridge-item-desc">Identified inconsistencies across 40+ components and proposed a unified token structure.</p>
+      </a>
+
+      <a href="#" class="fridge-item">
+        <div class="fridge-item-top">
+          <span class="fridge-item-type">Exploration</span>
+          <span class="fridge-item-arrow">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+        <h3 class="fridge-item-title">Information architecture mapping</h3>
+        <p class="fridge-item-desc">Untangling a sprawling navigation structure for a fintech onboarding flow.</p>
+      </a>
+
+      <a href="#" class="fridge-item">
+        <div class="fridge-item-top">
+          <span class="fridge-item-type">Side project</span>
+          <span class="fridge-item-arrow">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+        <h3 class="fridge-item-title">Wayfinding system concept</h3>
+        <p class="fridge-item-desc">A speculative redesign of hospital wayfinding for reduced cognitive load.</p>
+      </a>
+
+      <div class="fridge-item static">
+        <div class="fridge-item-top">
+          <span class="fridge-item-type">Add yours</span>
+        </div>
+        <h3 class="fridge-item-title">Your next refrigerator door item</h3>
+        <p class="fridge-item-desc">Something small but worth showing — give it a type, title, and one-line description.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="fridge-category">
+    <p class="fridge-category-label">Sketches & ideas</p>
+    <div class="fridge-grid">
+
+      <div class="fridge-item static">
+        <div class="fridge-item-top">
+          <span class="fridge-item-type">Sketch</span>
+        </div>
+        <h3 class="fridge-item-title">Add a sketch here</h3>
+        <p class="fridge-item-desc">A quick idea, a concept that didn't go anywhere, or something you're still noodling on.</p>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 Griffin Somaratne</p>
+  <p>Designed & built from scratch</p>
+</footer>
+
+</body>
+</html>

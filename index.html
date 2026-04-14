@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Griffin Somaratne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f3ee;
+    --accent: #e8e0d4;
+    --muted: #888078;
+    --tag-ux: #c8b8f0;
+    --tag-ui: #f0b8d8;
+    --tag-research: #f0d0b8;
+    --tag-service: #b8d8f0;
+    --tag-eng: #b8f0d0;
+    --tag-strategy: #f0f0b8;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(245,243,238,0.06);
+  }
+
+  .nav-logo {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(245,243,238,0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: color 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links a.active { color: var(--white); }
+
+  .nav-links a:hover { color: var(--white); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 8rem 3rem 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 60%;
+    height: 140%;
+    background: radial-gradient(ellipse at center, rgba(200,184,240,0.04) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    animation: fadeUp 0.9s ease both;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .hero-headline {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    line-height: 1.15;
+    font-weight: 400;
+    color: var(--white);
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: rgba(245,243,238,0.6);
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: rgba(245,243,238,0.5);
+    max-width: 380px;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .hero-scroll {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: rgba(245,243,238,0.45);
+    font-size: 0.85rem;
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: color 0.2s;
+    width: fit-content;
+  }
+
+  .hero-scroll:hover { color: var(--white); }
+
+  .scroll-arrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: bounce 2s ease infinite;
+  }
+
+  .scroll-arrow svg { width: 16px; height: 16px; }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(4px); }
+  }
+
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+
+  .hero-img-pair {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 0.5rem;
+    height: 460px;
+  }
+
+  .hero-img-box {
+    background: rgba(245,243,238,0.04);
+    border: 1px solid rgba(245,243,238,0.07);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-img-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    filter: grayscale(20%);
+  }
+
+  .hero-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(200,184,240,0.06) 0%, rgba(240,184,216,0.06) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-style: italic;
+    color: rgba(245,243,238,0.2);
+    font-size: 0.9rem;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* WORK SECTION */
+  .section-work {
+    padding: 6rem 3rem;
+    border-top: 1px solid rgba(245,243,238,0.07);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 400;
+    color: var(--white);
+  }
+
+  /* FILTERS */
+  .filters {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+  }
+
+  .filter-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-right: 0.5rem;
+  }
+
+  .filter-btn {
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    border: 1px solid rgba(245,243,238,0.15);
+    background: transparent;
+    color: rgba(245,243,238,0.6);
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.18s;
+    font-weight: 400;
+  }
+
+  .filter-btn:hover {
+    border-color: rgba(245,243,238,0.4);
+    color: var(--white);
+  }
+
+  .filter-btn.active {
+    background: var(--white);
+    color: var(--black);
+    border-color: var(--white);
+  }
+
+  .filter-btn[data-tag="UX design"].active { background: var(--tag-ux); border-color: var(--tag-ux); color: #2a1860; }
+  .filter-btn[data-tag="UI design"].active { background: var(--tag-ui); border-color: var(--tag-ui); color: #5a1035; }
+  .filter-btn[data-tag="Research"].active { background: var(--tag-research); border-color: var(--tag-research); color: #5a2a08; }
+  .filter-btn[data-tag="Service design"].active { background: var(--tag-service); border-color: var(--tag-service); color: #082858; }
+  .filter-btn[data-tag="Engineering"].active { background: var(--tag-eng); border-color: var(--tag-eng); color: #083820; }
+  .filter-btn[data-tag="Strategy"].active { background: var(--tag-strategy); border-color: var(--tag-strategy); color: #383808; }
+
+  /* CASE STUDY GRID */
+  .case-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .case-card {
+    background: rgba(245,243,238,0.03);
+    border: 1px solid rgba(245,243,238,0.07);
+    border-radius: 6px;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s, transform 0.2s;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .case-card:hover {
+    border-color: rgba(245,243,238,0.2);
+    transform: translateY(-2px);
+  }
+
+  .case-card.hidden {
+    display: none;
+  }
+
+  .case-thumb {
+    aspect-ratio: 16/9;
+    background: rgba(245,243,238,0.04);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .case-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+
+  .case-card:hover .case-thumb img { opacity: 0.9; }
+
+  .case-thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    opacity: 0.15;
+  }
+
+  .case-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1;
+  }
+
+  .case-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+  }
+
+  .tag-ux { background: rgba(200,184,240,0.18); color: #c8b8f0; border: 1px solid rgba(200,184,240,0.25); }
+  .tag-ui { background: rgba(240,184,216,0.18); color: #f0b8d8; border: 1px solid rgba(240,184,216,0.25); }
+  .tag-research { background: rgba(240,208,184,0.18); color: #f0d0b8; border: 1px solid rgba(240,208,184,0.25); }
+  .tag-service { background: rgba(184,216,240,0.18); color: #b8d8f0; border: 1px solid rgba(184,216,240,0.25); }
+  .tag-eng { background: rgba(184,240,208,0.18); color: #b8f0d0; border: 1px solid rgba(184,240,208,0.25); }
+  .tag-strategy { background: rgba(240,240,184,0.18); color: #f0f0b8; border: 1px solid rgba(240,240,184,0.25); }
+
+  .case-title {
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--white);
+  }
+
+  .case-desc {
+    font-size: 0.85rem;
+    color: rgba(245,243,238,0.45);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .case-link {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    font-size: 0.82rem;
+    color: rgba(245,243,238,0.4);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: color 0.2s;
+  }
+
+  .case-card:hover .case-link { color: var(--white); }
+
+  .case-link svg { width: 14px; height: 14px; transition: transform 0.2s; }
+  .case-card:hover .case-link svg { transform: translate(2px, -2px); }
+
+  /* FRIDGE DOOR SECTION */
+  .section-fridge {
+    padding: 6rem 3rem;
+    border-top: 1px solid rgba(245,243,238,0.07);
+  }
+
+  .fridge-intro {
+    max-width: 520px;
+    margin-bottom: 3rem;
+  }
+
+  .fridge-intro p {
+    font-size: 0.95rem;
+    color: rgba(245,243,238,0.45);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .fridge-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+  }
+
+  .fridge-item {
+    padding: 1.25rem;
+    border: 1px solid rgba(245,243,238,0.07);
+    border-radius: 6px;
+    background: rgba(245,243,238,0.02);
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .fridge-item:hover {
+    border-color: rgba(245,243,238,0.18);
+    background: rgba(245,243,238,0.04);
+  }
+
+  .fridge-item-type {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .fridge-item-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    line-height: 1.3;
+    color: var(--white);
+  }
+
+  .fridge-item-desc {
+    font-size: 0.82rem;
+    color: rgba(245,243,238,0.4);
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  /* ABOUT & CONTACT */
+  .section-about {
+    padding: 6rem 3rem;
+    border-top: 1px solid rgba(245,243,238,0.07);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-text h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+    color: rgba(245,243,238,0.55);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 1rem;
+  }
+
+  .contact-block h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+    border: 1px solid rgba(245,243,238,0.08);
+    border-radius: 4px;
+    text-decoration: none;
+    color: rgba(245,243,238,0.7);
+    font-size: 0.9rem;
+    transition: all 0.2s;
+  }
+
+  .contact-link:hover {
+    border-color: rgba(245,243,238,0.25);
+    color: var(--white);
+    background: rgba(245,243,238,0.04);
+  }
+
+  .contact-link svg { width: 14px; height: 14px; opacity: 0.5; }
+
+  /* FOOTER */
+  footer {
+    padding: 2rem 3rem;
+    border-top: 1px solid rgba(245,243,238,0.07);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: rgba(245,243,238,0.25);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2.5rem; }
+    .hero-right { order: -1; }
+    .hero-img-pair { height: 240px; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; }
+    .section-work, .section-fridge, .section-about, .section-fridge { padding: 4rem 1.5rem; }
+    .case-grid { grid-template-columns: 1fr; }
+    .section-about { grid-template-columns: 1fr; gap: 3rem; }
+    footer { padding: 1.5rem; }
+  }
+
+  @media (min-width: 901px) and (max-width: 1200px) {
+    .case-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Griffin Somaratne</a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="fridge.html">Refrigerator door</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <span class="hero-eyebrow">Designer &amp; Strategist</span>
+    <h1 class="hero-headline">
+      Looking to create products and experiences for happier, <em>healthier,</em> and brighter futures.
+    </h1>
+    <p class="hero-sub">
+      I'm Griffin — a UX designer, strategist, and problem solver working at the intersection of people, systems, and ideas.
+    </p>
+    <a href="#work" class="hero-scroll">
+      See my work
+      <span class="scroll-arrow">
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 3v10M3 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </span>
+    </a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-img-pair">
+      <div class="hero-img-box">
+        <div class="hero-placeholder">your artwork here</div>
+      </div>
+      <div class="hero-img-box">
+        <div class="hero-placeholder">your artwork here</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="section-work" id="work">
+  <div class="section-header">
+    <h2 class="section-title">Work</h2>
+  </div>
+
+  <div class="filters">
+    <span class="filter-label">Filter</span>
+    <button class="filter-btn active" data-tag="all">All</button>
+    <button class="filter-btn" data-tag="UX design">UX design</button>
+    <button class="filter-btn" data-tag="UI design">UI design</button>
+    <button class="filter-btn" data-tag="Research">Research</button>
+    <button class="filter-btn" data-tag="Service design">Service design</button>
+    <button class="filter-btn" data-tag="Engineering">Engineering</button>
+    <button class="filter-btn" data-tag="Strategy">Strategy</button>
+  </div>
+
+  <div class="case-grid" id="caseGrid">
+
+    <a href="blueprint.html" class="case-card" data-tags="UX design,UI design,Research">
+      <div class="case-thumb">
+        <div class="case-thumb-placeholder">◈</div>
+      </div>
+      <div class="case-body">
+        <div class="case-tags">
+          <span class="tag tag-ux">UX design</span>
+          <span class="tag tag-ui">UI design</span>
+          <span class="tag tag-research">Research</span>
+        </div>
+        <h3 class="case-title">Capital One — BluePrint</h3>
+        <p class="case-desc">Providing architecture pattern recommendations for application engineers.</p>
+        <span class="case-link">
+          View case study
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+
+    <a href="#" class="case-card" data-tags="UX design,Research">
+      <div class="case-thumb">
+        <div class="case-thumb-placeholder">◈</div>
+      </div>
+      <div class="case-body">
+        <div class="case-tags">
+          <span class="tag tag-ux">UX design</span>
+          <span class="tag tag-research">Research</span>
+        </div>
+        <h3 class="case-title">Capital One — CDs</h3>
+        <p class="case-desc">Retaining customers and enhancing the mobile experience for certificate of deposit accounts.</p>
+        <span class="case-link">
+          View case study
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+
+    <a href="#" class="case-card" data-tags="UI design">
+      <div class="case-thumb">
+        <div class="case-thumb-placeholder">◈</div>
+      </div>
+      <div class="case-body">
+        <div class="case-tags">
+          <span class="tag tag-ui">UI design</span>
+        </div>
+        <h3 class="case-title">Capital One — Workbench</h3>
+        <p class="case-desc">Redesigning the internal developer tooling experience for enterprise teams.</p>
+        <span class="case-link">
+          View case study
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+
+    <a href="#" class="case-card" data-tags="Strategy,Service design">
+      <div class="case-thumb">
+        <div class="case-thumb-placeholder">◈</div>
+      </div>
+      <div class="case-body">
+        <div class="case-tags">
+          <span class="tag tag-strategy">Strategy</span>
+          <span class="tag tag-service">Service design</span>
+        </div>
+        <h3 class="case-title">Add your next case study</h3>
+        <p class="case-desc">A short description of the project and what problem it solved.</p>
+        <span class="case-link">
+          View case study
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<!-- NEXT CASE placeholder for footer -->
+<footer>
+  <p>© 2026 Griffin Somaratne</p>
+  <p>Designed & built from scratch</p>
+</footer>
+
+<script>
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.case-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tag = btn.dataset.tag;
+      cards.forEach(card => {
+        if (tag === 'all') {
+          card.classList.remove('hidden');
+        } else {
+          const cardTags = card.dataset.tags.split(',');
+          card.classList.toggle('hidden', !cardTags.includes(tag));
+        }
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

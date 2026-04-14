@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BluePrint — Griffin Somaratne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f3ee;
+    --accent: #e8e0d4;
+    --muted: #888078;
+    --tag-ux: #c8b8f0;
+    --tag-ui: #f0b8d8;
+    --tag-research: #f0d0b8;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --highlight: rgba(200,184,240,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(245,243,238,0.06);
+  }
+
+  .nav-logo {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(245,243,238,0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  /* CASE STUDY LAYOUT */
+  .cs-hero {
+    padding: 9rem 3rem 5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .cs-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: rgba(245,243,238,0.4);
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin-bottom: 2.5rem;
+    transition: color 0.2s;
+  }
+
+  .cs-back:hover { color: var(--white); }
+  .cs-back svg { width: 14px; height: 14px; }
+
+  .cs-tags {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 400;
+  }
+
+  .tag-ux { background: rgba(200,184,240,0.18); color: #c8b8f0; border: 1px solid rgba(200,184,240,0.25); }
+  .tag-ui { background: rgba(240,184,216,0.18); color: #f0b8d8; border: 1px solid rgba(240,184,216,0.25); }
+  .tag-research { background: rgba(240,208,184,0.18); color: #f0d0b8; border: 1px solid rgba(240,208,184,0.25); }
+
+  .cs-title {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  /* MAIN LAYOUT: content + sidebar */
+  .cs-body {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 3rem 8rem;
+    align-items: start;
+  }
+
+  .cs-content { min-width: 0; }
+
+  /* HERO IMAGE */
+  .cs-hero-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: rgba(245,243,238,0.03);
+    border: 1px solid rgba(245,243,238,0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 3.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245,243,238,0.15);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  .cs-hero-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* SECTION BLOCKS */
+  .cs-section {
+    margin-bottom: 4rem;
+  }
+
+  .cs-section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #c8b8f0;
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+
+  .cs-section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 400;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+  }
+
+  .cs-section p {
+    font-size: 0.95rem;
+    color: rgba(245,243,238,0.65);
+    line-height: 1.85;
+    margin-bottom: 0.85rem;
+    font-weight: 300;
+  }
+
+  .cs-section ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .cs-section ul li {
+    font-size: 0.95rem;
+    color: rgba(245,243,238,0.65);
+    line-height: 1.7;
+    font-weight: 300;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .cs-section ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  /* PROCESS CARDS */
+  .process-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .process-card {
+    padding: 1.25rem;
+    border: 1px solid rgba(245,243,238,0.08);
+    border-radius: 6px;
+    background: rgba(245,243,238,0.02);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .process-thumb {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: rgba(245,243,238,0.04);
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245,243,238,0.1);
+    font-size: 0.75rem;
+    font-style: italic;
+  }
+
+  .process-card-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--white);
+    line-height: 1.3;
+  }
+
+  .process-card-desc {
+    font-size: 0.8rem;
+    color: rgba(245,243,238,0.45);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .process-card-link {
+    font-size: 0.8rem;
+    color: #c8b8f0;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: auto;
+    transition: opacity 0.2s;
+  }
+
+  .process-card-link:hover { opacity: 0.7; }
+  .process-card-link svg { width: 12px; height: 12px; }
+
+  /* RESEARCH CALLOUT */
+  .research-callout {
+    background: var(--highlight);
+    border: 1px solid rgba(200,184,240,0.2);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .research-callout .rc-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #c8b8f0;
+    margin-bottom: 0.75rem;
+  }
+
+  .research-callout p {
+    font-size: 0.9rem;
+    color: rgba(245,243,238,0.7);
+    margin-bottom: 0;
+  }
+
+  /* INSIGHTS LIST */
+  .insights-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .insight-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(245,243,238,0.07);
+    border-radius: 6px;
+  }
+
+  .insight-num {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: rgba(200,184,240,0.35);
+    line-height: 1;
+    min-width: 1.5rem;
+    padding-top: 0.1rem;
+  }
+
+  .insight-text {
+    font-size: 0.9rem;
+    color: rgba(245,243,238,0.6);
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  /* QUOTE */
+  .cs-quote {
+    border-left: 2px solid rgba(200,184,240,0.4);
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .cs-quote p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    color: rgba(245,243,238,0.75);
+    margin: 0;
+  }
+
+  /* DIVIDER */
+  .cs-divider {
+    border: none;
+    border-top: 1px solid rgba(245,243,238,0.07);
+    margin: 3.5rem 0;
+  }
+
+  /* SIDEBAR */
+  .cs-sidebar {
+    position: sticky;
+    top: 5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .sidebar-block { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .sidebar-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .sidebar-value {
+    font-size: 0.9rem;
+    color: rgba(245,243,238,0.8);
+    line-height: 1.5;
+  }
+
+  .sidebar-divider {
+    border: none;
+    border-top: 1px solid rgba(245,243,238,0.07);
+  }
+
+  .sidebar-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  /* NEXT CASE */
+  .cs-next {
+    border-top: 1px solid rgba(245,243,238,0.07);
+    padding: 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .cs-next p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .cs-next a {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: var(--white);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .cs-next a:hover { opacity: 0.65; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .cs-hero { padding: 7rem 1.5rem 3rem; }
+    .cs-body { grid-template-columns: 1fr; gap: 3rem; padding: 0 1.5rem 5rem; }
+    .cs-sidebar { position: static; flex-direction: row; flex-wrap: wrap; }
+    .process-cards { grid-template-columns: 1fr; }
+    .cs-next { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Griffin Somaratne</a>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <li><a href="fridge.html">Refrigerator door</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="cs-hero">
+  <a href="index.html" class="cs-back">
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 7H2M2 7l5-5M2 7l5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back to work
+  </a>
+
+  <div class="cs-tags">
+    <span class="tag tag-ux">UX design</span>
+    <span class="tag tag-ui">UI design</span>
+    <span class="tag tag-research">Research</span>
+  </div>
+
+  <h1 class="cs-title">BluePrint</h1>
+</div>
+
+<!-- BODY -->
+<div class="cs-body">
+  <main class="cs-content">
+
+    <!-- Hero image -->
+    <div class="cs-hero-img">
+      Add a hero screenshot of BluePrint here
+    </div>
+
+    <!-- Overview -->
+    <div class="cs-section">
+      <p class="cs-section-label">Overview</p>
+      <p>The enterprise application design process is rife with siloed knowledge, suboptimal decisions, and expensive rework. BluePrint makes designing applications easier and faster by recommending standardized patterns to meet developers' requirements.</p>
+      <p>I led design for the platform's minimum viable product, launched in Q4 2025.</p>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- Problem -->
+    <div class="cs-section">
+      <p class="cs-section-label">Problem</p>
+      <h2>Developers lack an easy way to discover and reuse standardized architectural patterns.</h2>
+      <p>Through empathy interviews with developers and application architects, my team identified significant challenges in the enterprise application design process.</p>
+      <p>Developers often lack expertise in evolving technology trends and established architectural guidelines, and architects with this expertise are often consulted late in the process — after developers have already made redundant or suboptimal decisions. While a catalog of approved, standardized patterns for architecture exists, it is not well-known nor is adoption enforced.</p>
+      <p>The result: tech debt, expensive rework, and delayed project timelines.</p>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- Design Process -->
+    <div class="cs-section">
+      <p class="cs-section-label">Design process</p>
+      <h2>From user flow to high-fidelity prototype.</h2>
+      <p>Building upon requirements set forth by my product team, I ideated on the design of a platform that takes application intent and requirements and provides suggested architectural patterns. I evolved the concept from a user flow diagram to a high fidelity prototype.</p>
+
+      <div class="process-cards">
+        <div class="process-card">
+          <div class="process-thumb">flow diagram</div>
+          <span class="process-card-title">Happy path</span>
+          <p class="process-card-desc">By mapping the happy path, I identified missing functional requirements — including the critical need for save functionality so developers could leave and return without losing progress.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-thumb">low fi wireframe</div>
+          <span class="process-card-title">Low fidelity</span>
+          <p class="process-card-desc">Sketching the UI fleshed out uncertainties in the platform's core capabilities. Drawing inspiration from Gemini and ChatGPT to ease a future transition to a conversational interface.</p>
+        </div>
+        <div class="process-card">
+          <div class="process-thumb">high fi screenshot</div>
+          <span class="process-card-title">High fidelity</span>
+          <p class="process-card-desc">After stakeholder feedback, I created a high fidelity prototype using Material UI components to visualize the flow from login through receiving a recommendation.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- Research -->
+    <div class="cs-section">
+      <p class="cs-section-label">User research</p>
+      <h2>Moderated usability testing with 6 target users.</h2>
+      <p>To evaluate the proposed UI design and information architecture, I conducted moderated usability testing with associates familiar with app architecture and/or with expressed interest in BluePrint:</p>
+      <ul>
+        <li>1 cloud policy engineer</li>
+        <li>3 software engineers</li>
+        <li>2 architects (1 solutions, 1 application)</li>
+      </ul>
+      <p>Using the insights I uncovered, my tech team was able to implement necessary improvements prior to MVP launch.</p>
+
+      <div class="research-callout">
+        <p class="rc-title">Research goals</p>
+        <p>Should the recommendation or chat log be presented first in previous questionnaires? Do users understand where the in-progress questionnaire alert will send them if they have multiple in-progress?</p>
+      </div>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- Insights: Wins -->
+    <div class="cs-section">
+      <p class="cs-section-label">Insights — wins</p>
+      <h2>The interface behaved as participants expected.</h2>
+      <p>For the most part, participants appreciated BluePrint's intuitive design and recognized its potential for usefulness in their day-to-day work with application architecture.</p>
+
+      <div class="insights-list">
+        <div class="insight-item">
+          <span class="insight-num">1</span>
+          <p class="insight-text">Participants knew how to start a questionnaire and where to find past questionnaires without prompting.</p>
+        </div>
+        <div class="insight-item">
+          <span class="insight-num">2</span>
+          <p class="insight-text">Users expected dynamic, guided questions about their application and what they were trying to achieve — and that's exactly what they got.</p>
+        </div>
+        <div class="insight-item">
+          <span class="insight-num">3</span>
+          <p class="insight-text">The contents of the recommendations — pros and cons, a component diagram, multiple patterns to compare — aligned with participant expectations.</p>
+        </div>
+      </div>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- Insights: Improvements -->
+    <div class="cs-section">
+      <p class="cs-section-label">Insights — MVP improvements</p>
+      <h2>All improvements were content-related.</h2>
+      <p>Of the few improvements needed for the MVP design, none were structural — all were about what the product said, not how it was shaped.</p>
+
+      <div class="insights-list">
+        <div class="insight-item">
+          <span class="insight-num">1</span>
+          <p class="insight-text">Clearer explanation of BluePrint's capabilities and value proposition on the login screen.</p>
+        </div>
+        <div class="insight-item">
+          <span class="insight-num">2</span>
+          <p class="insight-text">Present output recommendations before input response when viewing a past questionnaire.</p>
+        </div>
+        <div class="insight-item">
+          <span class="insight-num">3</span>
+          <p class="insight-text">Make explicit that the in-progress banner will take users to their most recent unfinished questionnaire.</p>
+        </div>
+      </div>
+
+      <div class="cs-quote">
+        <p>"Generic — I don't understand how it will help me."</p>
+      </div>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- Enhancements -->
+    <div class="cs-section">
+      <p class="cs-section-label">Insights — enhancements</p>
+      <h2>Opportunities that shaped the product roadmap.</h2>
+      <p>Multiple opportunities to enhance BluePrint's functionality were identified during testing. Most participants were confused by the JSON output format — what it represented and what they could do with it. They wanted something they could use "right away" and play around with.</p>
+      <p>Other desired capabilities initially contradicted requirements set forth for the MVP by my product partner — editing, deleting, and sharing questionnaires. The team believed these functionalities could allow users to "game" the recommendation engine. However, since BluePrint is a tool and not law, I was able to advocate for these features, and the insights I surfaced helped influence the product roadmap and shift the engineering team's focus.</p>
+      <ul>
+        <li>Output file format that can be more easily shared and deployed (e.g., vs. JSON)</li>
+        <li>Edit and delete functionality for questionnaire responses</li>
+        <li>Shareable links to BluePrint questionnaires and recommendations</li>
+      </ul>
+    </div>
+
+    <hr class="cs-divider">
+
+    <!-- Looking Forward -->
+    <div class="cs-section">
+      <p class="cs-section-label">Looking forward</p>
+      <h2>A well-received MVP with clear direction for what comes next.</h2>
+      <p>Overall, BluePrint's MVP was well-received by users — they recognized the platform's potential to streamline the architectural design process, especially once AI was integrated. As the focus for the next iteration turned to AI integration, the user research I conducted gave the team a clear and prioritized enhancement roadmap.</p>
+      <p>My personal learnings centered on collaborative habits: including my product partner during synthesis would have provided richer context earlier and reduced the friction of advocating for user-driven changes later.</p>
+    </div>
+
+  </main>
+
+  <!-- SIDEBAR -->
+  <aside class="cs-sidebar">
+    <div class="sidebar-block">
+      <span class="sidebar-label">Client</span>
+      <span class="sidebar-value">Capital One</span>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-block">
+      <span class="sidebar-label">Timeline</span>
+      <span class="sidebar-value">6 weeks</span>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-block">
+      <span class="sidebar-label">Role</span>
+      <span class="sidebar-value">Sole UX designer</span>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-block">
+      <span class="sidebar-label">Team</span>
+      <span class="sidebar-value">1 PM, 7 engineers</span>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-block">
+      <span class="sidebar-label">Disciplines</span>
+      <div class="sidebar-tags">
+        <span class="tag tag-ux">UX design</span>
+        <span class="tag tag-ui">UI design</span>
+        <span class="tag tag-research">Research</span>
+      </div>
+    </div>
+    <hr class="sidebar-divider">
+    <div class="sidebar-block">
+      <span class="sidebar-label">Launched</span>
+      <span class="sidebar-value">Q4 2025</span>
+    </div>
+  </aside>
+</div>
+
+<!-- NEXT CASE -->
+<div class="cs-next">
+  <div>
+    <p>Next case study</p>
+    <a href="#">Capital One — CDs →</a>
+  </div>
+  <a href="index.html" style="font-size:0.85rem; color: rgba(245,243,238,0.4); text-decoration:none;">← All work</a>
+</div>
+
+</body>
+</html>
