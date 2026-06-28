@@ -173,29 +173,19 @@
     animation: fadeUp 0.9s 0.2s ease both;
   }
 
-  .hero-img-pair {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    gap: 0.5rem;
+  .hero-img-single {
+    width: 100%;
     height: 460px;
-  }
-
-  .hero-img-box {
     background: rgba(245,243,238,0.04);
     border: 1px solid rgba(245,243,238,0.07);
     border-radius: 4px;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
 
-  .hero-img-box img {
+  .hero-img-single img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.85;
-    filter: grayscale(20%);
   }
 
   .hero-placeholder {
@@ -327,11 +317,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    opacity: 0.7;
+    object-position: top;
+    opacity: 0.85;
     transition: opacity 0.3s;
   }
 
-  .case-card:hover .case-thumb img { opacity: 0.9; }
+  .case-card:hover .case-thumb img { opacity: 1; }
 
   .case-thumb-placeholder {
     width: 100%;
@@ -544,7 +535,7 @@
     nav { padding: 1rem 1.5rem; }
     .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2.5rem; }
     .hero-right { order: -1; }
-    .hero-img-pair { height: 240px; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr; }
+    .hero-img-single { height: 300px; }
     .section-work, .section-fridge, .section-about, .section-fridge { padding: 4rem 1.5rem; }
     .case-grid { grid-template-columns: 1fr; }
     .section-about { grid-template-columns: 1fr; gap: 3rem; }
@@ -587,13 +578,8 @@
     </a>
   </div>
   <div class="hero-right">
-    <div class="hero-img-pair">
-      <div class="hero-img-box">
-        <div class="hero-placeholder">your artwork here</div>
-      </div>
-      <div class="hero-img-box">
-        <div class="hero-placeholder">your artwork here</div>
-      </div>
+    <div class="hero-img-single">
+      <img src="images/hero-artwork.jpg" alt="Abstract chalk-style illustration of a hooded figure surrounded by stars">
     </div>
   </div>
 </section>
@@ -619,7 +605,7 @@
 
     <a href="blueprint.html" class="case-card" data-tags="UX design,UI design,Research">
       <div class="case-thumb">
-        <div class="case-thumb-placeholder">◈</div>
+        <img src="images/blueprint-hero.png" alt="BluePrint homepage screenshot">
       </div>
       <div class="case-body">
         <div class="case-tags">

@@ -13,7 +13,6 @@
   :root {
     --black: #0a0a0a;
     --white: #f5f3ee;
-    --accent: #e8e0d4;
     --muted: #888078;
     --tag-ux: #c8b8f0;
     --tag-ui: #f0b8d8;
@@ -73,10 +72,10 @@
 
   .nav-links a:hover { color: var(--white); }
 
-  /* CASE STUDY LAYOUT */
+  /* CASE STUDY HEADER */
   .cs-hero {
-    padding: 9rem 3rem 5rem;
-    max-width: 1100px;
+    padding: 9rem 3rem 0;
+    max-width: 760px;
     margin: 0 auto;
     animation: fadeUp 0.8s ease both;
   }
@@ -123,21 +122,49 @@
     font-size: clamp(2.5rem, 5vw, 4.5rem);
     font-weight: 400;
     line-height: 1.1;
-    margin-bottom: 1.5rem;
   }
 
-  /* MAIN LAYOUT: content + sidebar */
+  /* META BAR — moved up from sidebar */
+  .cs-meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid rgba(245,243,238,0.08);
+    border-radius: 8px;
+    margin-top: 2.25rem;
+    margin-bottom: 3rem;
+    overflow: hidden;
+  }
+
+  .meta-item {
+    flex: 1 1 140px;
+    padding: 0.9rem 1.25rem;
+    border-right: 1px solid rgba(245,243,238,0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .meta-item:last-child { border-right: none; }
+
+  .meta-label {
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta-value {
+    font-size: 0.85rem;
+    color: rgba(245,243,238,0.85);
+    line-height: 1.4;
+  }
+
+  /* BODY */
   .cs-body {
-    display: grid;
-    grid-template-columns: 1fr 280px;
-    gap: 5rem;
-    max-width: 1100px;
+    max-width: 760px;
     margin: 0 auto;
     padding: 0 3rem 8rem;
-    align-items: start;
   }
-
-  .cs-content { min-width: 0; }
 
   /* HERO IMAGE */
   .cs-hero-img {
@@ -162,10 +189,25 @@
     object-fit: cover;
   }
 
-  /* SECTION BLOCKS */
-  .cs-section {
-    margin-bottom: 4rem;
+  .process-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 4px;
   }
+
+  .modal-img-placeholder img,
+  .modal-shot-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+    border-radius: 6px;
+  }
+
+  /* SECTION BLOCKS */
+  .cs-section { margin-bottom: 4rem; }
 
   .cs-section-label {
     font-size: 0.75rem;
@@ -217,7 +259,7 @@
     font-size: 0.8rem;
   }
 
-  /* PROCESS CARDS */
+  /* PROCESS CARDS — now clickable to open modals */
   .process-cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -233,6 +275,19 @@
     display: flex;
     flex-direction: column;
     gap: 0.6rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  }
+
+  .process-card:hover {
+    border-color: rgba(200,184,240,0.35);
+    background: rgba(245,243,238,0.04);
+    transform: translateY(-2px);
+  }
+
+  .process-card:focus-visible {
+    outline: 2px solid rgba(200,184,240,0.5);
+    outline-offset: 2px;
   }
 
   .process-thumb {
@@ -247,7 +302,28 @@
     color: rgba(245,243,238,0.1);
     font-size: 0.75rem;
     font-style: italic;
+    position: relative;
+    overflow: hidden;
   }
+
+  .process-thumb-expand {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(10,10,10,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245,243,238,0.6);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .process-card:hover .process-thumb-expand { opacity: 1; }
+  .process-thumb-expand svg { width: 12px; height: 12px; }
 
   .process-card-title {
     font-family: var(--serif);
@@ -266,7 +342,6 @@
   .process-card-link {
     font-size: 0.8rem;
     color: #c8b8f0;
-    text-decoration: none;
     display: flex;
     align-items: center;
     gap: 0.3rem;
@@ -274,8 +349,142 @@
     transition: opacity 0.2s;
   }
 
-  .process-card-link:hover { opacity: 0.7; }
+  .process-card:hover .process-card-link { opacity: 0.7; }
   .process-card-link svg { width: 12px; height: 12px; }
+
+  /* WINS — image slots */
+  .wins-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.75rem;
+  }
+
+  .wins-image { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .wins-image-box {
+    aspect-ratio: 4/3;
+    background: rgba(245,243,238,0.03);
+    border: 1px dashed rgba(245,243,238,0.12);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245,243,238,0.18);
+    font-size: 0.78rem;
+    font-style: italic;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .wins-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .wins-image-caption {
+    font-size: 0.8rem;
+    color: rgba(245,243,238,0.4);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  /* CAROUSEL — MVP improvements */
+  .carousel {
+    margin-top: 1.75rem;
+  }
+
+  .carousel-track-wrap {
+    overflow: hidden;
+    border-radius: 6px;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.35s ease;
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .carousel-img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background: rgba(245,243,238,0.03);
+    border: 1px dashed rgba(245,243,238,0.12);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245,243,238,0.18);
+    font-size: 0.8rem;
+    font-style: italic;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .carousel-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .carousel-caption {
+    font-size: 0.85rem;
+    color: rgba(245,243,238,0.55);
+    line-height: 1.6;
+    font-weight: 300;
+    padding: 0 0.1rem;
+  }
+
+  .carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+
+  .carousel-arrows { display: flex; gap: 0.5rem; }
+
+  .carousel-arrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,243,238,0.15);
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .carousel-arrow:hover { background: rgba(245,243,238,0.08); border-color: rgba(245,243,238,0.3); }
+  .carousel-arrow svg { width: 13px; height: 13px; }
+
+  .carousel-dots { display: flex; gap: 0.4rem; }
+
+  .carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(245,243,238,0.2);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s;
+  }
+
+  .carousel-dot.active { background: #c8b8f0; }
 
   /* RESEARCH CALLOUT */
   .research-callout {
@@ -294,10 +503,25 @@
     margin-bottom: 0.75rem;
   }
 
-  .research-callout p {
-    font-size: 0.9rem;
-    color: rgba(245,243,238,0.7);
-    margin-bottom: 0;
+  .research-callout p { font-size: 0.9rem; color: rgba(245,243,238,0.7); margin-bottom: 0; }
+
+  .research-callout ul {
+    margin-top: 0.5rem;
+    margin-bottom: 0 !important;
+  }
+
+  .research-callout ul li {
+    color: rgba(245,243,238,0.7) !important;
+    font-size: 0.9rem !important;
+  }
+
+  .research-callout .rc-sublist {
+    margin-top: 0.5rem;
+    margin-left: 1.2rem;
+  }
+
+  .research-callout ul li::before {
+    content: '•' !important;
   }
 
   /* INSIGHTS LIST */
@@ -354,46 +578,11 @@
     margin: 3.5rem 0;
   }
 
-  /* SIDEBAR */
-  .cs-sidebar {
-    position: sticky;
-    top: 5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .sidebar-block { display: flex; flex-direction: column; gap: 0.4rem; }
-
-  .sidebar-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  .sidebar-value {
-    font-size: 0.9rem;
-    color: rgba(245,243,238,0.8);
-    line-height: 1.5;
-  }
-
-  .sidebar-divider {
-    border: none;
-    border-top: 1px solid rgba(245,243,238,0.07);
-  }
-
-  .sidebar-tags {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-  }
-
   /* NEXT CASE */
   .cs-next {
     border-top: 1px solid rgba(245,243,238,0.07);
     padding: 3rem;
-    max-width: 1100px;
+    max-width: 760px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -419,13 +608,318 @@
 
   .cs-next a:hover { opacity: 0.65; }
 
-  /* RESPONSIVE */
-  @media (max-width: 900px) {
+  /* ===== MODALS ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.78);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.25rem;
+  }
+
+  .modal-box {
+    background: #111111;
+    border: 1px solid rgba(245,243,238,0.1);
+    border-radius: 10px;
+    max-width: 760px;
+    width: 100%;
+    max-height: 86vh;
+    overflow-y: auto;
+    padding: 2.5rem;
+    position: relative;
+    animation: modalIn 0.25s ease;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,243,238,0.15);
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover { background: rgba(245,243,238,0.08); }
+  .modal-close svg { width: 14px; height: 14px; }
+
+  .modal-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c8b8f0;
+    margin-bottom: 0.6rem;
+  }
+
+  .modal-title {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 400;
+    margin-bottom: 1.1rem;
+    padding-right: 2rem;
+  }
+
+  .modal-desc {
+    font-size: 0.92rem;
+    color: rgba(245,243,238,0.6);
+    line-height: 1.8;
+    margin-bottom: 1.75rem;
+    font-weight: 300;
+  }
+
+  .modal-img-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: rgba(245,243,238,0.04);
+    border: 1px dashed rgba(245,243,238,0.15);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245,243,238,0.2);
+    font-size: 0.8rem;
+    font-style: italic;
+    margin-bottom: 1.75rem;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  .modal-shots-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .modal-shot { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .modal-shot-img {
+    aspect-ratio: 16/10;
+    background: rgba(245,243,238,0.04);
+    border: 1px dashed rgba(245,243,238,0.15);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245,243,238,0.2);
+    font-size: 0.7rem;
+    font-style: italic;
+    text-align: center;
+    padding: 0.5rem;
+  }
+
+  .modal-shot-label {
+    font-size: 0.85rem;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .modal-shot-desc {
+    font-size: 0.78rem;
+    color: rgba(245,243,238,0.45);
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  .modal-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .modal-step {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+
+  .modal-step-num {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: rgba(200,184,240,0.45);
+    line-height: 1.4;
+    min-width: 1.4rem;
+  }
+
+  .modal-step-text {
+    font-size: 0.88rem;
+    color: rgba(245,243,238,0.6);
+    line-height: 1.65;
+    font-weight: 300;
+    padding-top: 0.1rem;
+  }
+
+  .modal-callout {
+    background: var(--highlight);
+    border: 1px solid rgba(200,184,240,0.2);
+    border-radius: 6px;
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .modal-callout .rc-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #c8b8f0;
+    margin-bottom: 0.65rem;
+  }
+
+  .modal-callout ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .modal-callout ul li {
+    font-size: 0.88rem;
+    color: rgba(245,243,238,0.65);
+    line-height: 1.6;
+    font-weight: 300;
+    padding-left: 1.1rem;
+    position: relative;
+  }
+
+  .modal-callout ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  /* PROTOTYPE CTA */
+  .prototype-cta {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(245,243,238,0.1);
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(200,184,240,0.06) 0%, rgba(240,184,216,0.04) 100%);
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .prototype-cta-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(245,243,238,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .prototype-cta-icon svg { width: 22px; height: 22px; }
+
+  .prototype-cta-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+    min-width: 180px;
+  }
+
+  .prototype-cta-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--white);
+  }
+
+  .prototype-cta-sub {
+    font-size: 0.82rem;
+    color: rgba(245,243,238,0.45);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .prototype-cta-btn {
+    padding: 0.65rem 1.25rem;
+    border-radius: 6px;
+    background: var(--white);
+    color: var(--black);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+  }
+
+  .prototype-cta-btn:hover { opacity: 0.8; }
+
+  /* FUTURE / LOOKING FORWARD IMAGES */
+  .future-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.75rem;
+  }
+
+  .future-image { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .future-image-box {
+    aspect-ratio: 4/3;
+    background: rgba(245,243,238,0.03);
+    border: 1px dashed rgba(245,243,238,0.12);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245,243,238,0.18);
+    font-size: 0.78rem;
+    font-style: italic;
+    text-align: center;
+    padding: 1rem;
+  }
+
+  .future-image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .future-image-caption {
+    font-size: 0.8rem;
+    color: rgba(245,243,238,0.4);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 768px) {
+    .future-images { grid-template-columns: 1fr; }
+    .prototype-cta { flex-direction: column; align-items: flex-start; }
+    .prototype-cta-btn { width: 100%; text-align: center; }
     nav { padding: 1rem 1.5rem; }
-    .cs-hero { padding: 7rem 1.5rem 3rem; }
-    .cs-body { grid-template-columns: 1fr; gap: 3rem; padding: 0 1.5rem 5rem; }
-    .cs-sidebar { position: static; flex-direction: row; flex-wrap: wrap; }
+    .cs-hero { padding: 7rem 1.5rem 0; }
+    .cs-body { padding: 0 1.5rem 5rem; }
     .process-cards { grid-template-columns: 1fr; }
+    .wins-images { grid-template-columns: 1fr; }
+    .meta-item { flex: 1 1 45%; border-right: none; border-bottom: 1px solid rgba(245,243,238,0.08); }
+    .modal-box { padding: 1.75rem; max-height: 90vh; }
     .cs-next { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
   }
 </style>
@@ -441,7 +935,7 @@
   </ul>
 </nav>
 
-<!-- HERO -->
+<!-- HEADER -->
 <div class="cs-hero">
   <a href="index.html" class="cs-back">
     <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -457,197 +951,339 @@
   </div>
 
   <h1 class="cs-title">BluePrint</h1>
+
+  <!-- META BAR — moved up from sidebar -->
+  <div class="cs-meta-bar">
+    <div class="meta-item">
+      <span class="meta-label">Client</span>
+      <span class="meta-value">Capital One</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Timeline</span>
+      <span class="meta-value">6 weeks</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Role</span>
+      <span class="meta-value">Sole UX designer</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Team</span>
+      <span class="meta-value">1 PM, 7 engineers</span>
+    </div>
+  </div>
 </div>
 
 <!-- BODY -->
 <div class="cs-body">
-  <main class="cs-content">
 
-    <!-- Hero image -->
-    <div class="cs-hero-img">
-      Add a hero screenshot of BluePrint here
-    </div>
+  <!-- Hero image -->
+  <div class="cs-hero-img">
+    <img src="images/blueprint-hero.png" alt="BluePrint homepage screenshot">
+  </div>
 
-    <!-- Overview -->
-    <div class="cs-section">
-      <p class="cs-section-label">Overview</p>
-      <p>The enterprise application design process is rife with siloed knowledge, suboptimal decisions, and expensive rework. BluePrint makes designing applications easier and faster by recommending standardized patterns to meet developers' requirements.</p>
-      <p>I led design for the platform's minimum viable product, launched in Q4 2025.</p>
-    </div>
+  <!-- Overview -->
+  <div class="cs-section">
+    <p class="cs-section-label">Overview</p>
+    <p>The enterprise application design process is rife with siloed knowledge, suboptimal decisions, and expensive rework. BluePrint makes designing applications easier and faster by recommending standardized patterns to meet developers' requirements.</p>
+    <p>I led design for the platform's minimum viable product, launched in Q4 2025.</p>
+  </div>
 
-    <hr class="cs-divider">
+  <hr class="cs-divider">
 
-    <!-- Problem -->
-    <div class="cs-section">
-      <p class="cs-section-label">Problem</p>
-      <h2>Developers lack an easy way to discover and reuse standardized architectural patterns.</h2>
-      <p>Through empathy interviews with developers and application architects, my team identified significant challenges in the enterprise application design process.</p>
-      <p>Developers often lack expertise in evolving technology trends and established architectural guidelines, and architects with this expertise are often consulted late in the process — after developers have already made redundant or suboptimal decisions. While a catalog of approved, standardized patterns for architecture exists, it is not well-known nor is adoption enforced.</p>
-      <p>The result: tech debt, expensive rework, and delayed project timelines.</p>
-    </div>
+  <!-- Problem -->
+  <div class="cs-section">
+    <p class="cs-section-label">Problem</p>
+    <h2>Developers lack an easy way to discover and reuse standardized architectural patterns.</h2>
+    <p>Through empathy interviews with developers and application architects, my team identified significant challenges in the enterprise application design process.</p>
+    <p>Developers often lack expertise in evolving technology trends and established architectural guidelines, and architects with this expertise are often consulted late in the process — after developers have already made redundant or suboptimal decisions. Scarce documentation ensures that developers implement patterns inconsistently and with arbitrary uniqueness. While a catalog of approved, standardized patterns for architecture exists, it is not well-known nor is adoption enforced.</p>
+    <p>The result: tech debt, expensive rework, and delayed project timelines.</p>
+  </div>
 
-    <hr class="cs-divider">
+  <hr class="cs-divider">
 
-    <!-- Design Process -->
-    <div class="cs-section">
-      <p class="cs-section-label">Design process</p>
-      <h2>From user flow to high-fidelity prototype.</h2>
-      <p>Building upon requirements set forth by my product team, I ideated on the design of a platform that takes application intent and requirements and provides suggested architectural patterns. I evolved the concept from a user flow diagram to a high fidelity prototype.</p>
+  <!-- Design Process -->
+  <div class="cs-section">
+    <p class="cs-section-label">Design process</p>
+    <h2>From user flow to high-fidelity prototype.</h2>
+    <p>Building upon requirements set forth by my product team, I ideated on the design of a platform that takes application intent and requirements and provides suggested architectural patterns. I evolved the concept from a user flow diagram to a high fidelity prototype. Click any card below for a closer look.</p>
 
-      <div class="process-cards">
-        <div class="process-card">
-          <div class="process-thumb">flow diagram</div>
-          <span class="process-card-title">Happy path</span>
-          <p class="process-card-desc">By mapping the happy path, I identified missing functional requirements — including the critical need for save functionality so developers could leave and return without losing progress.</p>
+    <div class="process-cards">
+
+      <div class="process-card" tabindex="0" role="button" aria-label="View Happy Path details" onclick="openModal('modal-happy-path')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-happy-path')}">
+        <div class="process-thumb">
+          <img src="images/blueprint-happypath-flow.png" alt="Happy path flow diagram">
+          <span class="process-thumb-expand">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2H2v3M9 2h3v3M5 12H2V9M9 12h3V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
         </div>
-        <div class="process-card">
-          <div class="process-thumb">low fi wireframe</div>
-          <span class="process-card-title">Low fidelity</span>
-          <p class="process-card-desc">Sketching the UI fleshed out uncertainties in the platform's core capabilities. Drawing inspiration from Gemini and ChatGPT to ease a future transition to a conversational interface.</p>
-        </div>
-        <div class="process-card">
-          <div class="process-thumb">high fi screenshot</div>
-          <span class="process-card-title">High fidelity</span>
-          <p class="process-card-desc">After stakeholder feedback, I created a high fidelity prototype using Material UI components to visualize the flow from login through receiving a recommendation.</p>
-        </div>
+        <span class="process-card-title">Happy path</span>
+        <p class="process-card-desc">By mapping the happy path, I identified missing functional requirements.</p>
+        <span class="process-card-link">
+          View details
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
       </div>
+
+      <div class="process-card" tabindex="0" role="button" aria-label="View Low Fidelity details" onclick="openModal('modal-lofi')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-lofi')}">
+        <div class="process-thumb">
+          <img src="images/blueprint-lofi-homepage.png" alt="Low fidelity wireframe of BluePrint homepage">
+          <span class="process-thumb-expand">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2H2v3M9 2h3v3M5 12H2V9M9 12h3V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+        <span class="process-card-title">Low fidelity</span>
+        <p class="process-card-desc">Sketching the UI fleshed out uncertainties in the platform's core capabilities.</p>
+        <span class="process-card-link">
+          View details
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+
+      <div class="process-card" tabindex="0" role="button" aria-label="View High Fidelity details" onclick="openModal('modal-hifi')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-hifi')}">
+        <div class="process-thumb">
+          <img src="images/blueprint-hifi-homepage.png" alt="High fidelity screenshot of BluePrint homepage">
+          <span class="process-thumb-expand">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2H2v3M9 2h3v3M5 12H2V9M9 12h3V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+        <span class="process-card-title">High fidelity</span>
+        <p class="process-card-desc">After stakeholder feedback, I created a high fidelity prototype to test with users.</p>
+        <span class="process-card-link">
+          View details
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+      </div>
+
     </div>
+  </div>
 
-    <hr class="cs-divider">
+  <hr class="cs-divider">
 
-    <!-- Research -->
-    <div class="cs-section">
-      <p class="cs-section-label">User research</p>
-      <h2>Moderated usability testing with 6 target users.</h2>
-      <p>To evaluate the proposed UI design and information architecture, I conducted moderated usability testing with associates familiar with app architecture and/or with expressed interest in BluePrint:</p>
+  <!-- Research -->
+  <div class="cs-section">
+    <p class="cs-section-label">User research</p>
+    <h2>Moderated usability testing with 6 target users.</h2>
+    <p>To evaluate the proposed UI design and information architecture, I conducted moderated usability testing with associates familiar with app architecture and/or with expressed interest in BluePrint:</p>
+    <ul>
+      <li>1 cloud policy engineer</li>
+      <li>3 software engineers</li>
+      <li>2 architects (1 solutions, 1 application)</li>
+    </ul>
+    <p>Using the insights I uncovered, my tech team was able to implement necessary improvements prior to MVP launch.</p>
+
+    <div class="research-callout">
+      <p class="rc-title">Research goals</p>
       <ul>
-        <li>1 cloud policy engineer</li>
-        <li>3 software engineers</li>
-        <li>2 architects (1 solutions, 1 application)</li>
-      </ul>
-      <p>Using the insights I uncovered, my tech team was able to implement necessary improvements prior to MVP launch.</p>
-
-      <div class="research-callout">
-        <p class="rc-title">Research goals</p>
-        <p>Should the recommendation or chat log be presented first in previous questionnaires? Do users understand where the in-progress questionnaire alert will send them if they have multiple in-progress?</p>
-      </div>
-    </div>
-
-    <hr class="cs-divider">
-
-    <!-- Insights: Wins -->
-    <div class="cs-section">
-      <p class="cs-section-label">Insights — wins</p>
-      <h2>The interface behaved as participants expected.</h2>
-      <p>For the most part, participants appreciated BluePrint's intuitive design and recognized its potential for usefulness in their day-to-day work with application architecture.</p>
-
-      <div class="insights-list">
-        <div class="insight-item">
-          <span class="insight-num">1</span>
-          <p class="insight-text">Participants knew how to start a questionnaire and where to find past questionnaires without prompting.</p>
-        </div>
-        <div class="insight-item">
-          <span class="insight-num">2</span>
-          <p class="insight-text">Users expected dynamic, guided questions about their application and what they were trying to achieve — and that's exactly what they got.</p>
-        </div>
-        <div class="insight-item">
-          <span class="insight-num">3</span>
-          <p class="insight-text">The contents of the recommendations — pros and cons, a component diagram, multiple patterns to compare — aligned with participant expectations.</p>
-        </div>
-      </div>
-    </div>
-
-    <hr class="cs-divider">
-
-    <!-- Insights: Improvements -->
-    <div class="cs-section">
-      <p class="cs-section-label">Insights — MVP improvements</p>
-      <h2>All improvements were content-related.</h2>
-      <p>Of the few improvements needed for the MVP design, none were structural — all were about what the product said, not how it was shaped.</p>
-
-      <div class="insights-list">
-        <div class="insight-item">
-          <span class="insight-num">1</span>
-          <p class="insight-text">Clearer explanation of BluePrint's capabilities and value proposition on the login screen.</p>
-        </div>
-        <div class="insight-item">
-          <span class="insight-num">2</span>
-          <p class="insight-text">Present output recommendations before input response when viewing a past questionnaire.</p>
-        </div>
-        <div class="insight-item">
-          <span class="insight-num">3</span>
-          <p class="insight-text">Make explicit that the in-progress banner will take users to their most recent unfinished questionnaire.</p>
-        </div>
-      </div>
-
-      <div class="cs-quote">
-        <p>"Generic — I don't understand how it will help me."</p>
-      </div>
-    </div>
-
-    <hr class="cs-divider">
-
-    <!-- Enhancements -->
-    <div class="cs-section">
-      <p class="cs-section-label">Insights — enhancements</p>
-      <h2>Opportunities that shaped the product roadmap.</h2>
-      <p>Multiple opportunities to enhance BluePrint's functionality were identified during testing. Most participants were confused by the JSON output format — what it represented and what they could do with it. They wanted something they could use "right away" and play around with.</p>
-      <p>Other desired capabilities initially contradicted requirements set forth for the MVP by my product partner — editing, deleting, and sharing questionnaires. The team believed these functionalities could allow users to "game" the recommendation engine. However, since BluePrint is a tool and not law, I was able to advocate for these features, and the insights I surfaced helped influence the product roadmap and shift the engineering team's focus.</p>
-      <ul>
-        <li>Output file format that can be more easily shared and deployed (e.g., vs. JSON)</li>
-        <li>Edit and delete functionality for questionnaire responses</li>
-        <li>Shareable links to BluePrint questionnaires and recommendations</li>
+        <li>Are users able to complete a questionnaire and receive a recommendation?
+          <ul class="rc-sublist">
+            <li>Are users able to begin a questionnaire?</li>
+            <li>Where and how do users struggle in the flow?</li>
+          </ul>
+        </li>
+        <li>How do users feel about the recommendation?</li>
+        <li>Are users able to navigate to previous recommendations?</li>
       </ul>
     </div>
+  </div>
 
-    <hr class="cs-divider">
+  <hr class="cs-divider">
 
-    <!-- Looking Forward -->
-    <div class="cs-section">
-      <p class="cs-section-label">Looking forward</p>
-      <h2>A well-received MVP with clear direction for what comes next.</h2>
-      <p>Overall, BluePrint's MVP was well-received by users — they recognized the platform's potential to streamline the architectural design process, especially once AI was integrated. As the focus for the next iteration turned to AI integration, the user research I conducted gave the team a clear and prioritized enhancement roadmap.</p>
-      <p>My personal learnings centered on collaborative habits: including my product partner during synthesis would have provided richer context earlier and reduced the friction of advocating for user-driven changes later.</p>
-    </div>
+  <!-- Insights: Wins -->
+  <div class="cs-section">
+    <p class="cs-section-label">Insights — wins</p>
+    <h2>The interface behaved as participants expected.</h2>
+    <p>For the most part, participants appreciated BluePrint's intuitive design and recognized its potential for usefulness in their day-to-day work with application architecture.</p>
+    <p>From login to recommendation, the interface behaved as participants expected it to:</p>
 
-  </main>
-
-  <!-- SIDEBAR -->
-  <aside class="cs-sidebar">
-    <div class="sidebar-block">
-      <span class="sidebar-label">Client</span>
-      <span class="sidebar-value">Capital One</span>
-    </div>
-    <hr class="sidebar-divider">
-    <div class="sidebar-block">
-      <span class="sidebar-label">Timeline</span>
-      <span class="sidebar-value">6 weeks</span>
-    </div>
-    <hr class="sidebar-divider">
-    <div class="sidebar-block">
-      <span class="sidebar-label">Role</span>
-      <span class="sidebar-value">Sole UX designer</span>
-    </div>
-    <hr class="sidebar-divider">
-    <div class="sidebar-block">
-      <span class="sidebar-label">Team</span>
-      <span class="sidebar-value">1 PM, 7 engineers</span>
-    </div>
-    <hr class="sidebar-divider">
-    <div class="sidebar-block">
-      <span class="sidebar-label">Disciplines</span>
-      <div class="sidebar-tags">
-        <span class="tag tag-ux">UX design</span>
-        <span class="tag tag-ui">UI design</span>
-        <span class="tag tag-research">Research</span>
+    <div class="insights-list">
+      <div class="insight-item">
+        <span class="insight-num">1</span>
+        <p class="insight-text">Participants knew how to start a questionnaire and where to find past questionnaires without prompting.</p>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">2</span>
+        <p class="insight-text">Users expected dynamic, guided questions about their application and what they were trying to achieve — and that's exactly what they got.</p>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">3</span>
+        <p class="insight-text">The contents of the recommendations — pros and cons, a component diagram, multiple patterns to compare — aligned with participant expectations.</p>
       </div>
     </div>
-    <hr class="sidebar-divider">
-    <div class="sidebar-block">
-      <span class="sidebar-label">Launched</span>
-      <span class="sidebar-value">Q4 2025</span>
+
+    <div class="wins-images">
+      <div class="wins-image">
+        <div class="wins-image-box">
+          <img src="images/blueprint-wins-1.png" alt="Synthesized research insight: users want alternative recommendations even if they weren't perfect matches">
+        </div>
+      </div>
+      <div class="wins-image">
+        <div class="wins-image-box">
+          <img src="images/blueprint-wins-2.png" alt="Synthesized research insight: recommendation output aligned with user expectations">
+        </div>
+      </div>
     </div>
-  </aside>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Insights: Improvements -->
+  <div class="cs-section">
+    <p class="cs-section-label">Insights — MVP improvements</p>
+    <h2>All improvements were content-related.</h2>
+    <p>Of the few improvements needed for the MVP design, none were structural — all were about what the product said, not how it was shaped.</p>
+
+    <div class="insights-list">
+      <div class="insight-item">
+        <span class="insight-num">1</span>
+        <p class="insight-text">Clearer explanation of BluePrint's capabilities and value proposition on the login screen.</p>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">2</span>
+        <p class="insight-text">Present output recommendations before input response when viewing a past questionnaire.</p>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">3</span>
+        <p class="insight-text">Make explicit that the in-progress banner will take users to their most recent unfinished questionnaire.</p>
+      </div>
+    </div>
+
+    <!-- CAROUSEL -->
+    <div class="carousel">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="mvpCarouselTrack">
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/blueprint-mvp-login.png" alt="Annotated login screen showing the value proposition callout"></div>
+            <p class="carousel-caption">"Generic — I don't understand how it will help me."</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/blueprint-mvp-recommendation-order.png" alt="Annotated previous questionnaire screen showing the recommendation and response tab order"></div>
+            <p class="carousel-caption">"Give the end product first then if I want to see how the tool derived this, then go into the details."</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/blueprint-mvp-banner.png" alt="Annotated homepage banner showing the in-progress questionnaire callout"></div>
+            <p class="carousel-caption">"Give the end product first then if I want to see how the tool derived this, then go into the details."</p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <div class="carousel-dots" id="mvpCarouselDots">
+          <button class="carousel-dot active" aria-label="Slide 1"></button>
+          <button class="carousel-dot" aria-label="Slide 2"></button>
+          <button class="carousel-dot" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" aria-label="Previous slide" onclick="prevSlide('mvpCarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="carousel-arrow" aria-label="Next slide" onclick="nextSlide('mvpCarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="prototype-cta">
+      <div class="prototype-cta-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 12a4 4 0 014-4h0a4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#c8b8f0"/>
+          <path d="M8 4a4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#f0b8d8"/>
+          <path d="M0 12a4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#b8d8f0"/>
+          <path d="M0 20a4 4 0 014-4h4v4a4 4 0 01-4 4 4 4 0 01-4-4z" fill="#b8f0d0"/>
+          <path d="M8 12v-4h4a4 4 0 110 8H8v-4z" fill="#f0d0b8"/>
+        </svg>
+      </div>
+      <div class="prototype-cta-text">
+        <span class="prototype-cta-title">Walk through the final prototype yourself</span>
+        <span class="prototype-cta-sub">Click through the full questionnaire-to-recommendation flow in Figma.</span>
+      </div>
+      <a href="https://www.figma.com/proto/Jed7Z5FseX12MFF8PCeOSb/BluePrint--Copy---Copy-?node-id=650-20633&p=f&t=ExzeIsXgYl3hx63V-0&scaling=scale-down-width&content-scaling=fixed&page-id=325%3A8555&starting-point-node-id=650%3A20633&disable-default-keyboard-nav=1&hide-ui=1" target="_blank" rel="noopener" class="prototype-cta-btn">Open in Figma →</a>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Enhancements -->
+  <div class="cs-section">
+    <p class="cs-section-label">Insights — enhancements</p>
+    <h2>Opportunities that shaped the product roadmap.</h2>
+    <p>Multiple opportunities to enhance BluePrint's functionality were identified during testing. Most participants were confused by the JSON output format — what it represented and what they could do with it. They wanted something they could use "right away" and play around with.</p>
+    <p>Other desired capabilities initially contradicted requirements set forth for the MVP by my product partner — editing, deleting, and sharing questionnaires. The team believed these functionalities could allow users to "game" the recommendation engine. However, since BluePrint is a tool and not law, I was able to advocate for these features, and the insights I surfaced helped influence the product roadmap and shift the engineering team's focus.</p>
+    <ul>
+      <li>Output file format that can be more easily shared and deployed (e.g., vs. JSON)</li>
+      <li>Edit and delete functionality for questionnaire responses</li>
+      <li>Shareable links to BluePrint questionnaires and recommendations</li>
+    </ul>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Looking Forward -->
+  <div class="cs-section">
+    <p class="cs-section-label">Looking forward</p>
+    <h2>A well-received MVP with clear direction for what comes next.</h2>
+    <p>Overall, BluePrint's MVP was well-received by users — they recognized the platform's potential to streamline the architectural design process, especially once AI was integrated. As the focus for the next iteration turned to AI integration, the user research I conducted gave the team a clear and prioritized enhancement roadmap.</p>
+    <p>My personal learnings centered on collaborative habits: including my product partner during synthesis would have provided richer context earlier and reduced the friction of advocating for user-driven changes later.</p>
+
+    <div class="carousel">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="futureCarouselTrack">
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/blueprint-ai-welcome.png" alt="New AI interface welcome screen prompting the user to describe their application"></div>
+            <p class="carousel-caption">The new AI interface starts with a simple, open-ended prompt: describe what you're building.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/blueprint-ai-conversation-start.png" alt="User describing their application in plain language to the AI"></div>
+            <p class="carousel-caption">Users describe their application in plain language — no rigid form fields required.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/blueprint-ai-questions.png" alt="AI asking clarifying follow-up questions about the application"></div>
+            <p class="carousel-caption">BluePrint asks clarifying follow-up questions, adapting based on each previous answer.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/blueprint-ai-recommendation.png" alt="AI-generated architecture recommendation with diagram, pros, and cons"></div>
+            <p class="carousel-caption">In seconds, the AI generates a recommended pattern — complete with a diagram, pros, and cons.</p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <div class="carousel-dots" id="futureCarouselDots">
+          <button class="carousel-dot active" aria-label="Slide 1"></button>
+          <button class="carousel-dot" aria-label="Slide 2"></button>
+          <button class="carousel-dot" aria-label="Slide 3"></button>
+          <button class="carousel-dot" aria-label="Slide 4"></button>
+        </div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" aria-label="Previous slide" onclick="prevSlide('futureCarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="carousel-arrow" aria-label="Next slide" onclick="nextSlide('futureCarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <!-- NEXT CASE -->
@@ -658,6 +1294,213 @@
   </div>
   <a href="index.html" style="font-size:0.85rem; color: rgba(245,243,238,0.4); text-decoration:none;">← All work</a>
 </div>
+
+<!-- ===================== MODALS ===================== -->
+
+<!-- HAPPY PATH MODAL -->
+<div class="modal-overlay" id="modal-happy-path">
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-happy-path')">
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <p class="modal-label">Process — back to BluePrint</p>
+    <h3 class="modal-title">Happy path</h3>
+    <p class="modal-desc">The product requirements for the user interface enumerated only a login screen, homepage, conversation history, conversations, and pattern recommendations. By mapping the happy path flow, I established the necessary actions for each page in the platform and identified the need for save functionality so that developers could leave and return without losing their progress.</p>
+
+    <div class="modal-img-placeholder">
+      <img src="images/blueprint-happypath-flow.png" alt="Happy path flow diagram, including the in-progress chats variant">
+    </div>
+
+    <div class="modal-steps">
+      <div class="modal-step">
+        <span class="modal-step-num">1</span>
+        <p class="modal-step-text">Developer arrives at the BluePrint login page and logs in using SSO, landing on the BluePrint home screen.</p>
+      </div>
+      <div class="modal-step">
+        <span class="modal-step-num">2</span>
+        <p class="modal-step-text">If an in-progress chat exists, the developer can click into it directly — otherwise, they can start a new conversation.</p>
+      </div>
+      <div class="modal-step">
+        <span class="modal-step-num">3</span>
+        <p class="modal-step-text">Starting a new conversation begins with the developer answering an initial prompt.</p>
+      </div>
+      <div class="modal-step">
+        <span class="modal-step-num">4</span>
+        <p class="modal-step-text">The developer answers each question or group of questions, clicking to advance to the next.</p>
+      </div>
+      <div class="modal-step">
+        <span class="modal-step-num">5</span>
+        <p class="modal-step-text">Once the final question is answered, BluePrint returns an architectural pattern recommendation.</p>
+      </div>
+      <div class="modal-step">
+        <span class="modal-step-num">6</span>
+        <p class="modal-step-text">The developer downloads the recommended architectural pattern.</p>
+      </div>
+      <div class="modal-step">
+        <span class="modal-step-num">7</span>
+        <p class="modal-step-text">Past conversations live in conversation history, where the developer can click into any individual conversation to view its details and re-download the pattern.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- LOW FIDELITY MODAL -->
+<div class="modal-overlay" id="modal-lofi">
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-lofi')">
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <p class="modal-label">Process — back to BluePrint</p>
+    <h3 class="modal-title">Low fidelity</h3>
+    <p class="modal-desc">Having established MVP functionality, I could develop a look and feel for the platform. To ease the transition to a conversational interface following AI integration in Q2 2026, I drew inspiration from Gemini and ChatGPT. For MVP, "conversations" and "chats" were misnomers that I persuaded the team to replace with "questionnaires."</p>
+
+    <div class="modal-shots-grid">
+      <div class="modal-shot">
+        <div class="modal-shot-img">
+          <img src="images/blueprint-lofi-homepage.png" alt="Low fidelity wireframe of BluePrint homepage">
+        </div>
+        <span class="modal-shot-label">Homepage</span>
+        <p class="modal-shot-desc">Previous questionnaires stored in an expandable side menu, new questionnaires started from the side bar or page center, and banners for unfinished questionnaires.</p>
+      </div>
+      <div class="modal-shot">
+        <div class="modal-shot-img">
+          <img src="images/blueprint-lofi-questionnaire.png" alt="Low fidelity wireframe of the BluePrint questionnaire screen">
+        </div>
+        <span class="modal-shot-label">Questionnaire</span>
+        <p class="modal-shot-desc">Sequential questions with typical form inputs — text input, multiple choice, multi-select, and more.</p>
+      </div>
+      <div class="modal-shot">
+        <div class="modal-shot-img">
+          <img src="images/blueprint-lofi-recommendation.png" alt="Low fidelity wireframe of the BluePrint recommendation screen">
+        </div>
+        <span class="modal-shot-label">Recommendation</span>
+        <p class="modal-shot-desc">Architecture pattern diagram, summary, justification, pros, cons, and citations for additional information.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- HIGH FIDELITY MODAL -->
+<div class="modal-overlay" id="modal-hifi">
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-hifi')">
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <p class="modal-label">Process — back to BluePrint</p>
+    <h3 class="modal-title">High fidelity</h3>
+    <p class="modal-desc">With a settled interface design, I used Google's Material UI components to create a high fidelity prototype, visualizing the flow from login to starting a questionnaire to receiving a recommendation.</p>
+
+    <div class="modal-shots-grid">
+      <div class="modal-shot">
+        <div class="modal-shot-img">
+          <img src="images/blueprint-hifi-homepage.png" alt="High fidelity screenshot of BluePrint homepage">
+        </div>
+        <span class="modal-shot-label">Homepage</span>
+        <p class="modal-shot-desc">Welcome screen with an in-progress questionnaire banner and quick access to start a new one.</p>
+      </div>
+      <div class="modal-shot">
+        <div class="modal-shot-img">
+          <img src="images/blueprint-hifi-recommendation.png" alt="High fidelity screenshot of a BluePrint architecture recommendation">
+        </div>
+        <span class="modal-shot-label">Recommendations</span>
+        <p class="modal-shot-desc">Architecture pattern diagram with downloadable output and a clear summary.</p>
+      </div>
+      <div class="modal-shot">
+        <div class="modal-shot-img">
+          <img src="images/blueprint-hifi-history.png" alt="High fidelity screenshot of a previous BluePrint questionnaire">
+        </div>
+        <span class="modal-shot-label">Previous questionnaire</span>
+        <p class="modal-shot-desc">Full response and recommendation history for a completed questionnaire.</p>
+      </div>
+    </div>
+
+    <div class="modal-callout">
+      <p class="rc-title">Still, some questions remained</p>
+      <ul>
+        <li>Should recommendation or chat log be presented to the user first in previous questionnaires?</li>
+        <li>Do users know where the in-progress questionnaire alert will send them if they have multiple in progress?</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===== Modal logic =====
+  function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeModal(overlay.id);
+    });
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+        if (overlay.style.display === 'flex') closeModal(overlay.id);
+      });
+    }
+  });
+
+  // ===== Carousel logic (supports multiple carousels) =====
+  var carouselState = {};
+
+  function initCarousels() {
+    document.querySelectorAll('.carousel-track').forEach(function(track) {
+      var id = track.id;
+      var slides = track.querySelectorAll('.carousel-slide');
+      carouselState[id] = { index: 0, count: slides.length };
+      var dotsContainer = document.getElementById(id.replace('Track', 'Dots'));
+      if (dotsContainer) {
+        dotsContainer.querySelectorAll('.carousel-dot').forEach(function(dot, i) {
+          dot.addEventListener('click', function() { goToSlide(id, i); });
+        });
+      }
+    });
+  }
+
+  function updateCarouselUI(id) {
+    var state = carouselState[id];
+    var track = document.getElementById(id);
+    track.style.transform = 'translateX(-' + (state.index * 100) + '%)';
+    var dotsContainer = document.getElementById(id.replace('Track', 'Dots'));
+    if (dotsContainer) {
+      dotsContainer.querySelectorAll('.carousel-dot').forEach(function(dot, i) {
+        dot.classList.toggle('active', i === state.index);
+      });
+    }
+  }
+
+  function nextSlide(id) {
+    var state = carouselState[id];
+    state.index = (state.index + 1) % state.count;
+    updateCarouselUI(id);
+  }
+
+  function prevSlide(id) {
+    var state = carouselState[id];
+    state.index = (state.index - 1 + state.count) % state.count;
+    updateCarouselUI(id);
+  }
+
+  function goToSlide(id, i) {
+    carouselState[id].index = i;
+    updateCarouselUI(id);
+  }
+
+  initCarousels();
+</script>
 
 </body>
 </html>
