@@ -205,7 +205,7 @@
 
   .hero-img-single {
     width: 100%;
-    height: 460px;
+    aspect-ratio: 2732 / 2048;
     border-radius: 4px;
     overflow: hidden;
   }
@@ -213,7 +213,7 @@
   .hero-img-single img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
   }
 
   .hero-placeholder {
@@ -563,7 +563,6 @@
     nav { padding: 1rem 1.5rem; }
     .hero { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2.5rem; }
     .hero-right { order: -1; }
-    .hero-img-single { height: 300px; }
     .section-work, .section-fridge, .section-about, .section-fridge { padding: 4rem 1.5rem; }
     .case-grid { grid-template-columns: 1fr; }
     .section-about { grid-template-columns: 1fr; gap: 3rem; }
@@ -581,7 +580,7 @@
   <a href="index.html" class="nav-logo">Griffin Somaratne</a>
   <ul class="nav-links">
     <li><a href="#work">Work</a></li>
-    <!-- <li><a href="fridge.html">Refrigerator door</a></li> -->
+    <li><a href="fridge.html">Refrigerator door</a></li>
     <li><a href="about.html">About</a></li>
   </ul>
 </nav>
@@ -659,7 +658,6 @@
       <div class="case-body">
         <div class="case-tags">
           <span class="tag tag-ux">UX design</span>
-          <span class="tag tag-ui">UI design</span>
           <span class="tag tag-research">Research</span>
         </div>
         <h3 class="case-title">Capital One — CDs</h3>
@@ -679,7 +677,6 @@
       </div>
       <div class="case-body">
         <div class="case-tags">
-          <span class="tag tag-ux">UX design</span>
           <span class="tag tag-ui">UI design</span>
         </div>
         <h3 class="case-title">Capital One — Workbench</h3>
@@ -693,7 +690,7 @@
       </div>
     </a>
 
-    <!-- <a href="#" class="case-card" data-tags="Strategy,Service design">
+    <a href="#" class="case-card" data-tags="Strategy,Service design">
       <div class="case-thumb">
         <div class="case-thumb-placeholder">◈</div>
       </div>
@@ -711,7 +708,7 @@
           </svg>
         </span>
       </div>
-    </a> -->
+    </a>
 
   </div>
 </section>
