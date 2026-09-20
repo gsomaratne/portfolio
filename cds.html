@@ -126,8 +126,9 @@
 
   /* META BAR — moved up from sidebar */
   .cs-meta-bar {
-    display: flex;
-    flex-wrap: wrap;
+    display: table;
+    table-layout: auto;
+    width: 100%;
     border: 1px solid rgba(245,243,238,0.08);
     border-radius: 8px;
     margin-top: 2.75rem;
@@ -136,17 +137,16 @@
   }
 
   .meta-item {
-    flex: 1 1 140px;
-    padding: 0.9rem 1.25rem;
+    display: table-cell;
+    padding: 0.9rem 1rem;
     border-right: 1px solid rgba(245,243,238,0.08);
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
+    vertical-align: top;
   }
 
   .meta-item:last-child { border-right: none; }
 
   .meta-label {
+    display: block;
     font-size: 0.66rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -154,6 +154,8 @@
   }
 
   .meta-value {
+    display: block;
+    margin-top: 0.3rem;
     font-size: 0.85rem;
     color: rgba(245,243,238,0.85);
     line-height: 1.4;
@@ -397,6 +399,7 @@
 
   .carousel-track {
     display: flex;
+    align-items: flex-start;
     transition: transform 0.35s ease;
   }
 
@@ -416,6 +419,18 @@
     width: 100%;
     height: auto;
     display: block;
+  }
+
+  .carousel-img.is-mobile {
+    display: flex;
+    justify-content: center;
+    background: rgba(245,243,238,0.02);
+  }
+
+  .carousel-img.is-mobile img {
+    width: auto;
+    max-width: 320px;
+    max-height: 70vh;
   }
 
   .carousel-caption {
@@ -441,7 +456,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 0.4rem;
+    margin-top: 0.3rem;
   }
 
   .carousel-arrows { display: flex; gap: 0.5rem; }
@@ -971,7 +986,8 @@
     .cs-hero { padding: 7rem 1.5rem 0; }
     .cs-body { padding: 0 1.5rem 5rem; }
     .process-cards { grid-template-columns: 1fr; }
-    .meta-item { flex: 1 1 45%; border-right: none; border-bottom: 1px solid rgba(245,243,238,0.08); }
+    .cs-meta-bar { display: flex; flex-wrap: wrap; }
+    .meta-item { display: block; flex: 1 1 45%; border-right: none; border-bottom: 1px solid rgba(245,243,238,0.08); }
     .modal-box { padding: 1.75rem; max-height: 90vh; }
     .cs-next { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
   }
@@ -1007,6 +1023,24 @@
     <img src="images/CDHero.png" alt="Certificates of Deposit hero screenshot" data-icon="inverted">
   </div>
 
+  <!-- Prototype CTA -->
+  <div class="prototype-cta">
+    <div class="prototype-cta-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 12a4 4 0 014-4h0a4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#c8b8f0"/>
+        <path d="M8 4a4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#f0b8d8"/>
+        <path d="M0 12a4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#b8d8f0"/>
+        <path d="M0 20a4 4 0 014-4h4v4a4 4 0 01-4 4 4 4 0 01-4-4z" fill="#b8f0d0"/>
+        <path d="M8 12v-4h4a4 4 0 110 8H8v-4z" fill="#f0d0b8"/>
+      </svg>
+    </div>
+    <div class="prototype-cta-text">
+      <span class="prototype-cta-title">Try the interactive prototype</span>
+      <span class="prototype-cta-sub">Walk through the final strategic vision flow in Figma.</span>
+    </div>
+    <a href="https://www.figma.com/proto/ecI421HDKEy5SW5tXuxB0E/Capital-One-CD-Strategic-Vision?node-id=856-43012&t=fZDkvxuzWdgPT0U8-8&scaling=min-zoom&content-scaling=fixed&page-id=743%3A49652&starting-point-node-id=856%3A43012&show-proto-sidebar=1&hide-ui=1" target="_blank" rel="noopener" class="prototype-cta-btn">Open in Figma →</a>
+  </div>
+
   <!-- META BAR -->
   <div class="cs-meta-bar">
     <div class="meta-item">
@@ -1023,7 +1057,7 @@
     </div>
     <div class="meta-item">
       <span class="meta-label">Team</span>
-      <span class="meta-value">1 design lead, 1 PM, 1 tech lead</span>
+      <span class="meta-value">2 design leads, 1 content designer, 1 PM, 1 tech lead</span>
     </div>
   </div>
 </div>
@@ -1063,55 +1097,48 @@
   <div class="cs-section">
     <p class="cs-section-label">Project 1</p>
     <h2>iOS and Android translation</h2>
-    <p>My team had already designed the web retention experience — Ed, Cathy, and Katie built the 1:1 web designs. When it came time to bring that experience to mobile, no native designs existed yet. I created the iOS and Android versions from scratch, using Capital One's Gravity design system and components to translate the web flow 1:1, and designing creatively wherever Gravity had gaps.</p>
-    <p>The experience covers a maturity options dashboard focused on plan selection (renew or transfer), and a choose-account flow — the moment where attrition actually happens, when a customer selects an external account to transfer to. On web this lived in a modal; on iOS and Android I rebuilt it using Gravity's full sheets, overlays, and bottom sheets.</p>
+    <p>My team had already designed the web retention experience. When it came time to bring that experience to mobile, no native designs existed yet. I created the iOS and Android versions from scratch, using Capital One's Gravity design system and components to translate the web flow 1:1, and designing creatively wherever Gravity had gaps.</p>
+    <p>The experience covers a maturity options dashboard focused on plan selection (renew or transfer), and a choose-account flow — the moment where attrition actually happens, when a customer selects an external account to transfer to. </p>
 
-    <div class="process-cards">
-      <div class="process-card" tabindex="0" role="button" aria-label="View maturity options dashboard details" onclick="openModal('modal-maturity-dashboard')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-maturity-dashboard')}">
-        <div class="process-thumb">
-          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add maturity dashboard screenshot</div>
-        </div>
-        <div class="process-card-body">
-          <span class="process-card-title">Maturity options dashboard</span>
-          <p class="process-card-desc">iOS and Android versions of the web maturity dashboard, focused on plan selection.</p>
-          <span class="process-card-link">
-            View details
-            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
+    <div class="carousel">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="translationCarouselTrack">
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/WebMobile1.png" alt="Maturity options dashboard on web translated to mobile"></div>
+            <p class="carousel-caption">Maturity options dashboard on web translated to mobile.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/WebMobile2.1.png" alt="Maturity options dashboard on web translated to mobile"></div>
+            <p class="carousel-caption">Choose account flow — Transfer modal: choosing an internal or external account to transfer the CD balance into upon maturity.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/WebMobile2.2.png" alt="Maturity options dashboard on web translated to mobile"></div>
+            <p class="carousel-caption">Choose account flow — 360 PS interstitial: an upsell to open a 360 Performance Savings account before transferring funds externally.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/WebMobile2.3.png" alt="Maturity options dashboard on web translated to mobile"></div>
+            <p class="carousel-caption">Choose account flow — Review modal: a final confirmation step showing account number, deposit, close date, and transfer destination.</p>
+          </div>
         </div>
       </div>
-
-      <div class="process-card" tabindex="0" role="button" aria-label="View choose account flow details" onclick="openModal('modal-choose-account')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-choose-account')}">
-        <div class="process-thumb">
-          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add choose account flow screenshot</div>
+      <div class="carousel-controls">
+        <div class="carousel-dots" id="translationCarouselDots">
+          <button class="carousel-dot active" aria-label="Slide 1"></button>
+          <button class="carousel-dot" aria-label="Slide 2"></button>
+          <button class="carousel-dot" aria-label="Slide 3"></button>
+          <button class="carousel-dot" aria-label="Slide 4"></button>
         </div>
-        <div class="process-card-body">
-          <span class="process-card-title">Choose account flow</span>
-          <p class="process-card-desc">The transfer and review modals built with Gravity's native sheet patterns.</p>
-          <span class="process-card-link">
-            View details
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" aria-label="Previous slide" onclick="prevSlide('translationCarouselTrack')">
             <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-          </span>
-        </div>
-      </div>
-
-      <div class="process-card" tabindex="0" role="button" aria-label="View development handoff details" onclick="openModal('modal-handoff')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-handoff')}">
-        <div class="process-thumb">
-          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add 1:1 comparison screenshot</div>
-        </div>
-        <div class="process-card-body">
-          <span class="process-card-title">Development handoff</span>
-          <p class="process-card-desc">Development-ready designs, on file for whenever mobile teams pick up the work.</p>
-          <span class="process-card-link">
-            View details
+          </button>
+          <button class="carousel-arrow" aria-label="Next slide" onclick="nextSlide('translationCarouselTrack')">
             <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-          </span>
+          </button>
         </div>
       </div>
     </div>
@@ -1332,71 +1359,6 @@
 
 <!-- ===================== MODALS ===================== -->
 
-<!-- MATURITY DASHBOARD MODAL -->
-<div class="modal-overlay" id="modal-maturity-dashboard">
-  <div class="modal-box">
-    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-maturity-dashboard')">
-      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <p class="modal-label">1:1 Translation</p>
-    <h3 class="modal-title">Maturity options dashboard</h3>
-    <p class="modal-desc">Moving into the 1:1 translation, I used the web design that Ed, Cathy, and Katie had built and applied Gravity's guidelines and components to create native iOS and Android versions. The maturity options dashboard focuses on plan selection — customers can see renew and transfer options clearly laid out.</p>
-    <div class="modal-img-placeholder">
-      <div class="hero-img-fallback">Add the iOS and Android maturity dashboard screenshots here</div>
-    </div>
-  </div>
-</div>
-
-<!-- CHOOSE ACCOUNT MODAL -->
-<div class="modal-overlay" id="modal-choose-account">
-  <div class="modal-box">
-    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-choose-account')">
-      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <p class="modal-label">1:1 Translation</p>
-    <h3 class="modal-title">Choose account flow</h3>
-    <p class="modal-desc">The choose-account flow is where attrition actually happens — the moment a customer selects an external account to transfer their CD balance to. On web, this lived in a single modal with a 360 PS upsell, transfer step, and review step. On iOS and Android, I rebuilt the same flow using Gravity's full sheets, overlays, and bottom sheets, native to each platform.</p>
-    <div class="modal-shots-grid">
-      <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add 360 PS interstitial screenshot</div></div>
-        <span class="modal-shot-label">360 PS interstitial</span>
-        <p class="modal-shot-desc">An upsell to open a 360 Performance Savings account before transferring funds externally.</p>
-      </div>
-      <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add transfer modal screenshot</div></div>
-        <span class="modal-shot-label">Transfer modal</span>
-        <p class="modal-shot-desc">Choosing an internal or external account to transfer the CD balance into upon maturity.</p>
-      </div>
-      <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add review modal screenshot</div></div>
-        <span class="modal-shot-label">Review modal</span>
-        <p class="modal-shot-desc">A final confirmation step showing account number, deposit, close date, and transfer destination.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- HANDOFF MODAL -->
-<div class="modal-overlay" id="modal-handoff">
-  <div class="modal-box">
-    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-handoff')">
-      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <p class="modal-label">1:1 Translation</p>
-    <h3 class="modal-title">Development handoff</h3>
-    <p class="modal-desc">These designs are development-ready. I handed them off to our product partners on file for whenever the mobile team is ready to build — hopefully helping generate support from mobile developers since the designs already exist, removing one barrier to getting this prioritized.</p>
-    <div class="modal-img-placeholder">
-      <div class="hero-img-fallback">Add a 1:1 comparison screenshot between web and iOS here</div>
-    </div>
-  </div>
-</div>
-
 <!-- FTUX MODAL -->
 <div class="modal-overlay" id="modal-ftux">
   <div class="modal-box">
@@ -1537,6 +1499,17 @@
       });
     });
   }
+
+  function refreshCarouselHeights() {
+    Object.keys(carouselState).forEach(function(id) { updateCarouselUI(id); });
+  }
+
+  window.addEventListener('load', refreshCarouselHeights);
+  var carouselResizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(carouselResizeTimer);
+    carouselResizeTimer = setTimeout(refreshCarouselHeights, 100);
+  });
 
   function updateCarouselUI(id) {
     var state = carouselState[id];

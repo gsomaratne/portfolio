@@ -350,6 +350,7 @@
 
   .carousel-track {
     display: flex;
+    align-items: flex-start;
     transition: transform 0.35s ease;
   }
 
@@ -384,7 +385,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-top: 0.4rem;
+    margin-top: 0.3rem;
   }
 
   .carousel-arrows { display: flex; gap: 0.5rem; }
@@ -981,6 +982,17 @@
       });
     });
   }
+
+  function refreshCarouselHeights() {
+    Object.keys(carouselState).forEach(function(id) { updateCarouselUI(id); });
+  }
+
+  window.addEventListener('load', refreshCarouselHeights);
+  var carouselResizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(carouselResizeTimer);
+    carouselResizeTimer = setTimeout(refreshCarouselHeights, 100);
+  });
 
   function updateCarouselUI(id) {
     var state = carouselState[id];
