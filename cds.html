@@ -691,25 +691,82 @@
 
   .modal-img-zoom-icon {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 44px;
-    height: 44px;
+    bottom: 0.75rem;
+    right: 0.75rem;
+    width: 36px;
+    height: 36px;
     border-radius: 50%;
-    background: rgba(10,10,10,0.65);
+    background: rgba(10,10,10,0.7);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white);
     opacity: 0;
-    transition: opacity 0.2s;
+    transition: opacity 0.2s, background 0.2s, color 0.2s;
     pointer-events: none;
   }
 
-  .modal-img-zoom-icon svg { width: 18px; height: 18px; }
+  .modal-img-zoom-icon.icon-inverted {
+    background: rgba(245,243,238,0.9);
+    color: var(--black);
+  }
 
-  .modal-img-zoom-link:hover .modal-img-zoom-icon { opacity: 1; }
+  .modal-img-zoom-icon svg { width: 16px; height: 16px; }
+
+  .modal-img-zoom-link:hover .modal-img-zoom-icon,
+  .cs-hero-img.zoomable:hover .modal-img-zoom-icon,
+  .carousel-img.zoomable:hover .modal-img-zoom-icon { opacity: 1; }
+
+  .cs-hero-img.zoomable,
+  .carousel-img.zoomable {
+    position: relative;
+    cursor: zoom-in;
+  }
+
+  /* LIGHTBOX */
+  .lightbox-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .lightbox-viewport {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .lightbox-viewport img {
+    max-width: 90vw;
+    max-height: 90vh;
+    transform: scale(1);
+    transition: transform 0.35s ease;
+    cursor: zoom-in;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  .lightbox-viewport img.zoomed {
+    transform: scale(2.5);
+    cursor: zoom-out;
+  }
+
+  .lightbox-close {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    z-index: 2001;
+    background: rgba(20,20,20,0.7);
+  }
 
   .modal-shots-grid {
     display: flex;
@@ -947,7 +1004,7 @@
 
   <!-- Hero image -->
   <div class="cs-hero-img">
-    <img src="images/CDHero.png" alt="Certificates of Deposit hero screenshot">
+    <img src="images/CDHero.png" alt="Certificates of Deposit hero screenshot" data-icon="inverted">
   </div>
 
   <!-- META BAR -->
@@ -966,7 +1023,7 @@
     </div>
     <div class="meta-item">
       <span class="meta-label">Team</span>
-      <span class="meta-value">2 PMs, 1 tech lead</span>
+      <span class="meta-value">1 design lead, 1 PM, 1 tech lead</span>
     </div>
   </div>
 </div>
@@ -996,7 +1053,7 @@
     <p>To prevent that loss of capital, our team designed a web retention experience, run in tandem with a marketing campaign, to encourage customers to keep their money at Capital One. The entire experience hinges on one interaction: when a CD nears maturity, customers must select a maturity option. There are three paths, but only two outcomes Capital One wants — renew the CD, or transfer to an internal account. That single selection moment is where my work, and the work that preceded me, was focused.</p>
 
     <div class="cs-hero-img" style="margin-top: 1.5rem;">
-      <div class="hero-img-fallback">Add the process map diagram here (Open CD → CD maturing → Select maturity option → Transfer external / Renew / Transfer internal)</div>
+      <img src="images/CDJourney.png" alt="CD journey map: Open CD → CD maturing → Select maturity option → Transfer external / Renew / Transfer internal">
     </div>
   </div>
 
@@ -1056,25 +1113,6 @@
             </svg>
           </span>
         </div>
-      </div>
-    </div>
-
-    <div class="insights-list" style="margin-top: 2rem;">
-      <div class="insight-item">
-        <span class="insight-num">—</span>
-        <p class="insight-text">Figma skills improved exponentially — especially auto layout, which I knew before but now really know, and prototyping interactions with animation.</p>
-      </div>
-      <div class="insight-item">
-        <span class="insight-num">—</span>
-        <p class="insight-text">Built real documentation habits: a changelog and context written beneath each screen so that anyone without background can jump in, read a little, and give meaningful feedback.</p>
-      </div>
-      <div class="insight-item">
-        <span class="insight-num">—</span>
-        <p class="insight-text">Got serious about organization — layer names, page names, separating iOS from Android, and keeping an archive and graveyard so the file stays comprehensible to anyone who opens it.</p>
-      </div>
-      <div class="insight-item">
-        <span class="insight-num">—</span>
-        <p class="insight-text">Integrated Gravity for the first time — both as a Figma library and as a constraint on design decisions. When Gravity had gaps, I broke components to fit its guidelines or built custom ones from scratch.</p>
       </div>
     </div>
   </div>
@@ -1442,6 +1480,18 @@
   </div>
 </div>
 
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <button class="modal-close lightbox-close" aria-label="Close" onclick="closeLightbox()">
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <div class="lightbox-viewport" id="lightboxViewport">
+    <img id="lightboxImg" src="" alt="Zoomed image">
+  </div>
+</div>
+
 <script>
   // ===== Modal logic =====
   function openModal(id) {
@@ -1523,6 +1573,114 @@
   }
 
   initCarousels();
+
+  // ===== Lightbox logic (click a spot to zoom in there, click again to zoom out) =====
+  var lightboxZoomed = false;
+
+  function openLightbox(src) {
+    var overlay = document.getElementById('lightbox');
+    var img = document.getElementById('lightboxImg');
+    img.src = src;
+    img.classList.remove('zoomed');
+    img.style.transformOrigin = '50% 50%';
+    lightboxZoomed = false;
+    overlay.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('lightboxImg').addEventListener('click', function(e) {
+    e.stopPropagation();
+    var img = this;
+    if (lightboxZoomed) {
+      img.classList.remove('zoomed');
+      lightboxZoomed = false;
+      return;
+    }
+    var rect = img.getBoundingClientRect();
+    var xPct = ((e.clientX - rect.left) / rect.width) * 100;
+    var yPct = ((e.clientY - rect.top) / rect.height) * 100;
+    img.style.transformOrigin = xPct + '% ' + yPct + '%';
+    img.classList.add('zoomed');
+    lightboxZoomed = true;
+  });
+
+  document.addEventListener('keydown', function(e) {
+    var overlay = document.getElementById('lightbox');
+    if (overlay.style.display !== 'flex') return;
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // ===== Auto-wire zoom on hero + carousel images =====
+  function averageBrightness(img, callback) {
+    try {
+      var canvas = document.createElement('canvas');
+      var w = 24, h = 24;
+      canvas.width = w; canvas.height = h;
+      var ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, w, h);
+      var data = ctx.getImageData(0, 0, w, h).data;
+      var total = 0;
+      for (var i = 0; i < data.length; i += 4) {
+        total += (data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114);
+      }
+      callback(total / (data.length / 4));
+    } catch (err) {
+      callback(null);
+    }
+  }
+
+  function applyIconContrast(img, icon) {
+    if (img.dataset.icon === 'inverted') { icon.classList.add('icon-inverted'); return; }
+    if (img.dataset.icon === 'default') return;
+    function run() {
+      averageBrightness(img, function(brightness) {
+        if (brightness !== null && brightness < 128) icon.classList.add('icon-inverted');
+      });
+    }
+    if (img.complete && img.naturalWidth) run();
+    else img.addEventListener('load', run);
+  }
+
+  function zoomIconSVG() {
+    return '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+      '<circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.6"/>' +
+      '<path d="M21 21l-4.35-4.35" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>' +
+      '<path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>' +
+      '</svg>';
+  }
+
+  function setupZoomableContainers() {
+    document.querySelectorAll('.cs-hero-img, .carousel-img').forEach(function(container) {
+      var img = container.querySelector('img');
+      if (!img || container.querySelector('.modal-img-zoom-icon')) return;
+
+      container.classList.add('zoomable');
+
+      var icon = document.createElement('span');
+      icon.className = 'modal-img-zoom-icon';
+      icon.innerHTML = zoomIconSVG();
+      container.appendChild(icon);
+
+      container.addEventListener('click', function() {
+        openLightbox(img.currentSrc || img.src);
+      });
+
+      applyIconContrast(img, icon);
+    });
+
+    document.querySelectorAll('.modal-img-zoom-link').forEach(function(link) {
+      var img = link.querySelector('img');
+      var icon = link.querySelector('.modal-img-zoom-icon');
+      if (img && icon) applyIconContrast(img, icon);
+    });
+  }
+
+  setupZoomableContainers();
 </script>
 
 </body>
