@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BluePrint — Griffin Somaratne</title>
+<title>Certificates of Deposit — Griffin Somaratne</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
@@ -98,7 +98,7 @@
 
   .cs-back:hover { color: var(--white); }
   .cs-back svg { width: 14px; height: 14px; }
-/* 
+/*
   .cs-tags {
     display: flex;
     gap: 0.5rem;
@@ -191,6 +191,22 @@
     width: 100%;
     height: auto;
     display: block;
+  }
+
+  /* PLACEHOLDER FALLBACK — used until real screenshots are added */
+  .hero-img-fallback {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: rgba(245,243,238,0.04);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245,243,238,0.25);
+    font-size: 0.82rem;
+    font-style: italic;
+    text-align: center;
+    padding: 1.5rem;
   }
 
   /* SECTION BLOCKS */
@@ -865,7 +881,6 @@
   .future-image-box {
     aspect-ratio: 4/3;
     background: rgba(245,243,238,0.03);
-    border: 1px dashed rgba(245,243,238,0.12);
     border-radius: 6px;
     overflow: hidden;
     display: flex;
@@ -914,7 +929,7 @@
   <a href="index.html" class="nav-logo">Griffin Somaratne</a>
   <ul class="nav-links">
     <li><a href="index.html#work">Work</a></li>
-    <!-- <li><a href="fridge.html">Refrigerator door</a></li> -->
+    <li><a href="fridge.html">Refrigerator door</a></li>
     <li><a href="about.html">About</a></li>
   </ul>
 </nav>
@@ -927,39 +942,15 @@
     </svg>
     Back to work
   </a>
-<!-- 
-  <div class="cs-tags">
-    <span class="tag tag-ux">UX design</span>
-    <span class="tag tag-ui">UI design</span>
-    <span class="tag tag-research">Research</span>
-  </div> -->
 
-  <h1 class="cs-title">BluePrint</h1>
+  <h1 class="cs-title">Certificates of Deposit</h1>
 
   <!-- Hero image -->
   <div class="cs-hero-img">
-    <img src="images/BluePrintHero.png" alt="BluePrint homepage screenshot">
+    <div class="hero-img-fallback">Add a hero screenshot of the CD experience here</div>
   </div>
 
-  <!-- Prototype CTA — now in the meta bar's old spot -->
-  <div class="prototype-cta">
-    <div class="prototype-cta-icon">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M8 12a4 4 0 014-4h0a4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#c8b8f0"/>
-        <path d="M8 4a4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#f0b8d8"/>
-        <path d="M0 12a4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#b8d8f0"/>
-        <path d="M0 20a4 4 0 014-4h4v4a4 4 0 01-4 4 4 4 0 01-4-4z" fill="#b8f0d0"/>
-        <path d="M8 12v-4h4a4 4 0 110 8H8v-4z" fill="#f0d0b8"/>
-      </svg>
-    </div>
-    <div class="prototype-cta-text">
-      <span class="prototype-cta-title">Walk through the final prototype yourself</span>
-      <span class="prototype-cta-sub">Click through the full questionnaire-to-recommendation flow in Figma.</span>
-    </div>
-    <a href="https://www.figma.com/proto/Jed7Z5FseX12MFF8PCeOSb/BluePrint--Copy---Copy-?node-id=650-20633&p=f&t=ExzeIsXgYl3hx63V-0&scaling=scale-down-width&content-scaling=fixed&page-id=325%3A8555&starting-point-node-id=650%3A20633&disable-default-keyboard-nav=1&hide-ui=1" target="_blank" rel="noopener" class="prototype-cta-btn">Open in Figma →</a>
-  </div>
-
-  <!-- META BAR — moved below the prototype CTA -->
+  <!-- META BAR -->
   <div class="cs-meta-bar">
     <div class="meta-item">
       <span class="meta-label">Client</span>
@@ -967,15 +958,15 @@
     </div>
     <div class="meta-item">
       <span class="meta-label">Timeline</span>
-      <span class="meta-value">6 weeks</span>
+      <span class="meta-value">4 weeks</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Role</span>
-      <span class="meta-value">Sole UX designer</span>
+      <span class="meta-value">Mobile designer</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Team</span>
-      <span class="meta-value">1 PM, 7 engineers</span>
+      <span class="meta-value">2 PMs, 1 tech lead</span>
     </div>
   </div>
 </div>
@@ -986,8 +977,12 @@
   <!-- Overview -->
   <div class="cs-section">
     <p class="cs-section-label">Overview</p>
-    <p>The enterprise application design process is rife with siloed knowledge, suboptimal decisions, and expensive rework. BluePrint makes designing applications easier and faster by recommending standardized patterns to meet developers' requirements.</p>
-    <p>I led design for the platform's minimum viable product, launched in Q4 2025.</p>
+    <p>To retain a $29 billion Certificate of Deposit (CD) portfolio maturing at the end of 2023, my team designed a marketing intervention encouraging customers to keep their money at Capital One. When translating this web experience to iOS and Android, I noticed a lackluster experience for managing CDs in the mobile app. To address this, I designed and tested a customer-centric strategic vision with three goals in mind:</p>
+    <ul>
+      <li>Reduce unnecessary information</li>
+      <li>Increase customer awareness of maturity date and options</li>
+      <li>Inspire joy and delight</li>
+    </ul>
   </div>
 
   <hr class="cs-divider">
@@ -995,34 +990,33 @@
   <!-- Problem -->
   <div class="cs-section">
     <p class="cs-section-label">Problem</p>
-    <h2>Developers lack an easy way to discover and reuse standardized architectural patterns.</h2>
-    <p>Through empathy interviews with developers and application architects, my team identified significant challenges in the enterprise application design process.</p>
-    <p>Developers often lack expertise in evolving technology trends and established architectural guidelines, and architects with this expertise are often consulted late in the process — after developers have already made redundant or suboptimal decisions. Scarce documentation ensures that developers implement patterns inconsistently and with arbitrary uniqueness. While a catalog of approved, standardized patterns for architecture exists, it is not well-known nor is adoption enforced.</p>
-    <p>The result: tech debt, expensive rework, and delayed project timelines.</p>
+    <h2>A $29 billion portfolio was at risk of walking out the door.</h2>
+    <p>A Certificate of Deposit is a special savings account: customers deposit funds for a set term, during which they can't touch their money without a fee, and the account accrues interest. Once the CD matures, customers can renew it or close it and withdraw their deposit plus accrued interest.</p>
+    <p>In early 2023, Capital One launched a limited-time offer for an 11-month CD. With a shorter term and higher rate than competitors, the offer attracted $29 billion in deposits. Business partners projected that 25–30% of that portfolio would attrite upon maturity in Q4 — customers closing their CDs and moving funds to external banks.</p>
+    <p>To prevent that loss of capital, our team designed a web retention experience, run in tandem with a marketing campaign, to encourage customers to keep their money at Capital One. The entire experience hinges on one interaction: when a CD nears maturity, customers must select a maturity option. There are three paths, but only two outcomes Capital One wants — renew the CD, or transfer to an internal account. That single selection moment is where my work, and the work that preceded me, was focused.</p>
+
+    <div class="cs-hero-img" style="margin-top: 1.5rem;">
+      <div class="hero-img-fallback">Add the process map diagram here (Open CD → CD maturing → Select maturity option → Transfer external / Renew / Transfer internal)</div>
+    </div>
   </div>
 
   <hr class="cs-divider">
 
-  <!-- Design Process -->
+  <!-- PROJECT 1 -->
   <div class="cs-section">
-    <p class="cs-section-label">Design process</p>
-    <h2>From user flow to high-fidelity prototype.</h2>
-    <p>Building upon requirements set forth by my product team, I ideated on the design of a platform that takes application intent and requirements and provides suggested architectural patterns. I evolved the concept from a user flow diagram to a high fidelity prototype. Click any card below for a closer look.</p>
+    <p class="cs-section-label">Project 1</p>
+    <h2>iOS and Android translation</h2>
+    <p>My team had already designed the web retention experience — Ed, Cathy, and Katie built the 1:1 web designs. When it came time to bring that experience to mobile, no native designs existed yet. I created the iOS and Android versions from scratch, using Capital One's Gravity design system and components to translate the web flow 1:1, and designing creatively wherever Gravity had gaps.</p>
+    <p>The experience covers a maturity options dashboard focused on plan selection (renew or transfer), and a choose-account flow — the moment where attrition actually happens, when a customer selects an external account to transfer to. On web this lived in a modal; on iOS and Android I rebuilt it using Gravity's full sheets, overlays, and bottom sheets.</p>
 
     <div class="process-cards">
-
-      <div class="process-card" tabindex="0" role="button" aria-label="View Happy Path details" onclick="openModal('modal-happy-path')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-happy-path')}">
+      <div class="process-card" tabindex="0" role="button" aria-label="View maturity options dashboard details" onclick="openModal('modal-maturity-dashboard')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-maturity-dashboard')}">
         <div class="process-thumb">
-          <img src="images/BluePrintHappyPathThumbnail.png" alt="Happy path flow diagram">
-          <span class="process-thumb-expand">
-            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 2H2v3M9 2h3v3M5 12H2V9M9 12h3V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
+          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add maturity dashboard screenshot</div>
         </div>
         <div class="process-card-body">
-          <span class="process-card-title">Happy path</span>
-          <p class="process-card-desc">By mapping the happy path, I identified missing functional requirements.</p>
+          <span class="process-card-title">Maturity options dashboard</span>
+          <p class="process-card-desc">iOS and Android versions of the web maturity dashboard, focused on plan selection.</p>
           <span class="process-card-link">
             View details
             <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1032,18 +1026,13 @@
         </div>
       </div>
 
-      <div class="process-card" tabindex="0" role="button" aria-label="View Low Fidelity details" onclick="openModal('modal-lofi')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-lofi')}">
+      <div class="process-card" tabindex="0" role="button" aria-label="View choose account flow details" onclick="openModal('modal-choose-account')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-choose-account')}">
         <div class="process-thumb">
-          <img src="images/BluePrintLofiThumbnail.png" alt="Low fidelity wireframe of BluePrint homepage">
-          <span class="process-thumb-expand">
-            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 2H2v3M9 2h3v3M5 12H2V9M9 12h3V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
+          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add choose account flow screenshot</div>
         </div>
         <div class="process-card-body">
-          <span class="process-card-title">Low fidelity</span>
-          <p class="process-card-desc">Sketching the UI fleshed out uncertainties in the platform's core capabilities.</p>
+          <span class="process-card-title">Choose account flow</span>
+          <p class="process-card-desc">The transfer and review modals built with Gravity's native sheet patterns.</p>
           <span class="process-card-link">
             View details
             <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1053,18 +1042,71 @@
         </div>
       </div>
 
-      <div class="process-card" tabindex="0" role="button" aria-label="View High Fidelity details" onclick="openModal('modal-hifi')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-hifi')}">
+      <div class="process-card" tabindex="0" role="button" aria-label="View development handoff details" onclick="openModal('modal-handoff')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-handoff')}">
         <div class="process-thumb">
-          <img src="images/BluePrintHifiThumbnail.png" alt="High fidelity screenshot of BluePrint homepage">
-          <span class="process-thumb-expand">
+          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add 1:1 comparison screenshot</div>
+        </div>
+        <div class="process-card-body">
+          <span class="process-card-title">Development handoff</span>
+          <p class="process-card-desc">Development-ready designs, on file for whenever mobile teams pick up the work.</p>
+          <span class="process-card-link">
+            View details
             <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 2H2v3M9 2h3v3M5 12H2V9M9 12h3V9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </span>
         </div>
+      </div>
+    </div>
+
+    <div class="insights-list" style="margin-top: 2rem;">
+      <div class="insight-item">
+        <span class="insight-num">—</span>
+        <p class="insight-text">Figma skills improved exponentially — especially auto layout, which I knew before but now really know, and prototyping interactions with animation.</p>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">—</span>
+        <p class="insight-text">Built real documentation habits: a changelog and context written beneath each screen so that anyone without background can jump in, read a little, and give meaningful feedback.</p>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">—</span>
+        <p class="insight-text">Got serious about organization — layer names, page names, separating iOS from Android, and keeping an archive and graveyard so the file stays comprehensible to anyone who opens it.</p>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">—</span>
+        <p class="insight-text">Integrated Gravity for the first time — both as a Figma library and as a constraint on design decisions. When Gravity had gaps, I broke components to fit its guidelines or built custom ones from scratch.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- PROJECT 2 -->
+  <div class="cs-section">
+    <p class="cs-section-label">Project 2</p>
+    <h2>CD strategic vision</h2>
+    <p>While translating the web intervention, I examined the existing mobile CD experience and found real gaps: the account tile didn't say when a CD matured, what term it was, or distinguish one CD from another. Tapping into account details didn't help much either — the maturity date was buried, and it was unclear how close the account was to maturity, what the term was, or what the APY even was. Meanwhile, the maturity planning flow on web risked cognitive overload from sheer density of information.</p>
+    <p>My problem statement going in was almost entirely open-ended: with no limits, what could be different about this experience? It sounds freeing, but in practice it gave me blank canvas paralysis — I'd never done visioning work before, and "no limits" can mean anything, which is its own kind of nothing. I brought this to my manager, MJ, who helped reframe the question into something I knew how to act on: how could this experience be improved? That was familiar ground.</p>
+
+    <div class="research-callout">
+      <p class="rc-title">Business POV</p>
+      <p>Desired outcomes: open a 360 Performance Savings account, transfer funds to an internal account, or renew the CD for another term. To generate ideas around those outcomes, I used how-might-we's — including one I came back to often: how might we make CD maturity feel like a graduation? A graduation is a stage of life you're moving on from. You don't want to go backwards. Or a breakup: I'm going to miss this, I want to get back together. Let's renew.</p>
+    </div>
+    <div class="research-callout">
+      <p class="rc-title">User POV</p>
+      <p>Dense information led to cognitive overload, and the maturity date itself wasn't emphasized. How might we educate customers about their maturity options earlier in the CD lifecycle, and increase awareness of both the date and the options available to them?</p>
+    </div>
+
+    <p>From there, I designed a vision that broke the CD journey into three stages: first-time use, approaching maturity, and after a maturity plan has been selected. Click into each stage below.</p>
+
+    <div class="process-cards">
+      <div class="process-card" tabindex="0" role="button" aria-label="View first-time experience details" onclick="openModal('modal-ftux')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-ftux')}">
+        <div class="process-thumb">
+          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add FTUX screenshot</div>
+        </div>
         <div class="process-card-body">
-          <span class="process-card-title">High fidelity</span>
-          <p class="process-card-desc">After stakeholder feedback, I created a high fidelity prototype to test with users.</p>
+          <span class="process-card-title">First-time experience</span>
+          <p class="process-card-desc">A celebratory CD slide-up animation and a separate, clearly labeled CD section.</p>
           <span class="process-card-link">
             View details
             <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1074,6 +1116,81 @@
         </div>
       </div>
 
+      <div class="process-card" tabindex="0" role="button" aria-label="View approaching maturity details" onclick="openModal('modal-approaching')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-approaching')}">
+        <div class="process-thumb">
+          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add approaching maturity screenshot</div>
+        </div>
+        <div class="process-card-body">
+          <span class="process-card-title">Approaching maturity</span>
+          <p class="process-card-desc">Elevating the maturity date and giving customers a direct entry point to plan selection.</p>
+          <span class="process-card-link">
+            View details
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="process-card" tabindex="0" role="button" aria-label="View after selection details" onclick="openModal('modal-after-selection')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-after-selection')}">
+        <div class="process-thumb">
+          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add after selection screenshot</div>
+        </div>
+        <div class="process-card-body">
+          <span class="process-card-title">After selection</span>
+          <p class="process-card-desc">Surfacing the full plan — when, how much, and where — plus a path to reconsider.</p>
+          <span class="process-card-link">
+            View details
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Ideation -->
+  <div class="cs-section">
+    <p class="cs-section-label">Ideation</p>
+    <h2>From sticky notes to a cohesive flow.</h2>
+    <p>I sketched sacrificial concepts on sticky notes, presented them to the team for feedback, and used that to narrow toward a single flow built around one goal: making customers feel supported and celebrated as their CD approached maturity, not just informed.</p>
+    <p>From there I jumped straight into a high-fidelity first iteration — I wanted to be clear about what I was proposing, not just gesture at it. That first pass explored a progress bar to frame maturity planning as "the next step," elevated maturity options on L2 so they were visible before tapping in, and a custom tab view on L3 that collapsed information until you tapped on an option. The feedback sharpened each idea: the progress bar was interesting but CDs are a long-term product and the bar would barely move over months — and it used red, a color Capital One reserves for error states where users can't proceed. The tab-within-a-tab on L3 hid information behind clicks that didn't need to be hidden, especially since there was already a tab view at the top of that page.</p>
+    <p>The second iteration responded directly: the maturity date moved to the top, the default plan surfaced immediately below it, and only the necessary information remained — no decorative bar, no buried tabs.</p>
+
+    <div class="carousel">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="iterationCarouselTrack">
+          <div class="carousel-slide">
+            <div class="carousel-img"><div class="hero-img-fallback" style="aspect-ratio:16/10;">add iteration 1 screenshots</div></div>
+            <p class="carousel-caption">Iteration 1 — animation, elevated date, a progress bar, elevated options, and collapsed info behind tabs.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><div class="hero-img-fallback" style="aspect-ratio:16/10;">add iteration 2 screenshots</div></div>
+            <p class="carousel-caption">Iteration 2 — animation, elevated date, elevated options, clear hierarchy, and only necessary info.</p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <div class="carousel-dots" id="iterationCarouselDots">
+          <button class="carousel-dot active" aria-label="Slide 1"></button>
+          <button class="carousel-dot" aria-label="Slide 2"></button>
+        </div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" aria-label="Previous slide" onclick="prevSlide('iterationCarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="carousel-arrow" aria-label="Next slide" onclick="nextSlide('iterationCarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1081,205 +1198,87 @@
 
   <!-- Research -->
   <div class="cs-section">
-    <p class="cs-section-label">User research</p>
-    <h2>Moderated usability testing with 6 target users.</h2>
-    <p>To evaluate the proposed UI design and information architecture, I conducted moderated usability testing with associates familiar with app architecture and/or with expressed interest in BluePrint:</p>
+    <p class="cs-section-label">Testing</p>
+    <h2>A/B testing two experiences head-to-head.</h2>
+    <p>I tested the existing BAU retention experience against the strategic vision experience to answer four questions:</p>
     <ul>
-      <li>1 cloud policy engineer</li>
-      <li>3 software engineers</li>
-      <li>2 architects (1 solutions, 1 application)</li>
+      <li>Do users know when their CD will mature?</li>
+      <li>Do users know what will happen when their CD matures?</li>
+      <li>Do users have the information they need, and do they know where to look for more?</li>
+      <li>How do users feel about the experience?</li>
     </ul>
-    <p>Using the insights I uncovered, my tech team was able to implement necessary improvements prior to MVP launch.</p>
 
-    <div class="research-callout">
-      <p class="rc-title">Research goals</p>
-      <ul>
-        <li>Are users able to complete a questionnaire and receive a recommendation?
-          <ul class="rc-sublist">
-            <li>Are users able to begin a questionnaire?</li>
-            <li>Where and how do users struggle in the flow?</li>
-          </ul>
-        </li>
-        <li>How do users feel about the recommendation?</li>
-        <li>Are users able to navigate to previous recommendations?</li>
-      </ul>
+    <div class="carousel">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="testingCarouselTrack">
+          <div class="carousel-slide">
+            <div class="carousel-img"><div class="hero-img-fallback" style="aspect-ratio:16/10;">add BAU vs strategic vision comparison screenshot</div></div>
+            <p class="carousel-caption">BAU CD retention experience (left) versus the strategic vision experience (right), tested side by side.</p>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <p style="margin-top: 1.75rem;">Synthesizing both rounds surfaced themes, notable quotes, and quantitative outcomes for each version, which I compared directly to see which performed better.</p>
   </div>
 
   <hr class="cs-divider">
 
-  <!-- Insights: Wins -->
+  <!-- Results -->
   <div class="cs-section">
-    <p class="cs-section-label">Insights — wins</p>
-    <h2>The interface behaved as participants expected.</h2>
-    <p>For the most part, participants appreciated BluePrint's intuitive design and recognized its potential for usefulness in their day-to-day work with application architecture.</p>
+    <p class="cs-section-label">Results</p>
+    <h2>The strategic vision won on every measure that mattered.</h2>
+
     <div class="insights-list">
       <div class="insight-item">
         <span class="insight-num">1</span>
-        <p class="insight-text">Participants knew how to start a questionnaire and where to find past questionnaires without prompting.</p>
+        <p class="insight-text">All users knew when their CD would mature, based on the L1, L2, and L3 screens.</p>
       </div>
       <div class="insight-item">
         <span class="insight-num">2</span>
-        <p class="insight-text">Users expected dynamic, guided questions about their application and what they were trying to achieve — and that's exactly what they got.</p>
+        <p class="insight-text">All users understood their maturity options on L3 without needing additional detail — and had no trouble defining what "renew your CD" or "close and transfer" actually meant. The question going into testing was whether I'd stripped out too much information. The answer was no.</p>
       </div>
       <div class="insight-item">
         <span class="insight-num">3</span>
-        <p class="insight-text">The contents of the recommendations — pros and cons, a component diagram, multiple patterns to compare — aligned with participant expectations.</p>
+        <p class="insight-text">Most users appreciated the animations — they emphasized what had changed, "added fun to banking," and made "waiting for [their] money worth it."</p>
       </div>
     </div>
 
-    <div class="carousel">
-      <div class="carousel-track-wrap">
-        <div class="carousel-track" id="winsCarouselTrack">
-          <div class="carousel-slide">
-            <div class="carousel-img"><img src="images/BluePrintInsight1.png" alt="Synthesized research insight: users want alternative recommendations even if they weren't perfect matches"></div>
-            <p class="carousel-caption">Affinity-mapped feedback showing participants wanted alternative recommendations to compare — even ones that weren't a perfect match.</p>
-          </div>
-          <div class="carousel-slide">
-            <div class="carousel-img"><img src="images/BluePrintInsight2.png" alt="Synthesized research insight: recommendation output aligned with user expectations"></div>
-            <p class="carousel-caption">Affinity-mapped feedback confirming the recommendation output — pros, cons, diagrams, and a summary — matched what participants expected to see.</p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-controls">
-        <div class="carousel-dots" id="winsCarouselDots">
-          <button class="carousel-dot active" aria-label="Slide 1"></button>
-          <button class="carousel-dot" aria-label="Slide 2"></button>
-        </div>
-        <div class="carousel-arrows">
-          <button class="carousel-arrow" aria-label="Previous slide" onclick="prevSlide('winsCarouselTrack')">
-            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <button class="carousel-arrow" aria-label="Next slide" onclick="nextSlide('winsCarouselTrack')">
-            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
-      </div>
+    <div class="cs-quote">
+      <p>"Add fun to banking."</p>
     </div>
+
+    <p>L2 surfaced a few rougher edges. Some users didn't know what actually happens to their CD when it matures — because I'd elevated the maturity options without making the current default plan equally visible. Some had trouble finding the maturity date at first glance, partially buried in body text. And a few felt the maturity planning tab was premature — they could see their CD matured in November, hadn't made a decision yet, and didn't want that tab sitting above account details and recent transactions before they were ready to use it.</p>
   </div>
 
   <hr class="cs-divider">
 
-  <!-- Insights: Improvements -->
+  <!-- Recommendation -->
   <div class="cs-section">
-    <p class="cs-section-label">Insights — MVP improvements</p>
-    <h2>All improvements were content-related.</h2>
-    <p>Of the few improvements needed for the MVP design, none were structural — all were about what the product said, not how it was shaped.</p>
-
-    <!-- CAROUSEL -->
-    <div class="carousel">
-      <div class="carousel-track-wrap">
-        <div class="carousel-track" id="mvpCarouselTrack">
-          <div class="carousel-slide">
-            <div class="carousel-img"><img src="images/BluePrintGallery1.png" alt="Annotated login screen showing the value proposition callout"></div>
-            <p class="carousel-caption">Clearer explanation of BluePrint's capabilities and value proposition on the login screen.</p>
-            <p class="carousel-caption-quote">"Generic — I don't understand how it will help me."</p>
-          </div>
-          <div class="carousel-slide">
-            <div class="carousel-img"><img src="images/BluePrintGallery2.png" alt="Annotated previous questionnaire screen showing the recommendation and response tab order"></div>
-            <p class="carousel-caption">Present output recommendations before input response when viewing a past questionnaire.</p>
-            <p class="carousel-caption-quote">"Give the end product first then if I want to see how the tool derived this, then go into the details."</p>
-          </div>
-          <div class="carousel-slide">
-            <div class="carousel-img"><img src="images/BluePrintGallery3.png" alt="Annotated homepage banner showing the in-progress questionnaire callout"></div>
-            <p class="carousel-caption">Make explicit that the in-progress banner will take users to their most recent unfinished questionnaire.</p>
-            <p class="carousel-caption-quote">"It's a bit confusing if I had two in progress, which one is this going to open?"</p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-controls">
-        <div class="carousel-dots" id="mvpCarouselDots">
-          <button class="carousel-dot active" aria-label="Slide 1"></button>
-          <button class="carousel-dot" aria-label="Slide 2"></button>
-          <button class="carousel-dot" aria-label="Slide 3"></button>
-        </div>
-        <div class="carousel-arrows">
-          <button class="carousel-arrow" aria-label="Previous slide" onclick="prevSlide('mvpCarouselTrack')">
-            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <button class="carousel-arrow" aria-label="Next slide" onclick="nextSlide('mvpCarouselTrack')">
-            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="cs-divider">
-
-  <!-- Enhancements -->
-  <div class="cs-section">
-    <p class="cs-section-label">Insights — enhancements</p>
-    <h2>Opportunities that shaped the product roadmap.</h2>
-    <p>Multiple opportunities to enhance BluePrint's functionality were identified during testing. Most participants were confused by the JSON output format — what it represented and what they could do with it. They wanted something they could use "right away" and play around with.</p>
-    <p>Other desired capabilities initially contradicted requirements set forth for the MVP by my product partner — editing, deleting, and sharing questionnaires. The team believed these functionalities could allow users to "game" the recommendation engine. However, since BluePrint is a tool and not law, I was able to advocate for these features, and the insights I surfaced helped influence the product roadmap and shift the engineering team's focus.</p>
+    <p class="cs-section-label">Recommendation</p>
+    <h2>A final prototype built on four principles.</h2>
     <ul>
-      <li>Output file format that can be more easily shared and deployed (e.g., vs. JSON)</li>
-      <li>Edit and delete functionality for questionnaire responses</li>
-      <li>Shareable links to BluePrint questionnaires and recommendations</li>
+      <li>Elevated maturity date — present on L1, L2, and L3. Low lift, high impact.</li>
+      <li>Improved information hierarchy — refined on L2 and L3</li>
+      <li>Elevated maturity plan — surfaced on L1 and L2</li>
+      <li>Animation throughout — used on L1, L2, and L3. From a front-end development perspective, no one really wants to build animations. But they added something real to this experience.</li>
     </ul>
+
+    <div class="cs-hero-img" style="margin-top: 1.5rem;">
+      <div class="hero-img-fallback">Add the final prototype video or screenshot here</div>
+    </div>
+
+    <p style="margin-top: 1.75rem;">Two further opportunities remain open: research into the mental model of customers most likely to attrite, and continuing to launch limited-time offers and internal products to compete in what is, fundamentally, an "interest rate game."</p>
   </div>
 
   <hr class="cs-divider">
 
-  <!-- Looking Forward -->
+  <!-- Takeaways -->
   <div class="cs-section">
-    <p class="cs-section-label">Looking forward</p>
-    <h2>A well-received MVP with clear direction for what comes next.</h2>
-    <p>Overall, BluePrint's MVP was well-received by users — they recognized the platform's potential to streamline the architectural design process, especially once AI was integrated. As the focus for the next iteration turned to AI integration, the user research I conducted gave the team a clear and prioritized enhancement roadmap.</p>
-    <p>My personal learnings centered on collaborative habits: including my product partner during synthesis would have provided richer context earlier and reduced the friction of advocating for user-driven changes later.</p>
-    <p>Looking ahead, the next major milestone for BluePrint is AI integration — and I've already begun designing what that conversational experience could look like.</p>
-
-    <div class="carousel">
-      <div class="carousel-track-wrap">
-        <div class="carousel-track" id="futureCarouselTrack">
-          <div class="carousel-slide">
-            <div class="carousel-img"><img src="images/BluePrintAI1.png" alt="New AI interface welcome screen prompting the user to describe their application"></div>
-            <p class="carousel-caption">The new AI interface starts with a simple, open-ended prompt: describe what you're building.</p>
-          </div>
-          <div class="carousel-slide">
-            <div class="carousel-img"><img src="images/BluePrintAI2.png" alt="User describing their application in plain language to the AI"></div>
-            <p class="carousel-caption">Users describe their application in plain language — no rigid form fields required.</p>
-          </div>
-          <div class="carousel-slide">
-            <div class="carousel-img"><img src="images/BluePrintAI3.png" alt="AI asking clarifying follow-up questions about the application"></div>
-            <p class="carousel-caption">BluePrint asks clarifying follow-up questions, adapting based on each previous answer.</p>
-          </div>
-          <div class="carousel-slide">
-            <div class="carousel-img"><img src="images/BluePrintAI4.png" alt="AI-generated architecture recommendation with diagram, pros, and cons"></div>
-            <p class="carousel-caption">In seconds, the AI generates a recommended pattern — complete with a diagram, pros, and cons.</p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-controls">
-        <div class="carousel-dots" id="futureCarouselDots">
-          <button class="carousel-dot active" aria-label="Slide 1"></button>
-          <button class="carousel-dot" aria-label="Slide 2"></button>
-          <button class="carousel-dot" aria-label="Slide 3"></button>
-          <button class="carousel-dot" aria-label="Slide 4"></button>
-        </div>
-        <div class="carousel-arrows">
-          <button class="carousel-arrow" aria-label="Previous slide" onclick="prevSlide('futureCarouselTrack')">
-            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <button class="carousel-arrow" aria-label="Next slide" onclick="nextSlide('futureCarouselTrack')">
-            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
+    <p class="cs-section-label">Takeaways</p>
+    <h2>What this project taught me.</h2>
+    <p>When a product is born from business needs, the onus falls on the designer to build a positive experience for the user and advocate for their perspective. I'd never done visioning work before this — as a designer, you're usually taught to be a facilitator and conduit for user needs, but vision work is a space to be creative and channel that empathy at the same time, rather than treating the two as separate modes.</p>
+    <p>I'm also genuinely grateful I got to work on something consumer-facing. The portfolio impact is exciting on paper, but what stuck with me was watching UserTesting recordings and seeing real people interact with a prototype I designed, answering questions I wrote. That direct connection to impact — and to what I could still improve for them — is something I didn't expect to feel this strongly.</p>
   </div>
 
 </div>
@@ -1288,150 +1287,157 @@
 <div class="cs-next">
   <div>
     <p>Next case study</p>
-    <a href="cds.html">Capital One — CDs →</a>
+    <a href="blueprint.html">Capital One — BluePrint →</a>
   </div>
   <a href="index.html" style="font-size:0.85rem; color: rgba(245,243,238,0.4); text-decoration:none;">← All work</a>
 </div>
 
 <!-- ===================== MODALS ===================== -->
 
-<!-- HAPPY PATH MODAL -->
-<div class="modal-overlay" id="modal-happy-path">
+<!-- MATURITY DASHBOARD MODAL -->
+<div class="modal-overlay" id="modal-maturity-dashboard">
   <div class="modal-box">
-    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-happy-path')">
+    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-maturity-dashboard')">
       <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
       </svg>
     </button>
-    <p class="modal-label">Process</p>
-    <h3 class="modal-title">Happy path</h3>
-    <p class="modal-desc">The product requirements for the user interface enumerated only a login screen, homepage, conversation history, conversations, and pattern recommendations. By mapping the happy path flow, I established the necessary actions for each page in the platform and identified the need for save functionality so that developers could leave and return without losing their progress.</p>
-
+    <p class="modal-label">1:1 Translation</p>
+    <h3 class="modal-title">Maturity options dashboard</h3>
+    <p class="modal-desc">Moving into the 1:1 translation, I used the web design that Ed, Cathy, and Katie had built and applied Gravity's guidelines and components to create native iOS and Android versions. The maturity options dashboard focuses on plan selection — customers can see renew and transfer options clearly laid out.</p>
     <div class="modal-img-placeholder">
-      <a href="images/BluePrintMap.png" target="_blank" rel="noopener" class="modal-img-zoom-link" aria-label="View full-size flow diagram">
-        <img src="images/BluePrintMap.png" alt="Happy path flow diagram, including the in-progress chats variant">
-        <span class="modal-img-zoom-icon">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="2"/>
-            <path d="M21 21l-5.2-5.2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-        </span>
-      </a>
+      <div class="hero-img-fallback">Add the iOS and Android maturity dashboard screenshots here</div>
     </div>
+  </div>
+</div>
 
-    <div class="modal-steps">
-      <div class="modal-step">
-        <span class="modal-step-num">1</span>
-        <p class="modal-step-text">Developer arrives at the BluePrint login page and logs in using SSO, landing on the BluePrint home screen.</p>
+<!-- CHOOSE ACCOUNT MODAL -->
+<div class="modal-overlay" id="modal-choose-account">
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-choose-account')">
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <p class="modal-label">1:1 Translation</p>
+    <h3 class="modal-title">Choose account flow</h3>
+    <p class="modal-desc">The choose-account flow is where attrition actually happens — the moment a customer selects an external account to transfer their CD balance to. On web, this lived in a single modal with a 360 PS upsell, transfer step, and review step. On iOS and Android, I rebuilt the same flow using Gravity's full sheets, overlays, and bottom sheets, native to each platform.</p>
+    <div class="modal-shots-grid">
+      <div class="modal-shot">
+        <div class="modal-shot-img"><div class="hero-img-fallback">add 360 PS interstitial screenshot</div></div>
+        <span class="modal-shot-label">360 PS interstitial</span>
+        <p class="modal-shot-desc">An upsell to open a 360 Performance Savings account before transferring funds externally.</p>
       </div>
-      <div class="modal-step">
-        <span class="modal-step-num">2</span>
-        <p class="modal-step-text">If an in-progress chat exists, the developer can click into it directly — otherwise, they can start a new conversation.</p>
+      <div class="modal-shot">
+        <div class="modal-shot-img"><div class="hero-img-fallback">add transfer modal screenshot</div></div>
+        <span class="modal-shot-label">Transfer modal</span>
+        <p class="modal-shot-desc">Choosing an internal or external account to transfer the CD balance into upon maturity.</p>
       </div>
-      <div class="modal-step">
-        <span class="modal-step-num">3</span>
-        <p class="modal-step-text">Starting a new conversation begins with the developer answering an initial prompt.</p>
-      </div>
-      <div class="modal-step">
-        <span class="modal-step-num">4</span>
-        <p class="modal-step-text">The developer answers each question or group of questions, clicking to advance to the next.</p>
-      </div>
-      <div class="modal-step">
-        <span class="modal-step-num">5</span>
-        <p class="modal-step-text">Once the final question is answered, BluePrint returns an architectural pattern recommendation.</p>
-      </div>
-      <div class="modal-step">
-        <span class="modal-step-num">6</span>
-        <p class="modal-step-text">The developer downloads the recommended architectural pattern.</p>
-      </div>
-      <div class="modal-step">
-        <span class="modal-step-num">7</span>
-        <p class="modal-step-text">Past conversations live in conversation history, where the developer can click into any individual conversation to view its details and re-download the pattern.</p>
+      <div class="modal-shot">
+        <div class="modal-shot-img"><div class="hero-img-fallback">add review modal screenshot</div></div>
+        <span class="modal-shot-label">Review modal</span>
+        <p class="modal-shot-desc">A final confirmation step showing account number, deposit, close date, and transfer destination.</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- LOW FIDELITY MODAL -->
-<div class="modal-overlay" id="modal-lofi">
+<!-- HANDOFF MODAL -->
+<div class="modal-overlay" id="modal-handoff">
   <div class="modal-box">
-    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-lofi')">
+    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-handoff')">
       <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
       </svg>
     </button>
-    <p class="modal-label">Process</p>
-    <h3 class="modal-title">Low fidelity</h3>
-    <p class="modal-desc">Having established MVP functionality, I could develop a look and feel for the platform. To ease the transition to a conversational interface following AI integration in Q2 2026, I drew inspiration from Gemini and ChatGPT. For MVP, "conversations" and "chats" were misnomers that I persuaded the team to replace with "questionnaires."</p>
+    <p class="modal-label">1:1 Translation</p>
+    <h3 class="modal-title">Development handoff</h3>
+    <p class="modal-desc">These designs are development-ready. I handed them off to our product partners on file for whenever the mobile team is ready to build — hopefully helping generate support from mobile developers since the designs already exist, removing one barrier to getting this prioritized.</p>
+    <div class="modal-img-placeholder">
+      <div class="hero-img-fallback">Add a 1:1 comparison screenshot between web and iOS here</div>
+    </div>
+  </div>
+</div>
 
+<!-- FTUX MODAL -->
+<div class="modal-overlay" id="modal-ftux">
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-ftux')">
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <p class="modal-label">Strategic Vision</p>
+    <h3 class="modal-title">First-time experience</h3>
+    <p class="modal-desc">The first time a customer encounters their CD, the goal is a moment of delight. A CD slide-up animation introduces the account into its own clearly separated section, distinct from checking and savings — with a shimmer animation and the maturity date visible right away, rather than buried behind a tap.</p>
     <div class="modal-shots-grid">
       <div class="modal-shot">
-        <div class="modal-shot-img">
-          <img src="images/BluePrintLofiModal1.png" alt="Low fidelity wireframe of BluePrint homepage">
-        </div>
-        <span class="modal-shot-label">Homepage</span>
-        <p class="modal-shot-desc">Previous questionnaires stored in an expandable side menu, new questionnaires started from the side bar or page center, and banners for unfinished questionnaires.</p>
-      </div>
-      <div class="modal-shot">
-        <div class="modal-shot-img">
-          <img src="images/BluePrintLofiModal2.png" alt="Low fidelity wireframe of the BluePrint questionnaire screen">
-        </div>
-        <span class="modal-shot-label">Questionnaire</span>
-        <p class="modal-shot-desc">Sequential questions with typical form inputs — text input, multiple choice, multi-select, and more.</p>
-      </div>
-      <div class="modal-shot">
-        <div class="modal-shot-img">
-          <img src="images/BluePrintLofiModal3.png" alt="Low fidelity wireframe of the BluePrint recommendation screen">
-        </div>
-        <span class="modal-shot-label">Recommendation</span>
-        <p class="modal-shot-desc">Architecture pattern diagram, summary, justification, pros, cons, and citations for additional information.</p>
+        <div class="modal-shot-img"><div class="hero-img-fallback">add L1 vision screenshot</div></div>
+        <span class="modal-shot-label">L1 — Home screen</span>
+        <p class="modal-shot-desc">CD slide-up animation, a separate CD Accounts section, visible maturity date, and a shimmer animation on the tile.</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- HIGH FIDELITY MODAL -->
-<div class="modal-overlay" id="modal-hifi">
+<!-- APPROACHING MATURITY MODAL -->
+<div class="modal-overlay" id="modal-approaching">
   <div class="modal-box">
-    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-hifi')">
+    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-approaching')">
       <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
       </svg>
     </button>
-    <p class="modal-label">Process</p>
-    <h3 class="modal-title">High fidelity</h3>
-    <p class="modal-desc">With a settled interface design, I used Google's Material UI components to create a high fidelity prototype, visualizing the flow from login to starting a questionnaire to receiving a recommendation.</p>
-
+    <p class="modal-label">Strategic Vision</p>
+    <h3 class="modal-title">Approaching maturity</h3>
+    <p class="modal-desc">As maturity nears, the goal shifts to giving customers a direct path into plan selection — rather than several clicks through layers of screens. My work focused specifically on this interaction, but I also explored what the experience looks like once a plan has actually been chosen.</p>
     <div class="modal-shots-grid">
       <div class="modal-shot">
-        <div class="modal-shot-img">
-          <img src="images/BluePrintHifiHomepage.png" alt="High fidelity screenshot of BluePrint homepage">
-        </div>
-        <span class="modal-shot-label">Homepage</span>
-        <p class="modal-shot-desc">Welcome screen with an in-progress questionnaire banner and quick access to start a new one.</p>
+        <div class="modal-shot-img"><div class="hero-img-fallback">add L1 approaching maturity screenshot</div></div>
+        <span class="modal-shot-label">L1 — Mudflap with CTA</span>
+        <p class="modal-shot-desc">A direct call-to-action surfaces right on the account tile, prompting the customer to make a maturity plan.</p>
       </div>
       <div class="modal-shot">
-        <div class="modal-shot-img">
-          <img src="images/BluePrintHifiRecommendation.png" alt="High fidelity screenshot of a BluePrint architecture recommendation">
-        </div>
-        <span class="modal-shot-label">Recommendations</span>
-        <p class="modal-shot-desc">Architecture pattern diagram with downloadable output and a clear summary.</p>
+        <div class="modal-shot-img"><div class="hero-img-fallback">add L2 approaching maturity screenshot</div></div>
+        <span class="modal-shot-label">L2 — Account details</span>
+        <p class="modal-shot-desc">Maturity date kept visible at top, with the maturity plan section displaying the current (or default) plan.</p>
       </div>
       <div class="modal-shot">
-        <div class="modal-shot-img">
-          <img src="images/BluePrintHifiHistory.png" alt="High fidelity screenshot of a previous BluePrint questionnaire">
-        </div>
-        <span class="modal-shot-label">Previous questionnaire</span>
-        <p class="modal-shot-desc">Full response and recommendation history for a completed questionnaire.</p>
+        <div class="modal-shot-img"><div class="hero-img-fallback">add L3 approaching maturity screenshot</div></div>
+        <span class="modal-shot-label">L3 — Maturity options</span>
+        <p class="modal-shot-desc">The maturity date is elevated further, and maturity options are simplified down to title plus CTA — nothing extra.</p>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="modal-callout">
-      <p class="rc-title">Still, some questions remained</p>
-      <ul>
-        <li>Should recommendation or chat log be presented to the user first in previous questionnaires?</li>
-        <li>Do users know where the in-progress questionnaire alert will send them if they have multiple in progress?</li>
-      </ul>
+<!-- AFTER SELECTION MODAL -->
+<div class="modal-overlay" id="modal-after-selection">
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-after-selection')">
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <p class="modal-label">Strategic Vision</p>
+    <h3 class="modal-title">After selection</h3>
+    <p class="modal-desc">Once a customer has chosen a maturity plan, the experience surfaces the full picture: when it matures, how much, and where the funds will go — plus details on the option they didn't choose, in case they want to reconsider before the date arrives.</p>
+    <div class="modal-shots-grid">
+      <div class="modal-shot">
+        <div class="modal-shot-img"><div class="hero-img-fallback">add L1 after selection screenshot</div></div>
+        <span class="modal-shot-label">L1 — Home screen</span>
+        <p class="modal-shot-desc">A mudflap without a CTA confirms the CD is set to close and transfer on its maturity date.</p>
+      </div>
+      <div class="modal-shot">
+        <div class="modal-shot-img"><div class="hero-img-fallback">add L2 after selection screenshot</div></div>
+        <span class="modal-shot-label">L2 — Account details</span>
+        <p class="modal-shot-desc">The current plan is displayed clearly, summarizing what will happen and when.</p>
+      </div>
+      <div class="modal-shot">
+        <div class="modal-shot-img"><div class="hero-img-fallback">add L3 after selection screenshot</div></div>
+        <span class="modal-shot-label">L3 — Maturity options</span>
+        <p class="modal-shot-desc">A detailed current plan — closing date, estimated balance, transfer destination — alongside the option to switch.</p>
+      </div>
     </div>
   </div>
 </div>
