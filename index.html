@@ -419,6 +419,12 @@
 
   .case-card:hover .case-link { color: var(--white); }
 
+  /* Pushed to the right end of the "View case study" row; stays muted on hover */
+  .case-read-time {
+    margin-left: auto;
+    color: rgba(245,243,238,0.35);
+  }
+
   .case-link svg { width: 14px; height: 14px; transition: transform 0.2s; }
   .case-card:hover .case-link svg { transform: translate(2px, -2px); }
 
@@ -647,6 +653,7 @@
           <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+          <span class="case-read-time">6 min read</span>
         </span>
       </div>
     </a>
@@ -667,11 +674,12 @@
           <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+          <span class="case-read-time">11 min read</span>
         </span>
       </div>
     </a>
 
-    <a href="#" class="case-card" data-tags="UI design">
+    <a href="workbench.html" class="case-card" data-tags="UI design">
       <div class="case-thumb">
         <div class="case-thumb-placeholder">◈</div>
       </div>
@@ -680,34 +688,35 @@
           <span class="tag tag-ui">UI design</span>
         </div>
         <h3 class="case-title">Capital One — Workbench</h3>
-        <p class="case-desc">Redesigning the internal developer tooling experience for enterprise teams.</p>
+        <p class="case-desc">Helping data modelers register and govern standardized data attributes across Capital One's Enterprise Data platform.</p>
         <span class="case-link">
           View case study
           <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+          <span class="case-read-time">5 min read</span>
         </span>
       </div>
     </a>
 
-    <a href="kairos.html" class="case-card" data-tags="UX design,UI design,Research,Service design">
+    <a href="kairos.html" class="case-card" data-tags="UI design,Engineering,Strategy">
       <div class="case-thumb">
         <div class="case-thumb-placeholder">◈</div>
       </div>
       <div class="case-body">
         <div class="case-tags">
-          <span class="tag tag-ux">UX design</span>
           <span class="tag tag-ui">UI design</span>
-          <span class="tag tag-research">Research</span>
-          <span class="tag tag-service">Service design</span>
+          <span class="tag tag-eng">Engineering</span>
+          <span class="tag tag-strategy">Strategy</span>
         </div>
         <h3 class="case-title">Capital One — Kairos Policy-as-code</h3>
-        <p class="case-desc">[Add a one-line description]</p>
+        <p class="case-desc">Writing design standards AI coding agents can follow, so generated UI matches Capital One's design system.</p>
         <span class="case-link">
           View case study
           <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
+          <span class="case-read-time">6 min read</span>
         </span>
       </div>
     </a>

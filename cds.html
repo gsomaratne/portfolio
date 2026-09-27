@@ -231,6 +231,12 @@
     line-height: 1.25;
   }
 
+  .cs-section p a {
+    color: #c8b8f0;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
   .cs-section p {
     font-size: 0.95rem;
     color: rgba(245,243,238,0.65);
@@ -389,6 +395,7 @@
   /* CAROUSEL — MVP improvements */
   .carousel {
     margin-top: 1.75rem;
+    position: relative;
   }
 
   .carousel-track-wrap {
@@ -409,14 +416,19 @@
     flex-direction: column;
   }
 
+  /* Cap image height so square/tall images don't fill the screen; the box shrinks to the image */
   .carousel-img {
-    width: 100%;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
     border-radius: 6px;
     overflow: hidden;
   }
 
   .carousel-img img {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
+    max-height: 460px;
     height: auto;
     display: block;
   }
@@ -430,16 +442,19 @@
   .carousel-img.is-mobile img {
     width: auto;
     max-width: 320px;
-    max-height: 70vh;
+    max-height: 460px;
   }
 
-  .carousel-caption {
-    font-size: 0.85rem;
-    color: rgba(245,243,238,0.55);
-    line-height: 1.6;
+  /* p.carousel-caption so it beats the generic .cs-section p body-text rule */
+  p.carousel-caption {
+    font-size: 0.78rem;
+    color: rgba(245,243,238,0.45);
+    line-height: 1.55;
     font-weight: 300;
+    letter-spacing: 0.01em;
     padding: 0 0.1rem;
-    margin-top: 1.5rem;
+    margin-top: 0.9rem;
+    margin-bottom: 0;
   }
 
   .carousel-caption-quote {
@@ -455,11 +470,19 @@
   .carousel-controls {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 0.3rem;
   }
 
-  .carousel-arrows { display: flex; gap: 0.5rem; }
+  /* Arrows sit over the left and right edges of the image; JS centers them vertically on it */
+  .carousel-arrows {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 0;
+    pointer-events: none;
+  }
 
   .carousel-arrow {
     width: 30px;
@@ -475,7 +498,23 @@
     transition: all 0.2s;
   }
 
-  .carousel-arrow:hover { background: rgba(245,243,238,0.08); border-color: rgba(245,243,238,0.3); }
+  .carousel-arrows .carousel-arrow {
+    position: absolute;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    transform: translateY(-50%);
+    background: rgba(10,10,10,0.6);
+    border-color: rgba(245,243,238,0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    pointer-events: auto;
+  }
+
+  .carousel-arrows .carousel-arrow:first-child { left: 0.75rem; }
+  .carousel-arrows .carousel-arrow:last-child { right: 0.75rem; }
+
+  .carousel-arrow:hover { background: rgba(10,10,10,0.85); border-color: rgba(245,243,238,0.5); }
   .carousel-arrow svg { width: 13px; height: 13px; }
 
   .carousel-dots { display: flex; gap: 0.4rem; }
@@ -494,6 +533,15 @@
   .carousel-dot.active { background: #c8b8f0; }
 
   /* RESEARCH CALLOUT */
+  .pov-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .pov-grid .research-callout { margin: 0; }
+
   .research-callout {
     background: var(--highlight);
     border: 1px solid rgba(200,184,240,0.2);
@@ -561,6 +609,8 @@
     line-height: 1.65;
     font-weight: 300;
   }
+
+  .insight-text strong { color: var(--white); font-weight: 500; }
 
   /* QUOTE */
   .cs-quote {
@@ -632,7 +682,7 @@
     background: #111111;
     border: 1px solid rgba(245,243,238,0.1);
     border-radius: 10px;
-    max-width: 760px;
+    max-width: 920px;
     width: 100%;
     max-height: 86vh;
     overflow-y: auto;
@@ -730,10 +780,12 @@
 
   .modal-img-zoom-link:hover .modal-img-zoom-icon,
   .cs-hero-img.zoomable:hover .modal-img-zoom-icon,
-  .carousel-img.zoomable:hover .modal-img-zoom-icon { opacity: 1; }
+  .carousel-img.zoomable:hover .modal-img-zoom-icon,
+  .modal-shot-img.zoomable:hover .modal-img-zoom-icon { opacity: 1; }
 
   .cs-hero-img.zoomable,
-  .carousel-img.zoomable {
+  .carousel-img.zoomable,
+  .modal-shot-img.zoomable {
     position: relative;
     cursor: zoom-in;
   }
@@ -783,29 +835,72 @@
     background: rgba(20,20,20,0.7);
   }
 
+  /* Multiple screens sit side by side, each with its label and description underneath */
   .modal-shots-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.75rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.75rem 1.25rem;
+    align-items: start;
     margin-bottom: 1.75rem;
   }
 
-  .modal-shot { display: flex; flex-direction: column; gap: 0.5rem; }
+  .modal-shot {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .modal-shot .modal-shot-desc { margin-top: 0; }
+
+  /* Rows: screen, label, description. Subgrid keeps labels aligned even when screens differ in height */
+  .modal-shots-grid { grid-template-rows: auto auto auto; row-gap: 0.5rem; }
+  .modal-shots-grid > .modal-shot:not(:only-child) {
+    display: grid;
+    grid-row: span 3;
+    grid-template-rows: subgrid;
+    gap: 0.5rem;
+  }
+
+  /* The named areas below are only for the single-screen layout */
+  .modal-shots-grid > .modal-shot:not(:only-child) > * { grid-area: auto; }
+
+  /* After selection: four screens (transfer path plus the renew L3) in one row */
+  .modal-shots-grid:has(> .modal-shot:nth-child(4)) { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+  /* Cap screen height so long L3 captures don't tower over the others; nothing is cropped */
+  .modal-shots-grid .modal-shot-img { width: fit-content; max-width: 100%; }
+  .modal-shots-grid .modal-shot-img img { width: auto; max-width: 100%; max-height: 440px; }
+
+  /* A single screen (first-time experience) sits on the left with its text on the right */
+  .modal-shots-grid:has(> .modal-shot:only-child) { grid-template-columns: 1fr; }
+
+  .modal-shot:only-child {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    grid-template-areas: "img ." "img label" "img desc" "img .";
+    grid-template-rows: 1fr auto auto 1fr;
+    column-gap: 1.75rem;
+  }
 
   .modal-shot-img {
+    grid-area: img;
     border-radius: 6px;
     overflow: hidden;
   }
 
+  .modal-shot-label { grid-area: label; }
+  .modal-shot-desc { grid-area: desc; }
+  .modal-shot:only-child .modal-shot-desc { margin-top: 0.5rem; }
+
   .modal-shot-label {
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: var(--white);
     font-weight: 500;
   }
 
   .modal-shot-desc {
-    font-size: 0.78rem;
-    color: rgba(245,243,238,0.45);
+    font-size: 0.9rem;
+    color: rgba(245,243,238,0.6);
     line-height: 1.55;
     font-weight: 300;
   }
@@ -941,6 +1036,84 @@
   .prototype-cta-btn:hover { opacity: 0.8; }
 
   /* FUTURE / LOOKING FORWARD IMAGES */
+  .jump-link {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.55rem 1.1rem;
+    border: 1px solid rgba(200,184,240,0.35);
+    border-radius: 999px;
+    color: #c8b8f0;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .jump-link:hover { background: rgba(200,184,240,0.1); border-color: rgba(200,184,240,0.6); }
+
+  #final-design { scroll-margin-top: 5rem; }
+
+  .cs-video {
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+
+  .cs-video video {
+    display: block;
+    max-width: 100%;
+    max-height: 720px;
+    height: auto;
+  }
+
+  .current-screens {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    align-items: start;
+    margin: 1.75rem 0;
+  }
+
+  /* BAU vs. strategic vision: one level per carousel slide, side by side */
+
+  /* A phone screen beside the paragraph that discusses it */
+  .text-with-screen {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 1.75rem;
+    align-items: center;
+  }
+
+  .text-with-screen .cs-hero-img { margin: 0; }
+  .text-with-screen p { margin-bottom: 0.5rem; }
+  .text-with-screen ul { margin-bottom: 0; }
+  .text-with-screen li strong { color: var(--white); font-weight: 500; }
+
+  .compare-pair {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+
+  .compare-pair > div { min-width: 0; }
+
+  p.screens-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c8b8f0;
+    margin: 0 0 0.75rem;
+  }
+
+  .current-screens.four { grid-template-columns: repeat(4, 1fr); }
+
+  .current-screens .cs-hero-img { width: fit-content; max-width: 100%; margin: 0 auto; }
+
+  .current-screens .cs-hero-img img { width: auto; max-width: 100%; max-height: 420px; }
+
+  .current-screens .carousel-caption { margin-top: 0.75rem; }
+
+  .current-screens .carousel-caption strong { font-weight: 500; }
+
   .future-images {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -980,6 +1153,12 @@
 
   @media (max-width: 768px) {
     .future-images { grid-template-columns: 1fr; }
+    .current-screens { gap: 0.6rem; }
+    .pov-grid { grid-template-columns: 1fr; }
+    .compare-pair { gap: 0.75rem; }
+    .text-with-screen { grid-template-columns: 110px 1fr; gap: 1rem; align-items: start; }
+    .current-screens.four { grid-template-columns: repeat(2, 1fr); row-gap: 1.25rem; }
+    .current-screens .carousel-caption { font-size: 0.75rem; }
     .prototype-cta { flex-direction: column; align-items: flex-start; }
     .prototype-cta-btn { width: 100%; text-align: center; }
     nav { padding: 1rem 1.5rem; }
@@ -989,6 +1168,10 @@
     .cs-meta-bar { display: flex; flex-wrap: wrap; }
     .meta-item { display: block; flex: 1 1 45%; border-right: none; border-bottom: 1px solid rgba(245,243,238,0.08); }
     .modal-box { padding: 1.75rem; max-height: 90vh; }
+    .modal-shots-grid,
+    .modal-shots-grid:has(> .modal-shot:nth-child(4)) { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: none; }
+    .modal-shots-grid > .modal-shot:not(:only-child) { grid-row: auto; display: flex; flex-direction: column; }
+    .modal-shot:only-child { grid-template-columns: 130px 1fr; column-gap: 1rem; }
     .cs-next { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
   }
 
@@ -1002,7 +1185,7 @@
   <a href="index.html" class="nav-logo">Griffin Somaratne</a>
   <ul class="nav-links">
     <li><a href="index.html#work">Work</a></li>
-    <li><a href="fridge.html">Refrigerator door</a></li>
+    <!-- <li><a href="fridge.html">Refrigerator door</a></li> -->
     <li><a href="about.html">About</a></li>
   </ul>
 </nav>
@@ -1053,7 +1236,7 @@
     </div>
     <div class="meta-item">
       <span class="meta-label">Role</span>
-      <span class="meta-value">Mobile designer</span>
+      <span class="meta-value">Mobile designer; strategic vision lead</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Team</span>
@@ -1068,12 +1251,13 @@
   <!-- Overview -->
   <div class="cs-section">
     <p class="cs-section-label">Overview</p>
-    <p>To retain a $29 billion Certificate of Deposit (CD) portfolio maturing at the end of 2023, my team designed a marketing intervention encouraging customers to keep their money at Capital One. When translating this web experience to iOS and Android, I noticed a lackluster experience for managing CDs in the mobile app. To address this, I designed and tested a customer-centric strategic vision with three goals in mind:</p>
+    <p>To retain a $29 billion Certificate of Deposit (CD) portfolio maturing at the end of 2023, my team designed a marketing intervention encouraging customers to keep their money at Capital One. I translated the web experience to iOS and Android, where it handled roughly 40% of maturity selections. In the end, 81.2% of deposits ($23.5 billion) stayed at Capital One. Along the way, I noticed a lackluster experience for managing CDs in the mobile app, so I designed and tested a customer-centric strategic vision with three goals in mind:</p>
     <ul>
       <li>Reduce unnecessary information</li>
       <li>Increase customer awareness of maturity date and options</li>
       <li>Inspire joy and delight</li>
     </ul>
+    <a href="#final-design" class="jump-link">Jump to final design ↓</a>
   </div>
 
   <hr class="cs-divider">
@@ -1081,10 +1265,10 @@
   <!-- Problem -->
   <div class="cs-section">
     <p class="cs-section-label">Problem</p>
-    <h2>A $29 billion portfolio was at risk of walking out the door.</h2>
+    <h2>A third of a $29 billion portfolio was projected to attrite at maturity.</h2>
     <p>A Certificate of Deposit is a special savings account: customers deposit funds for a set term, during which they can't touch their money without a fee, and the account accrues interest. Once the CD matures, customers can renew it or close it and withdraw their deposit plus accrued interest.</p>
-    <p>In early 2023, Capital One launched a limited-time offer for an 11-month CD. With a shorter term and higher rate than competitors, the offer attracted $29 billion in deposits. Business partners projected that 25–30% of that portfolio would attrite upon maturity in Q4 — customers closing their CDs and moving funds to external banks.</p>
-    <p>To prevent that loss of capital, our team designed a web retention experience, run in tandem with a marketing campaign, to encourage customers to keep their money at Capital One. The entire experience hinges on one interaction: when a CD nears maturity, customers must select a maturity option. There are three paths, but only two outcomes Capital One wants — renew the CD, or transfer to an internal account. That single selection moment is where my work, and the work that preceded me, was focused.</p>
+    <p>In early 2023, Capital One launched a limited-time offer for an 11-month CD. With a shorter term and higher rate than competitors, the offer attracted $29 billion in deposits across 478,000 new CD accounts. Business partners projected that $10 billion of that portfolio would attrite upon maturity in Q4 — customers closing their CDs and moving funds to external banks.</p>
+    <p>To prevent that loss of capital, our team designed a web retention experience, run in tandem with a marketing campaign, to encourage customers to keep their money at Capital One. The entire experience hinges on one interaction: when a CD nears maturity, customers must select a maturity option. There are three paths, but only two outcomes Capital One wants — renew the CD or transfer to an internal account. That single selection moment is where my work, and the work that preceded me, was focused.</p>
 
     <div class="cs-hero-img" style="margin-top: 1.5rem;">
       <img src="images/CDJourney.png" alt="CD journey map: Open CD → CD maturing → Select maturity option → Transfer external / Renew / Transfer internal">
@@ -1097,8 +1281,8 @@
   <div class="cs-section">
     <p class="cs-section-label">Project 1</p>
     <h2>iOS and Android translation</h2>
-    <p>My team had already designed the web retention experience. When it came time to bring that experience to mobile, no native designs existed yet. I created the iOS and Android versions from scratch, using Capital One's Gravity design system and components to translate the web flow 1:1, and designing creatively wherever Gravity had gaps.</p>
-    <p>The experience covers a maturity options dashboard focused on plan selection (renew or transfer), and a choose-account flow — the moment where attrition actually happens, when a customer selects an external account to transfer to. </p>
+    <p>My team had already designed the web retention experience. When it came time to bring that experience to mobile, no native designs existed yet. I created the iOS and Android versions from scratch, using Capital One's Gravity design system and components to translate the web flow 1:1, and designing creatively wherever Gravity had gaps. For example, I used a full-page modal for the transfer money flow and a bottom sheet for the 360 Performance Savings upsell, and because Gravity had no section cards for the dashboard, I designed them based on the web experience.</p>
+    <p>The experience consists of a maturity options dashboard, plan selection (renew or transfer), and a choose-account flow (which is where attrition actually happens, the moment a customer selects an external account to transfer to).</p>
 
     <div class="carousel">
       <div class="carousel-track-wrap">
@@ -1142,6 +1326,9 @@
         </div>
       </div>
     </div>
+
+    <p style="margin-top: 1.75rem;">Customers were sent email campaigns that directed them to the mobile or web experience depending on the device they were reading the email on. Mobile accounted for roughly 40% of maturity selections made between release (Q3) and Q4. As of April 2, 2024, $28.96 billion had matured, and 81.2% of it — $23.5 billion — was retained (most of it in new or renewed CDs, and the rest in other Capital One accounts).</p>
+    <p>External attrition came in at 18.8%, roughly $5.4 billion, about half of the $10 billion projected.</p>
   </div>
 
   <hr class="cs-divider">
@@ -1150,24 +1337,283 @@
   <div class="cs-section">
     <p class="cs-section-label">Project 2</p>
     <h2>CD strategic vision</h2>
-    <p>While translating the web intervention, I examined the existing mobile CD experience and found real gaps: the account tile didn't say when a CD matured, what term it was, or distinguish one CD from another. Tapping into account details didn't help much either — the maturity date was buried, and it was unclear how close the account was to maturity, what the term was, or what the APY even was. Meanwhile, the maturity planning flow on web risked cognitive overload from sheer density of information.</p>
-    <p>My problem statement going in was almost entirely open-ended: with no limits, what could be different about this experience? It sounds freeing, but in practice it gave me blank canvas paralysis — I'd never done visioning work before, and "no limits" can mean anything, which is its own kind of nothing. I brought this to my manager, MJ, who helped reframe the question into something I knew how to act on: how could this experience be improved? That was familiar ground.</p>
+    <p>While translating the web intervention, I examined the existing mobile CD experience and found real gaps: the account tile didn't say when a CD matured or what term it was, and it was difficult to distinguish from checking and savings accounts. Tapping into the account didn't help much either — it was unclear how close the CD was to maturity, as the maturity date, term, and even APY were buried in L3, the account details screen two taps from home. I led the strategic vision to address these gaps end to end.</p>
 
-    <div class="research-callout">
-      <p class="rc-title">Business POV</p>
-      <p>Desired outcomes: open a 360 Performance Savings account, transfer funds to an internal account, or renew the CD for another term. To generate ideas around those outcomes, I used how-might-we's — including one I came back to often: how might we make CD maturity feel like a graduation? A graduation is a stage of life you're moving on from. You don't want to go backwards. Or a breakup: I'm going to miss this, I want to get back together. Let's renew.</p>
+    <div class="current-screens">
+      <div>
+        <div class="cs-hero-img"><img src="images/CDCurrentHome.png" alt="Current mobile home screen: CD account tiles look identical to checking and savings tiles, with no maturity date or term"></div>
+        <p class="carousel-caption"><strong>L1 — Home:</strong> CD tiles look just like checking and savings, with no maturity date or term.</p>
+      </div>
+      <div>
+        <div class="cs-hero-img"><img src="images/CDCurrentAccount.png" alt="Current mobile CD account screen showing balance, transactions, and account details link"></div>
+        <p class="carousel-caption"><strong>L2 — Account:</strong> the same layout as any other account, with nothing about maturity.</p>
+      </div>
+      <div>
+        <div class="cs-hero-img"><img src="images/CDCurrentDetails.png" alt="Current mobile CD account details screen: a dense list with the maturity date buried among other fields"></div>
+        <p class="carousel-caption"><strong>L3 — Account details:</strong> the maturity date is buried in a dense list.</p>
+      </div>
     </div>
-    <div class="research-callout">
-      <p class="rc-title">User POV</p>
-      <p>Dense information led to cognitive overload, and the maturity date itself wasn't emphasized. How might we educate customers about their maturity options earlier in the CD lifecycle, and increase awareness of both the date and the options available to them?</p>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Ideation -->
+  <div class="cs-section">
+    <p class="cs-section-label">Ideation</p>
+    <h2>From sticky notes to a cohesive flow.</h2>
+    <p>In the initial stages, I thought of product improvement from both business and user perspectives.</p>
+    <div class="pov-grid">
+      <div class="research-callout">
+        <p class="rc-title">Business POV</p>
+        <p>With $10 billion projected to attrite, the maturity selection moment had to steer customers toward keeping their money at Capital One. Desired outcomes: open a 360 Performance Savings account, transfer funds to an internal account, or renew the CD for another term. The outcome to avoid: a transfer to an external bank.</p>
+      </div>
+      <div class="research-callout">
+        <p class="rc-title">User POV</p>
+        <p>In the web experience, dense information could lead to cognitive overload, and the maturity date itself wasn't emphasized. In the mobile app, CDs blended in with checking and savings accounts, and the maturity date was buried in L3 account details.</p>
+      </div>
     </div>
 
-    <p>From there, I designed a vision that broke the CD journey into three stages: first-time use, approaching maturity, and after a maturity plan has been selected. Click into each stage below.</p>
+    <p>These two points of view became my how-might-we questions:</p>
+    <ul>
+      <li>To increase the likelihood of the business's desired outcomes, how might we make CD maturity feel like a graduation? Or a breakup?</li>
+      <li>How might we educate customers about their maturity options earlier in the CD lifecycle, and increase awareness of both the date and the options available to them?</li>
+    </ul>
+
+    <div class="cs-hero-img" style="margin-top: 1.5rem;">
+      <img src="images/CDBusinessHMW.png" alt="Business POV ideation board: desired outcomes of transferring to 360 Performance Savings, opening a 360 Performance Savings account, and renewing, each with how-might-we questions and ideas">
+    </div>
+    <p class="carousel-caption" style="margin-top: 0.75rem;">Business POV ideation — mapping each desired outcome to how-might-we questions, then ideas.</p>
+
+    <p style="margin-top: 1.75rem;">I sketched sacrificial concepts on sticky notes and on iPad, presented them to the team for feedback, and used that to narrow in on a single flow built around one goal: making customers feel supported and celebrated as their CD approached maturity, not just informed. I set about accomplishing this goal through restructured information architecture, emphasized maturity planning, and celebratory visuals.</p>
+
+    <div class="carousel">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="sketchCarouselTrack">
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/CDSketch2.jpg" alt="Sticky notes: CD tile concepts with a mudflap status bar, plan selection in L1, and a collect-reward animation"></div>
+            <p class="carousel-caption">Sticky notes — CD tile concepts, borrowing from the Domino's pizza tracker, Flighty, and Duolingo's claim-reward animation.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/CDSketch4.jpg" alt="Digital sketch: home screen before and after separating CD accounts into their own section"></div>
+            <p class="carousel-caption">Digital sketch — giving CDs their own section, separate from savings and checking.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/CDSketch6.jpg" alt="Digital sketch: CD tile mudflap showing maturing, renewing, and closing states"></div>
+            <p class="carousel-caption">Digital sketch — the mudflap (the status strip under the account tile) reflects the plan: maturing, renewing, or closing on the maturity date.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/CDSketch7.jpg" alt="Digital sketch: four first-time animation options for the CD tile: slide up, shimmer, fade in, and swell"></div>
+            <p class="carousel-caption">Digital sketch — first-time animation options: slide up, shimmer, fade in, and swell.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img is-mobile"><img src="images/CDSketch9.jpg" alt="Digital sketch: manage your CD screen with maturity date, current plan, and selectable options"></div>
+            <p class="carousel-caption">Digital sketch — the maturity plan dashboard, with the date first and options below the current plan.</p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <div class="carousel-dots" id="sketchCarouselDots">
+          <button class="carousel-dot active" aria-label="Slide 1"></button>
+          <button class="carousel-dot" aria-label="Slide 2"></button>
+          <button class="carousel-dot" aria-label="Slide 3"></button>
+          <button class="carousel-dot" aria-label="Slide 4"></button>
+          <button class="carousel-dot" aria-label="Slide 5"></button>
+        </div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" aria-label="Previous slide" onclick="prevSlide('sketchCarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="carousel-arrow" aria-label="Next slide" onclick="nextSlide('sketchCarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 1.75rem;">From there, I jumped straight into a high-fidelity first iteration — I wanted to be clear about what I was proposing, not just gesture at it. That first pass explored a progress bar to frame maturity planning as "the next step," elevated maturity options on L2 so they were visible before tapping in, and a custom tab view on L3 that collapsed information until you tapped an option.</p>
+
+    <div class="current-screens four">
+      <div>
+        <div class="cs-hero-img"><img src="images/CDIter1-animation.png" alt="Iteration 1 home screen with CDs in their own section and a gradient CD tile"></div>
+        <p class="carousel-caption"><strong>Animation:</strong> the CD slides into its own section and elevates the maturity date.</p>
+      </div>
+      <div>
+        <div class="cs-hero-img"><img src="images/CDIter1-progressbar.png" alt="Iteration 1 home screen with a red progress bar from open to maturity plan to maturity on the CD tile"></div>
+        <p class="carousel-caption"><strong>Progress bar:</strong> framing maturity planning as the next step.</p>
+      </div>
+      <div>
+        <div class="cs-hero-img"><img src="images/CDIter1-elevatedoptions.png" alt="Iteration 1 CD account screen with maturity planning options shown before tapping in"></div>
+        <p class="carousel-caption"><strong>Elevated options:</strong> renew or close and transfer, visible on L2.</p>
+      </div>
+      <div>
+        <div class="cs-hero-img"><img src="images/CDIter1-collapsedinfo.png" alt="Iteration 1 manage your CD screen with default plan and selectable maturity options"></div>
+        <p class="carousel-caption"><strong>Collapsed info:</strong> a tab view on L3 hides detail until an option is tapped.</p>
+      </div>
+    </div>
+
+    <p>The feedback sharpened each idea: the progress bar was interesting, but CDs are a long-term product and the bar would barely move over months — and it used red, a color Capital One reserves for error states where users can't proceed. The tab-within-a-tab on L3 hid information behind clicks that didn't need to be hidden, especially since there was already a tab view at the top of that page.</p>
+    <p>The second iteration responded directly: the maturity date moved to the top, the default plan surfaced immediately below it, and only the necessary information remained — no decorative bar, no buried tabs.</p>
+
+    <div class="current-screens">
+      <div>
+        <div class="cs-hero-img"><img src="images/CDIter1-animation.png" alt="Iteration 2 home screen with CDs in their own section and the maturity date on the tile"></div>
+        <p class="carousel-caption"><strong>Animation and elevated date:</strong> carried over from iteration 1.</p>
+      </div>
+      <div>
+        <div class="cs-hero-img"><img src="images/CDIter2-elevatedoptions.png" alt="Iteration 2 CD account screen with maturity planning options shown before tapping in"></div>
+        <p class="carousel-caption"><strong>Elevated options:</strong> kept on L2, with a more direct prompt to make a plan.</p>
+      </div>
+      <div>
+        <div class="cs-hero-img"><img src="images/CDIter2-hierarchy.png" alt="Iteration 2 manage your CD screen with the maturity date first, then the default plan, then maturity options"></div>
+        <p class="carousel-caption"><strong>Hierarchy and necessary info:</strong> maturity date first, then the currently selected plan (the default), then options — no nested tabs.</p>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Research -->
+  <div class="cs-section">
+    <p class="cs-section-label">Testing</p>
+    <h2>A/B testing two experiences head-to-head.</h2>
+    <p>I ran unmoderated A/B testing with 11 users — 6 on the existing BAU retention experience and 5 on the strategic vision — to answer four questions:</p>
+    <ul>
+      <li>Do users know when their CD will mature?</li>
+      <li>Do users know what will happen when their CD matures?</li>
+      <li>Do users have the information they need, and do they know where to look for more?</li>
+      <li>How do users feel about the experience?</li>
+    </ul>
+
+    <div class="carousel">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="testingCarouselTrack">
+          <div class="carousel-slide">
+            <div class="compare-pair">
+              <div>
+                <p class="screens-label">BAU</p>
+                <div class="carousel-img"><img src="images/CDTestBAU-L1.png" alt="BAU home screen with the CD tile next to savings and no maturity date"></div>
+              </div>
+              <div>
+                <p class="screens-label">Strategic vision</p>
+                <div class="carousel-img"><img src="images/CDTestSV-L1.png" alt="Strategic vision home screen with CDs in their own section and the maturity date on the tile"></div>
+              </div>
+            </div>
+            <p class="carousel-caption">L1 — Home: BAU lists the CD like any other account; the vision gives CDs their own section with the maturity date on the tile.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="compare-pair">
+              <div>
+                <p class="screens-label">BAU</p>
+                <div class="carousel-img"><img src="images/CDTestBAU-L2.png" alt="BAU CD account screen with a maturity options link"></div>
+              </div>
+              <div>
+                <p class="screens-label">Strategic vision</p>
+                <div class="carousel-img"><img src="images/CDTestSV-L2.png" alt="Strategic vision CD account screen with maturity planning options"></div>
+              </div>
+            </div>
+            <p class="carousel-caption">L2 — Account: BAU hides maturity behind a single link; the vision shows the options up front.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="compare-pair">
+              <div>
+                <p class="screens-label">BAU</p>
+                <div class="carousel-img"><img src="images/CDTestBAU-L3.png" alt="BAU manage your CD screen with the maturity date in body text and the current plan"></div>
+              </div>
+              <div>
+                <p class="screens-label">Strategic vision</p>
+                <div class="carousel-img"><img src="images/CDTestSV-L3.png" alt="Strategic vision manage your CD screen with the maturity date first, then the default plan, then options"></div>
+              </div>
+            </div>
+            <p class="carousel-caption">L3 — Maturity plan: BAU buries the date in body text; the vision leads with the date, then the current plan.</p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <div class="carousel-dots" id="testingCarouselDots">
+          <button class="carousel-dot active" aria-label="Slide 1"></button>
+          <button class="carousel-dot" aria-label="Slide 2"></button>
+          <button class="carousel-dot" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" aria-label="Previous slide" onclick="prevSlide('testingCarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="carousel-arrow" aria-label="Next slide" onclick="nextSlide('testingCarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <p style="margin-top: 1.75rem;">Synthesizing both rounds surfaced themes, notable quotes, and quantitative outcomes for each version, which I compared directly to see which performed better.</p>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Results -->
+  <div class="cs-section">
+    <p class="cs-section-label">Results</p>
+    <h2>The strategic vision won where it mattered most.</h2>
+
+    <div class="insights-list">
+      <div class="insight-item">
+        <span class="insight-num">1</span>
+        <p class="insight-text"><strong>Every user knew when their CD would mature from L1 alone (5/5)</strong> — in the BAU condition, all six were unsure until they reached L3.</p>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">2</span>
+        <p class="insight-text"><strong>All users understood their maturity options on L3 (5/5)</strong> without needing additional detail — and had no trouble defining what "renew your CD" or "close and transfer" actually meant. The question going into testing was whether I'd stripped out too much information. The answer was no.</p>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">3</span>
+        <p class="insight-text"><strong>Most users appreciated the animations</strong> — they emphasized what had changed, "added fun to banking," and made "waiting for [their] money worth it."</p>
+      </div>
+    </div>
+
+    <div class="text-with-screen">
+      <div class="cs-hero-img"><img src="images/CDTestSV-L2.png" alt="Strategic vision L2 CD account screen tested with users, showing maturity planning options but not the current default plan"></div>
+      <div>
+        <p>L2 surfaced a few rougher edges:</p>
+        <ul>
+          <li><strong>Unclear default plan:</strong> none of the five could tell what happens at maturity from L2, the same as in the BAU condition. I'd elevated the maturity options without making the current plan equally visible.</li>
+          <li><strong>Hard-to-find date:</strong> some had trouble spotting the maturity date at first glance, since it was embedded in body text.</li>
+          <li><strong>Premature planning card:</strong> a few didn't want it above account details and recent transactions before they were ready to decide.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Recommendation -->
+  <div class="cs-section" id="final-design">
+    <p class="cs-section-label">Recommendation</p>
+    <h2>A final prototype built on four principles.</h2>
+    <ul>
+      <li>Elevated maturity date — present on L1, L2, and L3. Low lift, high impact.</li>
+      <li>Improved information hierarchy — refined on L2 and L3.</li>
+      <li>Elevated maturity plan — surfaced on L1 and L2.</li>
+      <li>Animation throughout — used on L1, L2, and L3. From a front-end development perspective, no one really wants to build animations. But they added something real to this experience.</li>
+    </ul>
+
+    <div class="cs-video">
+      <video src="images/CDPrototype.mp4" poster="images/CDPrototypePoster.jpg" autoplay muted loop playsinline aria-label="Prototype walkthrough of the final CD experience, from first-time use through selecting a maturity plan"></video>
+    </div>
+
+    <p style="margin-top: 1.75rem;">The experience follows the CD journey through three stages: the first-time user experience, approaching maturity, and after a maturity plan is selected. Click into each for details.</p>
 
     <div class="process-cards">
       <div class="process-card" tabindex="0" role="button" aria-label="View first-time experience details" onclick="openModal('modal-ftux')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-ftux')}">
         <div class="process-thumb">
-          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add FTUX screenshot</div>
+          <img src="images/CDThumbFTUX.png" alt="CD account tile with a gradient in its own CD Accounts section">
         </div>
         <div class="process-card-body">
           <span class="process-card-title">First-time experience</span>
@@ -1183,7 +1629,7 @@
 
       <div class="process-card" tabindex="0" role="button" aria-label="View approaching maturity details" onclick="openModal('modal-approaching')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-approaching')}">
         <div class="process-thumb">
-          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add approaching maturity screenshot</div>
+          <img src="images/CDThumbApproaching.png" alt="CD account tile with a prompt to make a maturity plan">
         </div>
         <div class="process-card-body">
           <span class="process-card-title">Approaching maturity</span>
@@ -1199,7 +1645,7 @@
 
       <div class="process-card" tabindex="0" role="button" aria-label="View after selection details" onclick="openModal('modal-after-selection')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-after-selection')}">
         <div class="process-thumb">
-          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add after selection screenshot</div>
+          <img src="images/CDThumbAfter.png" alt="Maturity plan card showing close and transfer on maturity date">
         </div>
         <div class="process-card-body">
           <span class="process-card-title">After selection</span>
@@ -1213,127 +1659,8 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <hr class="cs-divider">
-
-  <!-- Ideation -->
-  <div class="cs-section">
-    <p class="cs-section-label">Ideation</p>
-    <h2>From sticky notes to a cohesive flow.</h2>
-    <p>I sketched sacrificial concepts on sticky notes, presented them to the team for feedback, and used that to narrow toward a single flow built around one goal: making customers feel supported and celebrated as their CD approached maturity, not just informed.</p>
-    <p>From there I jumped straight into a high-fidelity first iteration — I wanted to be clear about what I was proposing, not just gesture at it. That first pass explored a progress bar to frame maturity planning as "the next step," elevated maturity options on L2 so they were visible before tapping in, and a custom tab view on L3 that collapsed information until you tapped on an option. The feedback sharpened each idea: the progress bar was interesting but CDs are a long-term product and the bar would barely move over months — and it used red, a color Capital One reserves for error states where users can't proceed. The tab-within-a-tab on L3 hid information behind clicks that didn't need to be hidden, especially since there was already a tab view at the top of that page.</p>
-    <p>The second iteration responded directly: the maturity date moved to the top, the default plan surfaced immediately below it, and only the necessary information remained — no decorative bar, no buried tabs.</p>
-
-    <div class="carousel">
-      <div class="carousel-track-wrap">
-        <div class="carousel-track" id="iterationCarouselTrack">
-          <div class="carousel-slide">
-            <div class="carousel-img"><div class="hero-img-fallback" style="aspect-ratio:16/10;">add iteration 1 screenshots</div></div>
-            <p class="carousel-caption">Iteration 1 — animation, elevated date, a progress bar, elevated options, and collapsed info behind tabs.</p>
-          </div>
-          <div class="carousel-slide">
-            <div class="carousel-img"><div class="hero-img-fallback" style="aspect-ratio:16/10;">add iteration 2 screenshots</div></div>
-            <p class="carousel-caption">Iteration 2 — animation, elevated date, elevated options, clear hierarchy, and only necessary info.</p>
-          </div>
-        </div>
-      </div>
-      <div class="carousel-controls">
-        <div class="carousel-dots" id="iterationCarouselDots">
-          <button class="carousel-dot active" aria-label="Slide 1"></button>
-          <button class="carousel-dot" aria-label="Slide 2"></button>
-        </div>
-        <div class="carousel-arrows">
-          <button class="carousel-arrow" aria-label="Previous slide" onclick="prevSlide('iterationCarouselTrack')">
-            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <button class="carousel-arrow" aria-label="Next slide" onclick="nextSlide('iterationCarouselTrack')">
-            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <hr class="cs-divider">
-
-  <!-- Research -->
-  <div class="cs-section">
-    <p class="cs-section-label">Testing</p>
-    <h2>A/B testing two experiences head-to-head.</h2>
-    <p>I tested the existing BAU retention experience against the strategic vision experience to answer four questions:</p>
-    <ul>
-      <li>Do users know when their CD will mature?</li>
-      <li>Do users know what will happen when their CD matures?</li>
-      <li>Do users have the information they need, and do they know where to look for more?</li>
-      <li>How do users feel about the experience?</li>
-    </ul>
-
-    <div class="carousel">
-      <div class="carousel-track-wrap">
-        <div class="carousel-track" id="testingCarouselTrack">
-          <div class="carousel-slide">
-            <div class="carousel-img"><div class="hero-img-fallback" style="aspect-ratio:16/10;">add BAU vs strategic vision comparison screenshot</div></div>
-            <p class="carousel-caption">BAU CD retention experience (left) versus the strategic vision experience (right), tested side by side.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <p style="margin-top: 1.75rem;">Synthesizing both rounds surfaced themes, notable quotes, and quantitative outcomes for each version, which I compared directly to see which performed better.</p>
-  </div>
-
-  <hr class="cs-divider">
-
-  <!-- Results -->
-  <div class="cs-section">
-    <p class="cs-section-label">Results</p>
-    <h2>The strategic vision won on every measure that mattered.</h2>
-
-    <div class="insights-list">
-      <div class="insight-item">
-        <span class="insight-num">1</span>
-        <p class="insight-text">All users knew when their CD would mature, based on the L1, L2, and L3 screens.</p>
-      </div>
-      <div class="insight-item">
-        <span class="insight-num">2</span>
-        <p class="insight-text">All users understood their maturity options on L3 without needing additional detail — and had no trouble defining what "renew your CD" or "close and transfer" actually meant. The question going into testing was whether I'd stripped out too much information. The answer was no.</p>
-      </div>
-      <div class="insight-item">
-        <span class="insight-num">3</span>
-        <p class="insight-text">Most users appreciated the animations — they emphasized what had changed, "added fun to banking," and made "waiting for [their] money worth it."</p>
-      </div>
-    </div>
-
-    <div class="cs-quote">
-      <p>"Add fun to banking."</p>
-    </div>
-
-    <p>L2 surfaced a few rougher edges. Some users didn't know what actually happens to their CD when it matures — because I'd elevated the maturity options without making the current default plan equally visible. Some had trouble finding the maturity date at first glance, partially buried in body text. And a few felt the maturity planning tab was premature — they could see their CD matured in November, hadn't made a decision yet, and didn't want that tab sitting above account details and recent transactions before they were ready to use it.</p>
-  </div>
-
-  <hr class="cs-divider">
-
-  <!-- Recommendation -->
-  <div class="cs-section">
-    <p class="cs-section-label">Recommendation</p>
-    <h2>A final prototype built on four principles.</h2>
-    <ul>
-      <li>Elevated maturity date — present on L1, L2, and L3. Low lift, high impact.</li>
-      <li>Improved information hierarchy — refined on L2 and L3</li>
-      <li>Elevated maturity plan — surfaced on L1 and L2</li>
-      <li>Animation throughout — used on L1, L2, and L3. From a front-end development perspective, no one really wants to build animations. But they added something real to this experience.</li>
-    </ul>
-
-    <div class="cs-hero-img" style="margin-top: 1.5rem;">
-      <div class="hero-img-fallback">Add the final prototype video or screenshot here</div>
-    </div>
-
-    <p style="margin-top: 1.75rem;">Two further opportunities remain open: research into the mental model of customers most likely to attrite, and continuing to launch limited-time offers and internal products to compete in what is, fundamentally, an "interest rate game."</p>
+    <p style="margin-top: 1.75rem;">The vision was handed off as a recommendation for the 2024 roadmap. Two further opportunities remain: research into the mental model of customers most likely to attrite, and continuing to launch limited-time offers and internal products to compete in what is, fundamentally, an "interest rate game."</p>
   </div>
 
   <hr class="cs-divider">
@@ -1343,7 +1670,8 @@
     <p class="cs-section-label">Takeaways</p>
     <h2>What this project taught me.</h2>
     <p>When a product is born from business needs, the onus falls on the designer to build a positive experience for the user and advocate for their perspective. I'd never done visioning work before this — as a designer, you're usually taught to be a facilitator and conduit for user needs, but vision work is a space to be creative and channel that empathy at the same time, rather than treating the two as separate modes.</p>
-    <p>I'm also genuinely grateful I got to work on something consumer-facing. The portfolio impact is exciting on paper, but what stuck with me was watching UserTesting recordings and seeing real people interact with a prototype I designed, answering questions I wrote. That direct connection to impact — and to what I could still improve for them — is something I didn't expect to feel this strongly.</p>
+    <p>This project also showed me how much reach consumer design can have. On paper, the translation work was small in scope: bringing an existing web flow to iOS and Android. But that mobile experience was where customers decided what to do with their money: roughly 40% of maturity selections happened there, contributing to the $23.5 billion that stayed at Capital One. Work that looks modest can carry enormous weight when it sits at the moment a customer makes a decision.</p>
+    <p>Above all, what stuck with me was watching UserTesting recordings and seeing real people interact with a prototype I designed, answering questions I wrote. That direct connection to impact — and to what I could still improve for my users — is very valuable and makes the work fulfilling.</p>
   </div>
 
 </div>
@@ -1372,7 +1700,7 @@
     <p class="modal-desc">The first time a customer encounters their CD, the goal is a moment of delight. A CD slide-up animation introduces the account into its own clearly separated section, distinct from checking and savings — with a shimmer animation and the maturity date visible right away, rather than buried behind a tap.</p>
     <div class="modal-shots-grid">
       <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add L1 vision screenshot</div></div>
+        <div class="modal-shot-img"><img src="images/CDVisionFTUX2.png" alt="L1 home screen with a separate CD Accounts section and visible maturity date"></div>
         <span class="modal-shot-label">L1 — Home screen</span>
         <p class="modal-shot-desc">CD slide-up animation, a separate CD Accounts section, visible maturity date, and a shimmer animation on the tile.</p>
       </div>
@@ -1393,19 +1721,19 @@
     <p class="modal-desc">As maturity nears, the goal shifts to giving customers a direct path into plan selection — rather than several clicks through layers of screens. My work focused specifically on this interaction, but I also explored what the experience looks like once a plan has actually been chosen.</p>
     <div class="modal-shots-grid">
       <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add L1 approaching maturity screenshot</div></div>
+        <div class="modal-shot-img"><img src="images/CDVisionApproachL1.png" alt="L1 home screen with a mudflap prompting the customer to select a maturity plan"></div>
         <span class="modal-shot-label">L1 — Mudflap with CTA</span>
         <p class="modal-shot-desc">A direct call-to-action surfaces right on the account tile, prompting the customer to make a maturity plan.</p>
       </div>
       <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add L2 approaching maturity screenshot</div></div>
+        <div class="modal-shot-img"><img src="images/CDVisionApproachL2.png" alt="L2 CD account screen with the maturity date at top and the default maturity plan"></div>
         <span class="modal-shot-label">L2 — Account details</span>
-        <p class="modal-shot-desc">Maturity date kept visible at top, with the maturity plan section displaying the current (or default) plan.</p>
+        <p class="modal-shot-desc">Maturity date kept visible at the top, with the maturity plan section displaying the current (or default) plan.</p>
       </div>
       <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add L3 approaching maturity screenshot</div></div>
+        <div class="modal-shot-img"><img src="images/CDVisionApproachL3.png" alt="L3 maturity options screen with elevated maturity date and simplified options"></div>
         <span class="modal-shot-label">L3 — Maturity options</span>
-        <p class="modal-shot-desc">The maturity date is elevated further, and maturity options are simplified down to title plus CTA — nothing extra.</p>
+        <p class="modal-shot-desc">The maturity date is elevated further, and maturity options are simplified to a title and CTA — nothing extra.</p>
       </div>
     </div>
   </div>
@@ -1421,22 +1749,27 @@
     </button>
     <p class="modal-label">Strategic Vision</p>
     <h3 class="modal-title">After selection</h3>
-    <p class="modal-desc">Once a customer has chosen a maturity plan, the experience surfaces the full picture: when it matures, how much, and where the funds will go — plus details on the option they didn't choose, in case they want to reconsider before the date arrives.</p>
+    <p class="modal-desc">Once a customer has chosen a maturity plan, the experience surfaces the full picture: when it matures, how much, and where the funds will go — plus details on the option they didn't choose, in case they want to reconsider before the date arrives. The first three screens show the close-and-transfer path; if a customer chooses to renew instead, L1's mudflap and L2's maturity plan update to match, and L3 shows the renewal details, including an option to change the CD term.</p>
     <div class="modal-shots-grid">
       <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add L1 after selection screenshot</div></div>
+        <div class="modal-shot-img"><img src="images/CDVisionAfterL1.png" alt="L1 home screen with a mudflap confirming the CD will close and transfer"></div>
         <span class="modal-shot-label">L1 — Home screen</span>
         <p class="modal-shot-desc">A mudflap without a CTA confirms the CD is set to close and transfer on its maturity date.</p>
       </div>
       <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add L2 after selection screenshot</div></div>
+        <div class="modal-shot-img"><img src="images/CDVisionAfterL2.png" alt="L2 CD account screen showing the selected close-and-transfer plan"></div>
         <span class="modal-shot-label">L2 — Account details</span>
         <p class="modal-shot-desc">The current plan is displayed clearly, summarizing what will happen and when.</p>
       </div>
       <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add L3 after selection screenshot</div></div>
+        <div class="modal-shot-img"><img src="images/CDVisionAfterL3.png" alt="L3 maturity options screen with the detailed current plan and option to switch"></div>
         <span class="modal-shot-label">L3 — Maturity options</span>
         <p class="modal-shot-desc">A detailed current plan — closing date, estimated balance, transfer destination — alongside the option to switch.</p>
+      </div>
+      <div class="modal-shot">
+        <div class="modal-shot-img"><img src="images/CDVisionAfterL3Renew.png" alt="L3 maturity options screen after choosing to renew, showing estimated balance, renewal APY, and a CD term with a Change link"></div>
+        <span class="modal-shot-label">L3 — Renew path</span>
+        <p class="modal-shot-desc">If the customer renews instead, the current plan shows the renewal APY and CD term, which they can change until maturity.</p>
       </div>
     </div>
   </div>
@@ -1526,6 +1859,13 @@
     if (wrap && activeSlide) {
       wrap.style.height = activeSlide.offsetHeight + 'px';
     }
+    var carousel = track.closest('.carousel');
+    var arrows = carousel && carousel.querySelector('.carousel-arrows');
+    var img = activeSlide && activeSlide.querySelector('.carousel-img');
+    if (arrows && img) {
+      var imgRect = img.getBoundingClientRect();
+      arrows.style.top = (imgRect.top - carousel.getBoundingClientRect().top + imgRect.height / 2) + 'px';
+    }
   }
 
   function nextSlide(id) {
@@ -1563,7 +1903,8 @@
 
   function closeLightbox() {
     document.getElementById('lightbox').style.display = 'none';
-    document.body.style.overflow = '';
+    var modalOpen = Array.prototype.some.call(document.querySelectorAll('.modal-overlay'), function(o) { return o.style.display === 'flex'; });
+    document.body.style.overflow = modalOpen ? 'hidden' : '';
   }
 
   document.getElementById('lightboxImg').addEventListener('click', function(e) {
@@ -1628,7 +1969,7 @@
   }
 
   function setupZoomableContainers() {
-    document.querySelectorAll('.cs-hero-img, .carousel-img').forEach(function(container) {
+    document.querySelectorAll('.cs-hero-img, .carousel-img, .modal-shot-img').forEach(function(container) {
       var img = container.querySelector('img');
       if (!img || container.querySelector('.modal-img-zoom-icon')) return;
 

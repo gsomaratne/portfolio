@@ -167,6 +167,38 @@
   }
 
   /* HERO IMAGE */
+  .jump-link {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.55rem 1.1rem;
+    border: 1px solid rgba(200,184,240,0.35);
+    border-radius: 999px;
+    color: #c8b8f0;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .jump-link:hover { background: rgba(200,184,240,0.1); border-color: rgba(200,184,240,0.6); }
+
+  #final-design { scroll-margin-top: 5rem; }
+
+  .cs-video { display: flex; justify-content: center; margin-top: 0.5rem; }
+  .cs-video video { display: block; max-width: 100%; max-height: 720px; height: auto; }
+
+  .video-placeholder {
+    width: 100%;
+    aspect-ratio: 16/10;
+    background: rgba(245,243,238,0.04);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245,243,238,0.25);
+    font-size: 0.82rem;
+    font-style: italic;
+  }
+
   .cs-hero-img {
     border-radius: 6px;
     overflow: hidden;
@@ -371,6 +403,7 @@
   /* CAROUSEL — MVP improvements */
   .carousel {
     margin-top: 1.75rem;
+    position: relative;
   }
 
   .carousel-track-wrap {
@@ -391,25 +424,33 @@
     flex-direction: column;
   }
 
+  /* Cap image height so square/tall images don't fill the screen; the box shrinks to the image */
   .carousel-img {
-    width: 100%;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
     border-radius: 6px;
     overflow: hidden;
   }
 
   .carousel-img img {
-    width: 100%;
+    width: auto;
+    max-width: 100%;
+    max-height: 460px;
     height: auto;
     display: block;
   }
 
-  .carousel-caption {
-    font-size: 0.85rem;
-    color: rgba(245,243,238,0.55);
-    line-height: 1.6;
+  /* p.carousel-caption so it beats the generic .cs-section p body-text rule */
+  p.carousel-caption {
+    font-size: 0.78rem;
+    color: rgba(245,243,238,0.45);
+    line-height: 1.55;
     font-weight: 300;
+    letter-spacing: 0.01em;
     padding: 0 0.1rem;
-    margin-top: 1.5rem;
+    margin-top: 0.9rem;
+    margin-bottom: 0;
   }
 
   .carousel-caption-quote {
@@ -425,11 +466,19 @@
   .carousel-controls {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 0.3rem;
   }
 
-  .carousel-arrows { display: flex; gap: 0.5rem; }
+  /* Arrows sit over the left and right edges of the image; JS centers them vertically on it */
+  .carousel-arrows {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 0;
+    pointer-events: none;
+  }
 
   .carousel-arrow {
     width: 30px;
@@ -445,7 +494,23 @@
     transition: all 0.2s;
   }
 
-  .carousel-arrow:hover { background: rgba(245,243,238,0.08); border-color: rgba(245,243,238,0.3); }
+  .carousel-arrows .carousel-arrow {
+    position: absolute;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    transform: translateY(-50%);
+    background: rgba(10,10,10,0.6);
+    border-color: rgba(245,243,238,0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    pointer-events: auto;
+  }
+
+  .carousel-arrows .carousel-arrow:first-child { left: 0.75rem; }
+  .carousel-arrows .carousel-arrow:last-child { right: 0.75rem; }
+
+  .carousel-arrow:hover { background: rgba(10,10,10,0.85); border-color: rgba(245,243,238,0.5); }
   .carousel-arrow svg { width: 13px; height: 13px; }
 
   .carousel-dots { display: flex; gap: 0.4rem; }
@@ -949,7 +1014,33 @@
     line-height: 1.5;
   }
 
+  /* Subsection heading: small sans label, clearly below the serif h2 */
+  .cs-section h3 {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.4;
+    margin: 2.75rem 0 0.6rem;
+  }
+
+  .cs-section h2 + h3 { margin-top: 1.5rem; }
+
+  /* Headline numbers */
+  .metrics-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0 0; }
+  .metric {
+    border: 1px solid rgba(245,243,238,0.08);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .metric-num { font-family: var(--serif); font-size: 2.4rem; line-height: 1; color: var(--white); }
+  .metric-cap { font-size: 0.82rem; color: rgba(245,243,238,0.55); line-height: 1.45; }
+
   @media (max-width: 768px) {
+    .metrics-strip { grid-template-columns: 1fr; }
     .future-images { grid-template-columns: 1fr; }
     .prototype-cta { flex-direction: column; align-items: flex-start; }
     .prototype-cta-btn { width: 100%; text-align: center; }
@@ -1046,6 +1137,7 @@
     <p class="cs-section-label">Overview</p>
     <p>The enterprise application design process is rife with siloed knowledge, suboptimal decisions, and expensive rework. BluePrint makes designing applications easier and faster by recommending standardized patterns to meet developers' requirements.</p>
     <p>I led design for the platform's minimum viable product, launched in Q4 2025.</p>
+    <a href="#final-design" class="jump-link">Jump to final design ↓</a>
   </div>
 
   <hr class="cs-divider">
@@ -1055,7 +1147,7 @@
     <p class="cs-section-label">Problem</p>
     <h2>Developers lack an easy way to discover and reuse standardized architectural patterns.</h2>
     <p>Through empathy interviews with developers and application architects, my team identified significant challenges in the enterprise application design process.</p>
-    <p>Developers often lack expertise in evolving technology trends and established architectural guidelines, and architects with this expertise are often consulted late in the process — after developers have already made redundant or suboptimal decisions. Scarce documentation ensures that developers implement patterns inconsistently and with arbitrary uniqueness. While a catalog of approved, standardized patterns for architecture exists, it is not well-known nor is adoption enforced.</p>
+    <p>Developers often lack expertise in evolving technology trends and established architectural guidelines, and architects with this expertise are often consulted late in the process — after developers have already made redundant or suboptimal decisions. Scarce documentation means developers implement patterns inconsistently and with arbitrary uniqueness. While a catalog of approved, standardized patterns for architecture exists, it isn't well known, and adoption isn't enforced.</p>
     <p>The result: tech debt, expensive rework, and delayed project timelines.</p>
   </div>
 
@@ -1065,7 +1157,7 @@
   <div class="cs-section">
     <p class="cs-section-label">Design process</p>
     <h2>From user flow to high-fidelity prototype.</h2>
-    <p>Building upon requirements set forth by my product team, I ideated on the design of a platform that takes application intent and requirements and provides suggested architectural patterns. I evolved the concept from a user flow diagram to a high fidelity prototype. Click any card below for a closer look.</p>
+    <p>Building upon requirements set forth by my product team, I ideated on the design of a platform that takes application intent and requirements and provides suggested architectural patterns. I evolved the concept from a user flow diagram to a high-fidelity prototype. Click any card below for a closer look.</p>
 
     <div class="process-cards">
 
@@ -1122,7 +1214,7 @@
         </div>
         <div class="process-card-body">
           <span class="process-card-title">High fidelity</span>
-          <p class="process-card-desc">After stakeholder feedback, I created a high fidelity prototype to test with users.</p>
+          <p class="process-card-desc">After stakeholder feedback, I created a high-fidelity prototype to test with users.</p>
           <span class="process-card-link">
             View details
             <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1141,7 +1233,7 @@
   <div class="cs-section">
     <p class="cs-section-label">User research</p>
     <h2>Moderated usability testing with 6 target users.</h2>
-    <p>To evaluate the proposed UI design and information architecture, I conducted moderated usability testing with associates familiar with app architecture and/or with expressed interest in BluePrint:</p>
+    <p>To evaluate the proposed UI design and information architecture, I conducted moderated usability testing with associates who were familiar with app architecture or had expressed interest in BluePrint:</p>
     <ul>
       <li>1 cloud policy engineer</li>
       <li>3 software engineers</li>
@@ -1168,8 +1260,9 @@
 
   <!-- Insights: Wins -->
   <div class="cs-section">
-    <p class="cs-section-label">Insights — wins</p>
-    <h2>The interface behaved as participants expected.</h2>
+    <p class="cs-section-label">Insights</p>
+    <h2>The structure held up; the content needed refinement.</h2>
+    <h3>What worked</h3>
     <p>For the most part, participants appreciated BluePrint's intuitive design and recognized its potential for usefulness in their day-to-day work with application architecture.</p>
     <div class="insights-list">
       <div class="insight-item">
@@ -1218,14 +1311,8 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <hr class="cs-divider">
-
-  <!-- Insights: Improvements -->
-  <div class="cs-section">
-    <p class="cs-section-label">Insights — MVP improvements</p>
-    <h2>All improvements were content-related.</h2>
+    <h3>What to fix before launch</h3>
     <p>Of the few improvements needed for the MVP design, none were structural — all were about what the product said, not how it was shaped.</p>
 
     <!-- CAROUSEL -->
@@ -1239,7 +1326,7 @@
           </div>
           <div class="carousel-slide">
             <div class="carousel-img"><img src="images/BluePrintGallery2.png" alt="Annotated previous questionnaire screen showing the recommendation and response tab order" data-icon="inverted"></div>
-            <p class="carousel-caption">Present output recommendations before input response when viewing a past questionnaire.</p>
+            <p class="carousel-caption">Present output recommendations before input responses when viewing a past questionnaire.</p>
             <p class="carousel-caption-quote">"Give the end product first then if I want to see how the tool derived this, then go into the details."</p>
           </div>
           <div class="carousel-slide">
@@ -1269,18 +1356,12 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <hr class="cs-divider">
-
-  <!-- Enhancements -->
-  <div class="cs-section">
-    <p class="cs-section-label">Insights — enhancements</p>
-    <h2>Opportunities that shaped the product roadmap.</h2>
+    <h3>What to build next</h3>
     <p>Multiple opportunities to enhance BluePrint's functionality were identified during testing. Most participants were confused by the JSON output format — what it represented and what they could do with it. They wanted something they could use "right away" and play around with.</p>
     <p>Other desired capabilities initially contradicted requirements set forth for the MVP by my product partner — editing, deleting, and sharing questionnaires. The team believed these functionalities could allow users to "game" the recommendation engine. However, since BluePrint is a tool and not law, I was able to advocate for these features, and the insights I surfaced helped influence the product roadmap and shift the engineering team's focus.</p>
     <ul>
-      <li>Output file format that can be more easily shared and deployed (e.g., vs. JSON)</li>
+      <li>An output format that's easier to share and deploy than JSON</li>
       <li>Edit and delete functionality for questionnaire responses</li>
       <li>Shareable links to BluePrint questionnaires and recommendations</li>
     </ul>
@@ -1288,14 +1369,17 @@
 
   <hr class="cs-divider">
 
-  <!-- Looking Forward -->
-  <div class="cs-section">
-    <p class="cs-section-label">Looking forward</p>
-    <h2>A well-received MVP with clear direction for what comes next.</h2>
-    <p>Overall, BluePrint's MVP was well-received by users — they recognized the platform's potential to streamline the architectural design process, especially once AI was integrated. As the focus for the next iteration turned to AI integration, the user research I conducted gave the team a clear and prioritized enhancement roadmap.</p>
-    <p>My personal learnings centered on collaborative habits: including my product partner during synthesis would have provided richer context earlier and reduced the friction of advocating for user-driven changes later.</p>
-    <p>Looking ahead, the next major milestone for BluePrint is AI integration — and I've already begun designing what that conversational experience could look like.</p>
+  <!-- Final design -->
+  <div class="cs-section" id="final-design">
+    <p class="cs-section-label">Final design</p>
+    <h2>From the MVP to an AI-powered BluePrint.</h2>
+    <h3>The MVP</h3>
+    <div class="cs-video">
+      <video src="images/BluePrintPrototype.mp4" poster="images/BluePrintPrototypePoster.jpg" autoplay muted loop playsinline aria-label="Walkthrough of the BluePrint MVP, from login through a questionnaire to a pattern recommendation"></video>
+    </div>
 
+    <h3>AI integration</h3>
+    <p>After the MVP, the next major milestone was AI integration. I designed the conversational experience that shipped: instead of a fixed questionnaire, developers describe their application in their own words and BluePrint asks follow-up questions before recommending a pattern.</p>
     <div class="carousel">
       <div class="carousel-track-wrap">
         <div class="carousel-track" id="futureCarouselTrack">
@@ -1338,6 +1422,37 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Results -->
+  <div class="cs-section">
+    <p class="cs-section-label">Results</p>
+    <h2>BluePrint became part of how every Capital One developer starts a build.</h2>
+    <p>BluePrint's MVP was well-received by users — they recognized the platform's potential to streamline the architectural design process — and the research I conducted gave the team a clear, prioritized enhancement roadmap.</p>
+    <p>That AI experience was then integrated into Build Readiness, the platform developers across Capital One use to prepare an application for build. Developers now use BluePrint to gather intent about their application and prefill the Build Readiness form, cutting it from 110 questions to 56.</p>
+
+    <div class="metrics-strip">
+      <div class="metric">
+        <span class="metric-num">110 → 56</span>
+        <span class="metric-cap">Questions on the Build Readiness form, with BluePrint prefilling the rest</span>
+      </div>
+      <div class="metric">
+        <span class="metric-num">All</span>
+        <span class="metric-cap">Capital One developers now use it to capture application intent</span>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Takeaways -->
+  <div class="cs-section">
+    <p class="cs-section-label">Takeaways</p>
+    <h2>What this project taught me.</h2>
+    <p>The biggest lesson was how to advocate when what users need conflicts with a product team's initial direction. Editing, deleting, and sharing questionnaires were deliberately left out of the MVP because the team worried users would game the recommendation engine. Participants wanted them anyway. Instead of arguing preference, I brought the testing evidence and reframed the risk: BluePrint is a guide, not a gate, so letting people revise their answers makes the recommendations more useful, not less trustworthy. That shifted the roadmap.</p>
+    <p>In hindsight, I'd bring my product partner into synthesis from the start. Seeing the evidence firsthand would have given them richer context earlier and made that advocacy far less of an uphill conversation.</p>
   </div>
 
 </div>
@@ -1420,7 +1535,7 @@
     </button>
     <p class="modal-label">Process</p>
     <h3 class="modal-title">Low fidelity</h3>
-    <p class="modal-desc">Having established MVP functionality, I could develop a look and feel for the platform. To ease the transition to a conversational interface following AI integration in Q2 2026, I drew inspiration from Gemini and ChatGPT. For MVP, "conversations" and "chats" were misnomers that I persuaded the team to replace with "questionnaires."</p>
+    <p class="modal-desc">Having established MVP functionality, I could develop a look and feel for the platform. To ease the transition to a conversational interface following AI integration in Q2 2026, I drew inspiration from Gemini and ChatGPT. For the MVP, "conversations" and "chats" were misnomers that I persuaded the team to replace with "questionnaires."</p>
 
     <div class="modal-shots-grid">
       <div class="modal-shot">
@@ -1428,7 +1543,7 @@
           <img src="images/BluePrintLofiModal1.png" alt="Low fidelity wireframe of BluePrint homepage">
         </div>
         <span class="modal-shot-label">Homepage</span>
-        <p class="modal-shot-desc">Previous questionnaires stored in an expandable side menu, new questionnaires started from the side bar or page center, and banners for unfinished questionnaires.</p>
+        <p class="modal-shot-desc">Previous questionnaires stored in an expandable side menu, new questionnaires started from the sidebar or page center, and banners for unfinished questionnaires.</p>
       </div>
       <div class="modal-shot">
         <div class="modal-shot-img">
@@ -1458,7 +1573,7 @@
     </button>
     <p class="modal-label">Process</p>
     <h3 class="modal-title">High fidelity</h3>
-    <p class="modal-desc">With a settled interface design, I used Google's Material UI components to create a high fidelity prototype, visualizing the flow from login to starting a questionnaire to receiving a recommendation.</p>
+    <p class="modal-desc">With a settled interface design, I used Material UI components, based on Google's Material Design, to create a high-fidelity prototype, visualizing the flow from login to starting a questionnaire to receiving a recommendation.</p>
 
     <div class="modal-shots-grid">
       <div class="modal-shot">
@@ -1487,7 +1602,7 @@
     <div class="modal-callout">
       <p class="rc-title">Still, some questions remained</p>
       <ul>
-        <li>Should recommendation or chat log be presented to the user first in previous questionnaires?</li>
+        <li>Should the recommendation or the chat log come first in previous questionnaires?</li>
         <li>Do users know where the in-progress questionnaire alert will send them if they have multiple in progress?</li>
       </ul>
     </div>
@@ -1577,6 +1692,13 @@
     var activeSlide = track.children[state.index];
     if (wrap && activeSlide) {
       wrap.style.height = activeSlide.offsetHeight + 'px';
+    }
+    var carousel = track.closest('.carousel');
+    var arrows = carousel && carousel.querySelector('.carousel-arrows');
+    var img = activeSlide && activeSlide.querySelector('.carousel-img');
+    if (arrows && img) {
+      var imgRect = img.getBoundingClientRect();
+      arrows.style.top = (imgRect.top - carousel.getBoundingClientRect().top + imgRect.height / 2) + 'px';
     }
   }
 

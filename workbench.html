@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workbench — Griffin Somaratne</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f3ee;
+    --muted: #888078;
+    --tag-ux: #c8b8f0;
+    --tag-ui: #f0b8d8;
+    --tag-research: #f0d0b8;
+    --serif: 'Instrument Serif', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --highlight: rgba(200,184,240,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(245,243,238,0.06);
+  }
+
+  .nav-logo {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 400;
+    color: var(--white);
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(245,243,238,0.6);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  /* CASE STUDY HEADER */
+  .cs-hero {
+    padding: 7rem 3rem 0;
+    max-width: 800px;
+    margin: 0 auto;
+    animation: fadeUp 0.8s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .cs-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: rgba(245,243,238,0.4);
+    text-decoration: none;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    transition: color 0.2s;
+  }
+
+  .cs-back:hover { color: var(--white); }
+  .cs-back svg { width: 14px; height: 14px; }
+
+  .cs-title {
+    font-family: var(--serif);
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 400;
+    line-height: 1.1;
+  }
+
+  /* META BAR */
+  .cs-meta-bar {
+    display: table;
+    table-layout: auto;
+    width: 100%;
+    border: 1px solid rgba(245,243,238,0.08);
+    border-radius: 8px;
+    margin-top: 2.75rem;
+    margin-bottom: 2.25rem;
+    overflow: hidden;
+  }
+
+  .meta-item {
+    display: table-cell;
+    padding: 0.9rem 1rem;
+    border-right: 1px solid rgba(245,243,238,0.08);
+    vertical-align: top;
+  }
+
+  .meta-item:last-child { border-right: none; }
+
+  .meta-label {
+    display: block;
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .meta-value {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.85rem;
+    color: rgba(245,243,238,0.85);
+    line-height: 1.4;
+  }
+
+  /* BODY */
+  .cs-body {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 3rem 8rem;
+  }
+
+  /* HERO IMAGE */
+  .cs-hero-img {
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 0.5rem;
+    margin-bottom: 0rem;
+  }
+
+  .cs-hero-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .process-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .modal-img-placeholder img,
+  .modal-shot-img img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* PLACEHOLDER FALLBACK — used until real screenshots are added */
+  .hero-img-fallback {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: rgba(245,243,238,0.04);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245,243,238,0.25);
+    font-size: 0.82rem;
+    font-style: italic;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+  /* SECTION BLOCKS */
+  .cs-section { margin-bottom: 4rem; }
+
+  .cs-section-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #f0b8d8;
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+
+  .cs-section h2 {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 400;
+    margin-bottom: 1rem;
+    line-height: 1.25;
+  }
+
+  .cs-section p {
+    font-size: 0.95rem;
+    color: rgba(245,243,238,0.65);
+    line-height: 1.85;
+    margin-bottom: 0.85rem;
+    font-weight: 300;
+  }
+
+  .cs-section ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .cs-section ul li {
+    font-size: 0.95rem;
+    color: rgba(245,243,238,0.65);
+    line-height: 1.7;
+    font-weight: 300;
+    padding-left: 1.2rem;
+    position: relative;
+  }
+
+  .cs-section ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  /* PROCESS CARDS */
+  .process-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .process-card {
+    padding: 0;
+    border: 1px solid rgba(245,243,238,0.08);
+    border-radius: 6px;
+    background: rgba(245,243,238,0.02);
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.2s, background 0.2s, transform 0.2s;
+  }
+
+  .process-card:hover {
+    border-color: rgba(240,184,216,0.35);
+    background: rgba(245,243,238,0.04);
+    transform: translateY(-2px);
+  }
+
+  .process-card:focus-visible {
+    outline: 2px solid rgba(240,184,216,0.5);
+    outline-offset: 2px;
+  }
+
+  .process-thumb {
+    width: 100%;
+    aspect-ratio: 1072 / 657;
+    background: rgba(245,243,238,0.04);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .process-card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1;
+  }
+
+  .process-card-title {
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--white);
+    line-height: 1.3;
+  }
+
+  .process-card-desc {
+    font-size: 0.8rem;
+    color: rgba(245,243,238,0.45);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  .process-card-link {
+    font-size: 0.8rem;
+    color: #f0b8d8;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: auto;
+    transition: opacity 0.2s;
+  }
+
+  .process-card:hover .process-card-link { opacity: 0.7; }
+  .process-card-link svg { width: 12px; height: 12px; }
+
+  /* RESEARCH CALLOUT */
+  .research-callout {
+    background: var(--highlight);
+    border: 1px solid rgba(240,184,216,0.2);
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .research-callout .rc-title {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #f0b8d8;
+    margin-bottom: 0.75rem;
+  }
+
+  .research-callout p { font-size: 0.9rem; color: rgba(245,243,238,0.7); margin-bottom: 0; }
+
+  .research-callout ul {
+    margin-top: 0.5rem;
+    margin-bottom: 0 !important;
+  }
+
+  .research-callout ul li {
+    color: rgba(245,243,238,0.7) !important;
+    font-size: 0.9rem !important;
+  }
+
+  /* DIVIDER */
+  .cs-divider {
+    border: none;
+    border-top: 1px solid rgba(245,243,238,0.07);
+    margin: 3.5rem 0;
+  }
+
+  /* NEXT CASE */
+  .cs-next {
+    border-top: 1px solid rgba(245,243,238,0.07);
+    padding: 3rem;
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .cs-next p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+
+  .cs-next a {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: var(--white);
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .cs-next a:hover { opacity: 0.65; }
+
+  /* ===== MODALS ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.78);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1.25rem;
+  }
+
+  .modal-box {
+    background: #111111;
+    border: 1px solid rgba(245,243,238,0.1);
+    border-radius: 10px;
+    max-width: 760px;
+    width: 100%;
+    max-height: 86vh;
+    overflow-y: auto;
+    padding: 2.5rem;
+    position: relative;
+    animation: modalIn 0.25s ease;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,243,238,0.15);
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover { background: rgba(245,243,238,0.08); }
+  .modal-close svg { width: 14px; height: 14px; }
+
+  .modal-label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #f0b8d8;
+    margin-bottom: 0.6rem;
+  }
+
+  .modal-title {
+    font-family: var(--serif);
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    font-weight: 400;
+    margin-bottom: 1.1rem;
+    padding-right: 2rem;
+  }
+
+  .modal-desc {
+    font-size: 0.92rem;
+    color: rgba(245,243,238,0.6);
+    line-height: 1.8;
+    margin-bottom: 1.75rem;
+    font-weight: 300;
+  }
+
+  .modal-shots-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .modal-shot { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .modal-shot-img {
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .modal-shot-label {
+    font-size: 0.85rem;
+    color: var(--white);
+    font-weight: 500;
+  }
+
+  .modal-shot-desc {
+    font-size: 0.78rem;
+    color: rgba(245,243,238,0.45);
+    line-height: 1.55;
+    font-weight: 300;
+  }
+
+  .modal-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-step {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+
+  .modal-step-num {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: rgba(240,184,216,0.45);
+    line-height: 1.4;
+    min-width: 1.4rem;
+  }
+
+  .modal-step-text {
+    font-size: 0.88rem;
+    color: rgba(245,243,238,0.6);
+    line-height: 1.65;
+    font-weight: 300;
+    padding-top: 0.1rem;
+  }
+
+  .modal-callout {
+    background: var(--highlight);
+    border: 1px solid rgba(240,184,216,0.2);
+    border-radius: 6px;
+    padding: 1.25rem;
+    margin-top: 1.5rem;
+  }
+
+  .modal-callout .rc-title {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #f0b8d8;
+    margin-bottom: 0.65rem;
+  }
+
+  .modal-callout ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .modal-callout ul li {
+    font-size: 0.88rem;
+    color: rgba(245,243,238,0.65);
+    line-height: 1.6;
+    font-weight: 300;
+    padding-left: 1.1rem;
+    position: relative;
+  }
+
+  .modal-callout ul li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-size: 0.78rem;
+  }
+
+  /* PROTOTYPE CTA */
+  .prototype-cta {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    border: 1px solid rgba(245,243,238,0.1);
+    border-radius: 10px;
+    background: linear-gradient(135deg, rgba(240,184,216,0.06) 0%, rgba(200,184,240,0.04) 100%);
+    margin-top: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .prototype-cta-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: rgba(245,243,238,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .prototype-cta-icon svg { width: 22px; height: 22px; }
+
+  .prototype-cta-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    flex: 1;
+    min-width: 180px;
+  }
+
+  .prototype-cta-title {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    color: var(--white);
+  }
+
+  .prototype-cta-sub {
+    font-size: 0.82rem;
+    color: rgba(245,243,238,0.45);
+    font-weight: 300;
+    line-height: 1.5;
+  }
+
+  .prototype-cta-btn {
+    padding: 0.65rem 1.25rem;
+    border-radius: 6px;
+    background: var(--white);
+    color: var(--black);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+  }
+
+  .prototype-cta-btn:hover { opacity: 0.8; }
+
+  .jump-link {
+    display: inline-block;
+    margin-top: 0.75rem;
+    padding: 0.55rem 1.1rem;
+    border: 1px solid rgba(200,184,240,0.35);
+    border-radius: 999px;
+    color: #c8b8f0;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .jump-link:hover { background: rgba(200,184,240,0.1); border-color: rgba(200,184,240,0.6); }
+
+  #final-design { scroll-margin-top: 5rem; }
+
+  /* Numbered steps (matches the CDs results list) */
+  .insights-list { display: flex; flex-direction: column; margin-top: 1rem; }
+  .insight-item { display: flex; gap: 1rem; padding: 1rem 1.25rem; border-radius: 6px; }
+  .insight-num {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    color: rgba(200,184,240,0.35);
+    line-height: 1;
+    min-width: 1.5rem;
+    padding-top: 0.1rem;
+  }
+  .cs-section p.insight-text { font-size: 0.9rem; color: rgba(245,243,238,0.6); line-height: 1.65; margin: 0; }
+  .insight-text strong { color: var(--white); font-weight: 500; }
+
+  /* Headline numbers */
+  .metrics-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin: 1.5rem 0 2rem;
+  }
+  .metric {
+    border: 1px solid rgba(245,243,238,0.08);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .metric-num { font-family: var(--serif); font-size: 2.5rem; line-height: 1; color: var(--white); }
+  .metric-cap { font-size: 0.82rem; color: rgba(245,243,238,0.55); line-height: 1.45; }
+
+  .cs-section ul li strong { color: var(--white); font-weight: 500; }
+
+  p.carousel-caption {
+    font-size: 0.78rem;
+    color: rgba(245,243,238,0.45);
+    line-height: 1.55;
+    font-weight: 300;
+    margin-top: 0.9rem;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    .metrics-strip { grid-template-columns: 1fr; }
+    .prototype-cta { flex-direction: column; align-items: flex-start; }
+    .prototype-cta-btn { width: 100%; text-align: center; }
+    nav { padding: 1rem 1.5rem; }
+    .cs-hero { padding: 7rem 1.5rem 0; }
+    .cs-body { padding: 0 1.5rem 5rem; }
+    .process-cards { grid-template-columns: 1fr; }
+    .cs-meta-bar { display: flex; flex-wrap: wrap; }
+    .meta-item { display: block; flex: 1 1 45%; border-right: none; border-bottom: 1px solid rgba(245,243,238,0.08); }
+    .modal-box { padding: 1.75rem; max-height: 90vh; }
+    .cs-next { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+  }
+
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Griffin Somaratne</a>
+  <ul class="nav-links">
+    <li><a href="index.html#work">Work</a></li>
+    <!-- <li><a href="fridge.html">Refrigerator door</a></li> -->
+    <li><a href="about.html">About</a></li>
+  </ul>
+</nav>
+
+<!-- HEADER -->
+<div class="cs-hero">
+  <a href="index.html" class="cs-back">
+    <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 7H2M2 7l5-5M2 7l5 5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    Back to work
+  </a>
+
+  <h1 class="cs-title">Workbench</h1>
+
+  <!-- Hero image -->
+  <div class="cs-hero-img">
+    <div class="hero-img-fallback">add full MVP export: assembled modeling set detail page (Figma frame 1119-79545)</div>
+  </div>
+
+  <!-- Figma file CTA -->
+  <div class="prototype-cta">
+    <div class="prototype-cta-icon">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 12a4 4 0 014-4h0a4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#c8b8f0"/>
+        <path d="M8 4a4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#f0b8d8"/>
+        <path d="M0 12a4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#b8d8f0"/>
+        <path d="M0 20a4 4 0 014-4h4v4a4 4 0 01-4 4 4 4 0 01-4-4z" fill="#b8f0d0"/>
+        <path d="M8 12v-4h4a4 4 0 110 8H8v-4z" fill="#f0d0b8"/>
+      </svg>
+    </div>
+    <div class="prototype-cta-text">
+      <span class="prototype-cta-title">View the source Figma file</span>
+      <span class="prototype-cta-sub">Explore the full modeling set flow, component states, and annotations.</span>
+    </div>
+    <a href="https://www.figma.com/design/NdQ2JmkS6zL35c9eY9wRDR/Workbench---8-18--Copy-" target="_blank" rel="noopener" class="prototype-cta-btn">Open in Figma →</a>
+  </div>
+
+  <!-- META BAR -->
+  <div class="cs-meta-bar">
+    <div class="meta-item">
+      <span class="meta-label">Client</span>
+      <span class="meta-value">Capital One — Enterprise Data</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Timeline</span>
+      <span class="meta-value">MVP to 35 data products in ~2 quarters</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Role</span>
+      <span class="meta-value">Product designer (side of desk)</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Team</span>
+      <span class="meta-value">1 product partner, engineering team</span>
+    </div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="cs-body">
+
+  <!-- Overview -->
+  <div class="cs-section">
+    <p class="cs-section-label">Overview</p>
+    <p>Workbench is an internal tool for Capital One's Enterprise Data organization. It gives data modelers a single place to register, define, and govern <em>standardized data attributes</em> — the shared, reusable definitions (names, data types, quality rules, privacy classifications, and calculation logic) that let data be discovered, trusted, and reused across teams. Before Workbench, that modeling happened in Google Sheets.</p>
+    <p>No designer was ever staffed to the project, so I picked it up alongside my assigned work. What started as a single modal grew into reskinning the tool onto Capital One's Gravity design system, which got it through the innersourcing review it needed to launch. Within about six months, 35 data products had onboarded.</p>
+    <a href="#final-design" class="jump-link">Jump to final design ↓</a>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Problem -->
+  <div class="cs-section">
+    <p class="cs-section-label">Problem</p>
+    <h2>Modeling data products meant spreadsheets, and a governance tool was heading to launch without design.</h2>
+    <p>Spreadsheets meant no versioning, no audit trail, no validation, and no visibility for the governance reviewers who eventually had to sign off on what got published. A small platform team in Enterprise Data set out to build a real tool to replace them — but it was conceived and built entirely by engineering, with a product partner driving scope.</p>
+    <p>When I learned about Workbench, I raised it with my manager, and we agreed it was an experience risk: a governance-facing tool, built without UX involvement, heading toward a real launch. There was no plan to staff design, and I already had a working relationship with the product partner.</p>
+    <div class="research-callout">
+      <p class="rc-title">The call I made</p>
+      <p>I picked the project up side of desk — informal design work layered on top of my assigned projects — because the alternative was a governance tool shipping with no design input at all.</p>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Approach -->
+  <div class="cs-section">
+    <p class="cs-section-label">Approach</p>
+    <h2>Starting small, then following the problem.</h2>
+    <p>The scope didn't start as "redesign the platform." It started as a single, well-defined ask, and grew because the problems underneath it didn't stop at one screen.</p>
+
+    <div class="insights-list">
+      <div class="insight-item">
+        <span class="insight-num">1</span>
+        <p class="insight-text"><strong>One modal.</strong> The product partner's first ask was narrow and concrete: design the modal analysts use to model a new standardized attribute, the create/edit form used dozens of times a day. It was the right entry point for side-of-desk work: scoped, bounded, and clearly valuable.</p>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">2</span>
+        <p class="insight-text"><strong>The scope kept growing.</strong> Designing that modal surfaced the same problems everywhere around it — inconsistent patterns in the attribute tables, the registration flow, and the hierarchy views. Asks for "just this screen" turned into requests for the whole modeling workspace.</p>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">3</span>
+        <p class="insight-text"><strong>Failing the innersourcing review forced the real fix.</strong> To be hosted on the Exchange, Capital One's internal platform for data products, a tool has to clear an innersourcing review. Workbench's original build failed it: with no design system underneath, there was no credible path to pass. That failure turned "help with a modal" into a full reskin.</p>
+      </div>
+      <div class="insight-item">
+        <span class="insight-num">4</span>
+        <p class="insight-text"><strong>Reskinning onto Gravity.</strong> I rebuilt the modeling workspace, standardized-attribute tables, registration wizard, and delete/archive flows on Gravity — consistent components, accessible patterns, and a structure that could pass the review.</p>
+      </div>
+    </div>
+
+    <p style="margin-top: 1.75rem;">Because this was side-of-desk work, iteration happened in the open, directly on the exploration boards: annotated call-outs on breadcrumb placement, CTA hierarchy, table row alignment, and overflow states, worked through with the product partner in real time rather than in a formal review cycle.</p>
+    <div class="cs-hero-img" style="margin-top: 1.5rem;">
+      <div class="hero-img-fallback">add ideation &amp; annotation board export (Figma frame 985-39157)</div>
+    </div>
+    <p class="carousel-caption">Working notes against the standardized-attributes table — breadcrumb, CTA, and table-alignment fixes called out directly on the canvas.</p>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Final design -->
+  <div class="cs-section" id="final-design">
+    <p class="cs-section-label">Final design</p>
+    <h2>Designing the modeling set experience.</h2>
+    <p>The core object in Workbench is a <em>data product modeling set</em> — a registered group of standardized attributes owned by a team. The redesign covers the end-to-end experience around it: registering a new set, populating it with standardized attributes, and building in guardrails so destructive actions can't happen by accident. Click into each area below.</p>
+
+    <div class="process-cards">
+      <div class="process-card" tabindex="0" role="button" aria-label="View registration flow details" onclick="openModal('modal-registration')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-registration')}">
+        <div class="process-thumb">
+          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add registration flow screenshot</div>
+        </div>
+        <div class="process-card-body">
+          <span class="process-card-title">Registering a modeling set</span>
+          <p class="process-card-desc">A guided, multi-step wizard for defining basic info, ownership, and team permissions before submitting for review.</p>
+          <span class="process-card-link">
+            View details
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="process-card" tabindex="0" role="button" aria-label="View standardized attribute management details" onclick="openModal('modal-attributes')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-attributes')}">
+        <div class="process-thumb">
+          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add modeling set detail table screenshot</div>
+        </div>
+        <div class="process-card-body">
+          <span class="process-card-title">Managing standardized attributes</span>
+          <p class="process-card-desc">A dense data table plus a detailed form for defining an attribute's type, quality rules, privacy classification, and hierarchy.</p>
+          <span class="process-card-link">
+            View details
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+
+      <div class="process-card" tabindex="0" role="button" aria-label="View guardrails and AI assist details" onclick="openModal('modal-guardrails')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-guardrails')}">
+        <div class="process-thumb">
+          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add delete / archive or AI assist screenshot</div>
+        </div>
+        <div class="process-card-body">
+          <span class="process-card-title">Guardrails and AI-assisted authoring</span>
+          <p class="process-card-desc">Confirmation flows for deleting attributes and archiving sets, plus an AI assistant that helps modelers draft definitions instead of starting from a blank form.</p>
+          <span class="process-card-link">
+            View details
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Results -->
+  <div class="cs-section">
+    <p class="cs-section-label">Results</p>
+    <h2>The team's biggest win of the year.</h2>
+
+    <div class="metrics-strip">
+      <div class="metric">
+        <span class="metric-num">0</span>
+        <span class="metric-cap">Design hours formally staffed at the start</span>
+      </div>
+      <div class="metric">
+        <span class="metric-num">1</span>
+        <span class="metric-cap">Innersourcing review failed before the reskin</span>
+      </div>
+      <div class="metric">
+        <span class="metric-num">35</span>
+        <span class="metric-cap">Data products onboarded in about six months</span>
+      </div>
+    </div>
+
+    <p>The rebuilt experience passed the innersourcing review, and Workbench launched on the Exchange. From there, adoption moved fast: 35 data products were modeled through the tool within about six months of the pilot going live.</p>
+    <p>By the time that growth was visible, I'd rotated onto my next assignment. The side-of-desk work had already set the foundation, and the product partner carried it forward. By their account, it became the team's largest success of the year.</p>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Takeaways -->
+  <div class="cs-section">
+    <p class="cs-section-label">Takeaways</p>
+    <h2>What this project taught me.</h2>
+    <p>A tool built with zero staffed design time still had to clear a bar that only design work could get it past. Naming a risk is the first step; someone still has to own it. Next time, I'd push earlier for that conversation to end in a resourcing decision, so the work doesn't depend on whoever has the capacity to absorb it informally.</p>
+    <p>No formal user testing was ever conducted. With informal staffing and no research support, there wasn't a path to run it properly, and I decided shipping a compliant, usable tool mattered more than delaying for research I couldn't resource. The pilot's success is real, but it isn't the same as validated confidence, and it's the clearest gap in this project.</p>
+    <p>My role, specifically:</p>
+    <ul>
+      <li><strong>Interaction and UI design</strong> — the attribute modeling modal, hierarchy views, registration wizard, and delete/archive flows.</li>
+      <li><strong>Design system migration</strong> — reskinning the existing build onto Gravity components and tokens to clear the innersourcing review.</li>
+      <li><strong>Compliance advocacy</strong> — identifying what the review actually required and turning that into a design plan.</li>
+      <li><strong>Not in scope</strong> — formal user research or usability testing.</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- NEXT CASE -->
+<div class="cs-next">
+  <div>
+    <p>Next case study</p>
+    <a href="kairos.html">Capital One — Kairos Policy-as-code →</a>
+  </div>
+  <a href="index.html" style="font-size:0.85rem; color: rgba(245,243,238,0.4); text-decoration:none;">← All work</a>
+</div>
+
+<!-- ===================== MODALS ===================== -->
+
+<!-- REGISTRATION MODAL -->
+<div class="modal-overlay" id="modal-registration">
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-registration')">
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <p class="modal-label">Workbench</p>
+    <h3 class="modal-title">Registering a modeling set</h3>
+    <p class="modal-desc">Creating a new modeling set is a four-step wizard, with a persistent side panel tracking progress and a help link out to the team's Slack channel for questions along the way.</p>
+    <div class="modal-steps">
+      <div class="modal-step">
+        <span class="modal-step-num">1</span>
+        <p class="modal-step-text"><strong>Basic info</strong> — name and describe the modeling set.</p>
+      </div>
+      <div class="modal-step">
+        <span class="modal-step-num">2</span>
+        <p class="modal-step-text"><strong>Ownership</strong> — assign a platform owner and any delegates.</p>
+      </div>
+      <div class="modal-step">
+        <span class="modal-step-num">3</span>
+        <p class="modal-step-text"><strong>Team</strong> — choose modelers who can edit and reviewers who can approve.</p>
+      </div>
+      <div class="modal-step">
+        <span class="modal-step-num">4</span>
+        <p class="modal-step-text"><strong>Review</strong> — a read-only summary of everything before submitting.</p>
+      </div>
+    </div>
+    <div class="modal-shots-grid">
+      <div class="modal-shot">
+        <div class="modal-shot-img"><div class="hero-img-fallback">add registration step screenshots</div></div>
+        <span class="modal-shot-label">Registration wizard</span>
+        <p class="modal-shot-desc">Basic info → ownership → team → review, with a milestone tracker in the side panel.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ATTRIBUTES MODAL -->
+<div class="modal-overlay" id="modal-attributes">
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-attributes')">
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <p class="modal-label">Workbench</p>
+    <h3 class="modal-title">Managing standardized attributes</h3>
+    <p class="modal-desc">Each modeling set's detail page is a data table of its standardized attributes, with search, pagination, and a side navigation for jumping between sections of the set. Adding a new one opens a detailed form covering everything governance needs to know about it.</p>
+    <div class="modal-shots-grid">
+      <div class="modal-shot">
+        <div class="modal-shot-img"><div class="hero-img-fallback">add modeling set detail table screenshot</div></div>
+        <span class="modal-shot-label">Modeling set detail table</span>
+        <p class="modal-shot-desc">Standardized attributes list with search, row-level actions, and bulk selection.</p>
+      </div>
+      <div class="modal-shot">
+        <div class="modal-shot-img"><div class="hero-img-fallback">add new standardized feature modal screenshot</div></div>
+        <span class="modal-shot-label">New standardized feature</span>
+        <p class="modal-shot-desc">Source elements, naming (logical, operational, and analytical), data type, data quality rules, human/PII data flags, privacy classification, attribute hierarchy, and calculation logic with a lightweight rich-text editor.</p>
+      </div>
+      <div class="modal-shot">
+        <div class="modal-shot-img"><div class="hero-img-fallback">add attribute hierarchy screenshot</div></div>
+        <span class="modal-shot-label">Attribute hierarchy</span>
+        <p class="modal-shot-desc">Defining how a new attribute relates to a parent standardized attribute, so governance and lineage stay intact as the set grows.</p>
+      </div>
+      <div class="modal-shot">
+        <div class="modal-shot-img"><div class="hero-img-fallback">add multiple source elements screenshot</div></div>
+        <span class="modal-shot-label">Multiple source elements</span>
+        <p class="modal-shot-desc">Handling attributes that roll up from more than one source system — a state the original build hadn't accounted for.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GUARDRAILS MODAL -->
+<div class="modal-overlay" id="modal-guardrails">
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-guardrails')">
+      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <p class="modal-label">Workbench</p>
+    <h3 class="modal-title">Guardrails and AI-assisted authoring</h3>
+    <p class="modal-desc">Deleting a standardized attribute can affect every data product that references it, so I designed confirmation flows that adapt to the situation — individual vs. bulk, whether the attribute is still actively modeled elsewhere, and archiving a full modeling set. Separately, an AI assistant panel helps modelers draft a definition and calculation logic instead of starting from a blank form.</p>
+    <div class="modal-shots-grid">
+      <div class="modal-shot">
+        <div class="modal-shot-img"><div class="hero-img-fallback">add delete &amp; archive confirmation screenshots</div></div>
+        <span class="modal-shot-label">Delete and archive confirmations</span>
+        <p class="modal-shot-desc">Distinct messaging for individual vs. multiple deletions, for attributes with no source elements modeled versus several, and for archiving a whole set.</p>
+      </div>
+      <div class="modal-shot">
+        <div class="modal-shot-img"><div class="hero-img-fallback">add AI assistant panel screenshot</div></div>
+        <span class="modal-shot-label">AI assistant panel</span>
+        <p class="modal-shot-desc">A conversational side panel that suggests a starting definition and calculation logic based on the source elements a modeler selects.</p>
+      </div>
+    </div>
+    <div class="modal-callout">
+      <p class="rc-title">Design system</p>
+      <p>Built entirely on Capital One's Gravity design system components — form fields, badges, checkboxes, and buttons — so the focus stayed on the data governance workflow itself rather than the UI kit.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ===== Modal logic =====
+  function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeModal(overlay.id);
+    });
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+        if (overlay.style.display === 'flex') closeModal(overlay.id);
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
