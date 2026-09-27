@@ -21,6 +21,7 @@
     --tag-service: #b8d8f0;
     --tag-eng: #b8f0d0;
     --tag-strategy: #f0f0b8;
+    --tag-ds: #f0b8b8;
     --serif: 'Instrument Serif', Georgia, serif;
     --sans: 'DM Sans', sans-serif;
   }
@@ -85,7 +86,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    padding: 8rem 3rem 4rem;
+    padding: 8rem 4.5rem 4rem;
     gap: 4rem;
     position: relative;
     overflow: hidden;
@@ -236,7 +237,7 @@
 
   /* WORK SECTION */
   .section-work {
-    padding: 6rem 3rem;
+    padding: 6rem 4.5rem;
     border-top: 1px solid rgba(245,243,238,0.07);
   }
 
@@ -303,6 +304,7 @@
   .filter-btn[data-tag="Service design"].active { background: var(--tag-service); border-color: var(--tag-service); color: #082858; }
   .filter-btn[data-tag="Engineering"].active { background: var(--tag-eng); border-color: var(--tag-eng); color: #083820; }
   .filter-btn[data-tag="Strategy"].active { background: var(--tag-strategy); border-color: var(--tag-strategy); color: #383808; }
+  .filter-btn[data-tag="Design systems"].active { background: var(--tag-ds); border-color: var(--tag-ds); color: #581010; }
 
   /* CASE STUDY GRID */
   .case-grid {
@@ -390,6 +392,7 @@
   .tag-service { background: rgba(184,216,240,0.18); color: #b8d8f0; border: 1px solid rgba(184,216,240,0.25); }
   .tag-eng { background: rgba(184,240,208,0.18); color: #b8f0d0; border: 1px solid rgba(184,240,208,0.25); }
   .tag-strategy { background: rgba(240,240,184,0.18); color: #f0f0b8; border: 1px solid rgba(240,240,184,0.25); }
+  .tag-ds { background: rgba(240,184,184,0.18); color: #f0b8b8; border: 1px solid rgba(240,184,184,0.25); }
 
   .case-title {
     font-family: var(--serif);
@@ -430,7 +433,7 @@
 
   /* FRIDGE DOOR SECTION */
   .section-fridge {
-    padding: 6rem 3rem;
+    padding: 6rem 4.5rem;
     border-top: 1px solid rgba(245,243,238,0.07);
   }
 
@@ -493,7 +496,7 @@
 
   /* ABOUT & CONTACT */
   .section-about {
-    padding: 6rem 3rem;
+    padding: 6rem 4.5rem;
     border-top: 1px solid rgba(245,243,238,0.07);
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -552,7 +555,7 @@
 
   /* FOOTER */
   footer {
-    padding: 2rem 3rem;
+    padding: 2rem 4.5rem;
     border-top: 1px solid rgba(245,243,238,0.07);
     display: flex;
     align-items: center;
@@ -596,7 +599,7 @@
   <div class="hero-left">
     <span class="hero-eyebrow">Designer, Strategist, &amp; Problem Solver</span>
     <h1 class="hero-headline">
-      Looking to create products and experiences for happier, healthier, and brighter futures.
+      From developer tooling to consumer banking, I turn complex problems into intuitive experiences.
     </h1>
     <p class="hero-sub">
       Currently designing for Internal Tools @ Capital One.
@@ -630,11 +633,33 @@
     <button class="filter-btn" data-tag="UI design">UI design</button>
     <button class="filter-btn" data-tag="Research">Research</button>
     <button class="filter-btn" data-tag="Service design">Service design</button>
-    <button class="filter-btn" data-tag="Engineering">Engineering</button>
     <button class="filter-btn" data-tag="Strategy">Strategy</button>
+    <button class="filter-btn" data-tag="Design systems">Design systems</button>
+    <button class="filter-btn" data-tag="Engineering">Engineering</button>
   </div>
 
   <div class="case-grid" id="caseGrid">
+
+    <a href="cds.html" class="case-card" data-tags="UX design,Research">
+      <div class="case-thumb">
+        <img src="images/CDThumbnail.png" alt="Certificates of Deposit screenshot">
+      </div>
+      <div class="case-body">
+        <div class="case-tags">
+          <span class="tag tag-ux">UX design</span>
+          <span class="tag tag-research">Research</span>
+        </div>
+        <h3 class="case-title">Capital One — CDs</h3>
+        <p class="case-desc">Retaining customers and enhancing the mobile experience for certificate of deposit accounts.</p>
+        <span class="case-link">
+          View case study
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="case-read-time">11 min read</span>
+        </span>
+      </div>
+    </a>
 
     <a href="blueprint.html" class="case-card" data-tags="UX design,UI design,Research">
       <div class="case-thumb">
@@ -658,30 +683,9 @@
       </div>
     </a>
 
-    <a href="cds.html" class="case-card" data-tags="UX design,Research">
-      <div class="case-thumb">
-        <img src="images/CDThumbnail.png" alt="Certificates of Deposit screenshot">
-      </div>
-      <div class="case-body">
-        <div class="case-tags">
-          <span class="tag tag-ux">UX design</span>
-          <span class="tag tag-research">Research</span>
-        </div>
-        <h3 class="case-title">Capital One — CDs</h3>
-        <p class="case-desc">Retaining customers and enhancing the mobile experience for certificate of deposit accounts.</p>
-        <span class="case-link">
-          View case study
-          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="case-read-time">11 min read</span>
-        </span>
-      </div>
-    </a>
-
     <a href="workbench.html" class="case-card" data-tags="UI design">
       <div class="case-thumb">
-        <div class="case-thumb-placeholder">◈</div>
+        <img src="images/WorkbenchThumbnail.png" alt="Workbench standardized attributes table">
       </div>
       <div class="case-body">
         <div class="case-tags">
@@ -699,15 +703,16 @@
       </div>
     </a>
 
-    <a href="kairos.html" class="case-card" data-tags="UI design,Engineering,Strategy">
+    <a href="kairos.html" class="case-card" data-tags="Service design,Strategy,Design systems,Engineering">
       <div class="case-thumb">
         <div class="case-thumb-placeholder">◈</div>
       </div>
       <div class="case-body">
         <div class="case-tags">
-          <span class="tag tag-ui">UI design</span>
-          <span class="tag tag-eng">Engineering</span>
+          <span class="tag tag-service">Service design</span>
           <span class="tag tag-strategy">Strategy</span>
+          <span class="tag tag-ds">Design systems</span>
+          <span class="tag tag-eng">Engineering</span>
         </div>
         <h3 class="case-title">Capital One — Kairos Policy-as-code</h3>
         <p class="case-desc">Writing design standards AI coding agents can follow, so generated UI matches Capital One's design system.</p>
@@ -754,21 +759,34 @@
   const filterBtns = document.querySelectorAll('.filter-btn');
   const cards = document.querySelectorAll('.case-card');
 
+  const allBtn = document.querySelector('.filter-btn[data-tag="all"]');
+
+  // Multi-select: a card shows if it has any of the selected tags.
+  // "All" clears the selection; deselecting the last tag falls back to "All".
+  function applyFilters() {
+    const selected = [...filterBtns]
+      .filter(b => b !== allBtn && b.classList.contains('active'))
+      .map(b => b.dataset.tag);
+    allBtn.classList.toggle('active', selected.length === 0);
+    filterBtns.forEach(b => b.setAttribute('aria-pressed', b.classList.contains('active')));
+    cards.forEach(card => {
+      const cardTags = card.dataset.tags.split(',');
+      const show = selected.length === 0 || selected.some(t => cardTags.includes(t));
+      card.classList.toggle('hidden', !show);
+    });
+  }
+
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const tag = btn.dataset.tag;
-      cards.forEach(card => {
-        if (tag === 'all') {
-          card.classList.remove('hidden');
-        } else {
-          const cardTags = card.dataset.tags.split(',');
-          card.classList.toggle('hidden', !cardTags.includes(tag));
-        }
-      });
+      if (btn === allBtn) {
+        filterBtns.forEach(b => b.classList.remove('active'));
+      } else {
+        btn.classList.toggle('active');
+      }
+      applyFilters();
     });
   });
+  applyFilters();
 </script>
 
 </body>

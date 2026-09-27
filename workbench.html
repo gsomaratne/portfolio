@@ -200,7 +200,7 @@
     font-size: 0.75rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #f0b8d8;
+    color: #c8b8f0;
     margin-bottom: 1rem;
     font-weight: 400;
   }
@@ -219,6 +219,15 @@
     line-height: 1.85;
     margin-bottom: 0.85rem;
     font-weight: 300;
+  }
+
+  .cs-section h3 {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.4;
+    margin: 2.75rem 0 0.6rem;
   }
 
   .cs-section ul {
@@ -267,13 +276,13 @@
   }
 
   .process-card:hover {
-    border-color: rgba(240,184,216,0.35);
+    border-color: rgba(200,184,240,0.35);
     background: rgba(245,243,238,0.04);
     transform: translateY(-2px);
   }
 
   .process-card:focus-visible {
-    outline: 2px solid rgba(240,184,216,0.5);
+    outline: 2px solid rgba(200,184,240,0.5);
     outline-offset: 2px;
   }
 
@@ -309,7 +318,7 @@
 
   .process-card-link {
     font-size: 0.8rem;
-    color: #f0b8d8;
+    color: #c8b8f0;
     display: flex;
     align-items: center;
     gap: 0.3rem;
@@ -323,7 +332,7 @@
   /* RESEARCH CALLOUT */
   .research-callout {
     background: var(--highlight);
-    border: 1px solid rgba(240,184,216,0.2);
+    border: 1px solid rgba(200,184,240,0.2);
     border-radius: 6px;
     padding: 1.5rem;
     margin: 1.5rem 0;
@@ -333,7 +342,7 @@
     font-size: 0.75rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #f0b8d8;
+    color: #c8b8f0;
     margin-bottom: 0.75rem;
   }
 
@@ -442,7 +451,7 @@
     font-size: 0.72rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #f0b8d8;
+    color: #c8b8f0;
     margin-bottom: 0.6rem;
   }
 
@@ -505,7 +514,7 @@
   .modal-step-num {
     font-family: var(--serif);
     font-size: 1.1rem;
-    color: rgba(240,184,216,0.45);
+    color: rgba(200,184,240,0.45);
     line-height: 1.4;
     min-width: 1.4rem;
   }
@@ -520,7 +529,7 @@
 
   .modal-callout {
     background: var(--highlight);
-    border: 1px solid rgba(240,184,216,0.2);
+    border: 1px solid rgba(200,184,240,0.2);
     border-radius: 6px;
     padding: 1.25rem;
     margin-top: 1.5rem;
@@ -530,7 +539,7 @@
     font-size: 0.72rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #f0b8d8;
+    color: #c8b8f0;
     margin-bottom: 0.65rem;
   }
 
@@ -566,7 +575,7 @@
     padding: 1.5rem;
     border: 1px solid rgba(245,243,238,0.1);
     border-radius: 10px;
-    background: linear-gradient(135deg, rgba(240,184,216,0.06) 0%, rgba(200,184,240,0.04) 100%);
+    background: linear-gradient(135deg, rgba(200,184,240,0.06) 0%, rgba(200,184,240,0.04) 100%);
     margin-top: 3rem;
     flex-wrap: wrap;
   }
@@ -679,7 +688,16 @@
     margin-bottom: 0;
   }
 
+  .two-up {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .two-up .cs-hero-img { margin-top: 0; }
+
   @media (max-width: 768px) {
+    .two-up { grid-template-columns: 1fr; }
     .metrics-strip { grid-template-columns: 1fr; }
     .prototype-cta { flex-direction: column; align-items: flex-start; }
     .prototype-cta-btn { width: 100%; text-align: center; }
@@ -719,7 +737,7 @@
 
   <!-- Hero image -->
   <div class="cs-hero-img">
-    <div class="hero-img-fallback">add full MVP export: assembled modeling set detail page (Figma frame 1119-79545)</div>
+    <img src="images/WorkbenchHero.png" alt="Workbench modeling set page showing the published standardized attributes table with source elements, definitions, modelers, datatypes, and status">
   </div>
 
   <!-- Figma file CTA -->
@@ -727,7 +745,7 @@
     <div class="prototype-cta-icon">
       <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M8 12a4 4 0 014-4h0a4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#c8b8f0"/>
-        <path d="M8 4a4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#f0b8d8"/>
+        <path d="M8 4a4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#c8b8f0"/>
         <path d="M0 12a4 4 0 014-4 4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4z" fill="#b8d8f0"/>
         <path d="M0 20a4 4 0 014-4h4v4a4 4 0 01-4 4 4 4 0 01-4-4z" fill="#b8f0d0"/>
         <path d="M8 12v-4h4a4 4 0 110 8H8v-4z" fill="#f0d0b8"/>
@@ -744,11 +762,11 @@
   <div class="cs-meta-bar">
     <div class="meta-item">
       <span class="meta-label">Client</span>
-      <span class="meta-value">Capital One — Enterprise Data</span>
+      <span class="meta-value">Capital One</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Timeline</span>
-      <span class="meta-value">MVP to 35 data products in ~2 quarters</span>
+      <span class="meta-value">1 quarter</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Role</span>
@@ -767,8 +785,8 @@
   <!-- Overview -->
   <div class="cs-section">
     <p class="cs-section-label">Overview</p>
-    <p>Workbench is an internal tool for Capital One's Enterprise Data organization. It gives data modelers a single place to register, define, and govern <em>standardized data attributes</em> — the shared, reusable definitions (names, data types, quality rules, privacy classifications, and calculation logic) that let data be discovered, trusted, and reused across teams. Before Workbench, that modeling happened in Google Sheets.</p>
-    <p>No designer was ever staffed to the project, so I picked it up alongside my assigned work. What started as a single modal grew into reskinning the tool onto Capital One's Gravity design system, which got it through the innersourcing review it needed to launch. Within about six months, 35 data products had onboarded.</p>
+    <p>Workbench is an internal tool for Capital One's Enterprise Data organization. It gives data modelers a single place to model <em>data products</em> by registering, defining, and governing the standardized data attributes they're built from — the shared, reusable definitions (names, data types, quality rules, privacy classifications, and calculation logic) that let data be discovered, trusted, and reused across teams. Before Workbench, data products were modeled in Google Sheets.</p>
+    <p>No designer was ever staffed to the project, so I picked it up alongside my assigned work. What started as a single modal grew into redesigning the tool around the Exchange design system's components and patterns, which got it through the innersourcing review it needed to launch. Within about six months, 35 data products had onboarded.</p>
     <a href="#final-design" class="jump-link">Jump to final design ↓</a>
   </div>
 
@@ -777,13 +795,9 @@
   <!-- Problem -->
   <div class="cs-section">
     <p class="cs-section-label">Problem</p>
-    <h2>Modeling data products meant spreadsheets, and a governance tool was heading to launch without design.</h2>
-    <p>Spreadsheets meant no versioning, no audit trail, no validation, and no visibility for the governance reviewers who eventually had to sign off on what got published. A small platform team in Enterprise Data set out to build a real tool to replace them — but it was conceived and built entirely by engineering, with a product partner driving scope.</p>
-    <p>When I learned about Workbench, I raised it with my manager, and we agreed it was an experience risk: a governance-facing tool, built without UX involvement, heading toward a real launch. There was no plan to staff design, and I already had a working relationship with the product partner.</p>
-    <div class="research-callout">
-      <p class="rc-title">The call I made</p>
-      <p>I picked the project up side of desk — informal design work layered on top of my assigned projects — because the alternative was a governance tool shipping with no design input at all.</p>
-    </div>
+    <h2>A new governance tool would replace spreadsheets for modeling data products. It just had no design support.</h2>
+    <p>Spreadsheets had no versioning, audit trail, validation, or visibility for the governance reviewers who signed off on what got published, and modeling a data product in them required scanning rows of attributes across many columns of metadata, which led to fatigue and cognitive overload. Collaboration was also difficult, since comments got lost in the sheet or glossed over. A small platform team in Enterprise Data set out to build a real tool to replace them — but it was conceived and built entirely by engineering, with a product partner driving scope.</p>
+    <p>When I learned about Workbench, I raised it with my manager, and we agreed it was an experience risk: a governance-facing tool, built without UX involvement, heading toward a real launch. There was no plan to staff design, and I already had a working relationship with the product partner, so I picked it up side of desk, on top of my assigned projects, rather than let it ship with no design input at all.</p>
   </div>
 
   <hr class="cs-divider">
@@ -797,7 +811,7 @@
     <div class="insights-list">
       <div class="insight-item">
         <span class="insight-num">1</span>
-        <p class="insight-text"><strong>One modal.</strong> The product partner's first ask was narrow and concrete: design the modal analysts use to model a new standardized attribute, the create/edit form used dozens of times a day. It was the right entry point for side-of-desk work: scoped, bounded, and clearly valuable.</p>
+        <p class="insight-text"><strong>One modal.</strong> The product partner's first ask was narrow and concrete: design the modal analysts use to model a new standardized attribute. It was the right entry point for side-of-desk work: scoped, bounded, and clearly valuable.</p>
       </div>
       <div class="insight-item">
         <span class="insight-num">2</span>
@@ -805,11 +819,11 @@
       </div>
       <div class="insight-item">
         <span class="insight-num">3</span>
-        <p class="insight-text"><strong>Failing the innersourcing review forced the real fix.</strong> To be hosted on the Exchange, Capital One's internal platform for data products, a tool has to clear an innersourcing review. Workbench's original build failed it: with no design system underneath, there was no credible path to pass. That failure turned "help with a modal" into a full reskin.</p>
+        <p class="insight-text"><strong>Failing the innersourcing review forced the real fix.</strong> To be hosted on the Exchange, Capital One's internal platform for data products, a tool has to clear an innersourcing review. Workbench's original build failed it: the developers had built on the Exchange design system, but used its components incorrectly or in unexpected ways. That failure turned "help with a modal" into a full redesign.</p>
       </div>
       <div class="insight-item">
         <span class="insight-num">4</span>
-        <p class="insight-text"><strong>Reskinning onto Gravity.</strong> I rebuilt the modeling workspace, standardized-attribute tables, registration wizard, and delete/archive flows on Gravity — consistent components, accessible patterns, and a structure that could pass the review.</p>
+        <p class="insight-text"><strong>Redesigning with the Exchange design system.</strong> I redesigned the modeling workspace, standardized-attribute tables, registration wizard, and delete/archive flows to use Exchange components the way they were intended — consistent patterns, accessible interactions, and a structure that could pass the review.</p>
       </div>
     </div>
 
@@ -818,6 +832,54 @@
       <div class="hero-img-fallback">add ideation &amp; annotation board export (Figma frame 985-39157)</div>
     </div>
     <p class="carousel-caption">Working notes against the standardized-attributes table — breadcrumb, CTA, and table-alignment fixes called out directly on the canvas.</p>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Design review -->
+  <div class="cs-section">
+    <p class="cs-section-label">Design review</p>
+    <h2>Auditing the build before designing anything.</h2>
+    <p>Before jumping into screens, I put together a design review of the existing build for the product partner and engineering team. It walked through the original UI against Gravity's foundations and the Exchange design system, and I tagged every recommendation as low, medium, or high level of effort so the team could ship quick wins while planning the bigger changes.</p>
+
+    <h3>Low effort: quick wins</h3>
+    <div class="cs-hero-img" style="margin-top: 1rem;"><img src="images/WorkbenchOrigLanding.png" alt="Original Workbench landing page: a grid of modeling set cards, each with a full-width primary View button"></div>
+    <p class="carousel-caption">The original landing page: every card had a full-width primary "View" button competing with "Create New Modeling Set."</p>
+    <ul>
+      <li><strong>Font weights.</strong> The build leaned heavily on bold. Following Gravity's foundations, I recommended using only regular and semibold for both text and numbers.</li>
+      <li><strong>One primary action.</strong> "Create new modeling set" became the only primary CTA, moved to the top right to match the Gravity standard, with "View" demoted to a narrower secondary button on each card.</li>
+      <li><strong>Breadcrumbs.</strong> Each page had only a back button. Breadcrumbs show users where they are in the hierarchy and let them jump back more than one level.</li>
+      <li><strong>Clearer labels.</strong> "Modeling set details" held progress stats, not details, so I recommended "Metrics," with stats segmented by standardized attribute and data entity and a small visualization of review times.</li>
+      <li><strong>Table and form cleanup.</strong> Consistent font sizes across inputs and lookups, and pagination and sort icons hidden unless they're actually needed.</li>
+    </ul>
+
+    <h3>Medium effort: modeling and guardrails</h3>
+    <div class="cs-hero-img" style="margin-top: 1rem;"><img src="images/WorkbenchOrigEditAttribute.png" alt="Original Edit Standardized Attribute modal with source element info above a long form of attribute fields"></div>
+    <p class="carousel-caption">The original attribute editor: source element info scrolled away as soon as modelers started filling in fields.</p>
+    <ul>
+      <li><strong>Sticky source element.</strong> Moving the source element name and description into a sticky header, so modelers can see what they're modeling while filling in attribute fields.</li>
+      <li><strong>AI transparency.</strong> An informational banner flagging definitions generated by the ML recommendation model, so modelers know to review them.</li>
+      <li><strong>Deleting drafts.</strong> There was no way to delete a modeling set draft.</li>
+    </ul>
+
+    <h3>High effort: rethinking the structure</h3>
+    <div class="cs-hero-img" style="margin-top: 1rem;"><img src="images/WorkbenchOrigCreateModal.png" alt="Original Create Modeling Set modal with name, description, owner, modelers, and reviewers stacked in one scrolling form" style="max-height: 460px; width: auto; margin: 0 auto;"></div>
+    <p class="carousel-caption">The original registration: name, description, owner, modelers, and reviewers stacked in a single scrolling modal.</p>
+    <ul>
+      <li><strong>Full pages instead of modals.</strong> Registration and modeling had too many actions for a modal. Both warranted full pages with navigation.</li>
+      <li><strong>Template registration.</strong> Aligning with the Exchange's other registration flows: a milestone panel so users know how many steps are left, and helper text explaining the purpose of each field.</li>
+      <li><strong>Asset layout with a sidebar.</strong> Once a modeling set is registered, attributes, entities, and reviews move out of tabs and into the Exchange design system's asset layout, with a sidebar grouped into Manage (details and team), Model (attributes, entities, and reviews), and Metrics.</li>
+    </ul>
+    <div class="two-up">
+      <div>
+        <div class="cs-hero-img"><img src="images/WorkbenchSketchRegistration.jpg" alt="Hand sketch of a full-page registration flow with a milestone panel: build, details, owners, import, review"></div>
+        <p class="carousel-caption">Sketch: full-page registration with a milestone panel.</p>
+      </div>
+      <div>
+        <div class="cs-hero-img"><img src="images/WorkbenchSketchSidebar.jpg" alt="Hand sketch of the modeling set page with sidebar navigation: Manage, Model, and Metrics"></div>
+        <p class="carousel-caption">Sketch: sidebar navigation for a registered modeling set.</p>
+      </div>
+    </div>
   </div>
 
   <hr class="cs-divider">
@@ -831,7 +893,7 @@
     <div class="process-cards">
       <div class="process-card" tabindex="0" role="button" aria-label="View registration flow details" onclick="openModal('modal-registration')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-registration')}">
         <div class="process-thumb">
-          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add registration flow screenshot</div>
+          <img src="images/WorkbenchThumbRegistration.png" alt="Redesigned registration: milestone panel and modeling set details step">
         </div>
         <div class="process-card-body">
           <span class="process-card-title">Registering a modeling set</span>
@@ -861,13 +923,13 @@
         </div>
       </div>
 
-      <div class="process-card" tabindex="0" role="button" aria-label="View guardrails and AI assist details" onclick="openModal('modal-guardrails')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-guardrails')}">
+      <div class="process-card" tabindex="0" role="button" aria-label="View guardrails and AI transparency details" onclick="openModal('modal-guardrails')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-guardrails')}">
         <div class="process-thumb">
-          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add delete / archive or AI assist screenshot</div>
+          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add delete / archive or AI definition banner screenshot</div>
         </div>
         <div class="process-card-body">
-          <span class="process-card-title">Guardrails and AI-assisted authoring</span>
-          <p class="process-card-desc">Confirmation flows for deleting attributes and archiving sets, plus an AI assistant that helps modelers draft definitions instead of starting from a blank form.</p>
+          <span class="process-card-title">Guardrails and AI transparency</span>
+          <p class="process-card-desc">Confirmation flows for deleting attributes and archiving sets, plus a banner that flags definitions generated by an ML model so modelers know to review them.</p>
           <span class="process-card-link">
             View details
             <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -893,7 +955,7 @@
       </div>
       <div class="metric">
         <span class="metric-num">1</span>
-        <span class="metric-cap">Innersourcing review failed before the reskin</span>
+        <span class="metric-cap">Innersourcing review failed before the redesign</span>
       </div>
       <div class="metric">
         <span class="metric-num">35</span>
@@ -916,7 +978,7 @@
     <p>My role, specifically:</p>
     <ul>
       <li><strong>Interaction and UI design</strong> — the attribute modeling modal, hierarchy views, registration wizard, and delete/archive flows.</li>
-      <li><strong>Design system migration</strong> — reskinning the existing build onto Gravity components and tokens to clear the innersourcing review.</li>
+      <li><strong>Design system alignment</strong> — redesigning the existing build to use Exchange design system components correctly and clear the innersourcing review.</li>
       <li><strong>Compliance advocacy</strong> — identifying what the review actually required and turning that into a design plan.</li>
       <li><strong>Not in scope</strong> — formal user research or usability testing.</li>
     </ul>
@@ -966,7 +1028,7 @@
     </div>
     <div class="modal-shots-grid">
       <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add registration step screenshots</div></div>
+        <div class="modal-shot-img"><img src="images/WorkbenchRegistrationDetails.png" alt="Redesigned registration wizard on the details step, with the milestone panel on the left"></div>
         <span class="modal-shot-label">Registration wizard</span>
         <p class="modal-shot-desc">Basic info → ownership → team → review, with a milestone tracker in the side panel.</p>
       </div>
@@ -1019,8 +1081,8 @@
       </svg>
     </button>
     <p class="modal-label">Workbench</p>
-    <h3 class="modal-title">Guardrails and AI-assisted authoring</h3>
-    <p class="modal-desc">Deleting a standardized attribute can affect every data product that references it, so I designed confirmation flows that adapt to the situation — individual vs. bulk, whether the attribute is still actively modeled elsewhere, and archiving a full modeling set. Separately, an AI assistant panel helps modelers draft a definition and calculation logic instead of starting from a blank form.</p>
+    <h3 class="modal-title">Guardrails and AI transparency</h3>
+    <p class="modal-desc">Deleting a standardized attribute can affect every data product that references it, so I designed confirmation flows that adapt to the situation — individual vs. bulk, whether the attribute is still actively modeled elsewhere, and archiving a full modeling set. Separately, Workbench pre-fills attribute definitions using an ML recommendation model, so I added an informational banner that labels generated definitions and prompts modelers to review them rather than accept them blindly.</p>
     <div class="modal-shots-grid">
       <div class="modal-shot">
         <div class="modal-shot-img"><div class="hero-img-fallback">add delete &amp; archive confirmation screenshots</div></div>
@@ -1028,14 +1090,14 @@
         <p class="modal-shot-desc">Distinct messaging for individual vs. multiple deletions, for attributes with no source elements modeled versus several, and for archiving a whole set.</p>
       </div>
       <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add AI assistant panel screenshot</div></div>
-        <span class="modal-shot-label">AI assistant panel</span>
-        <p class="modal-shot-desc">A conversational side panel that suggests a starting definition and calculation logic based on the source elements a modeler selects.</p>
+        <div class="modal-shot-img"><div class="hero-img-fallback">add AI definition banner screenshot</div></div>
+        <span class="modal-shot-label">AI definition banner</span>
+        <p class="modal-shot-desc">An informational banner under the definition field: "This definition was generated by our ML recommendation model based on the source element."</p>
       </div>
     </div>
     <div class="modal-callout">
       <p class="rc-title">Design system</p>
-      <p>Built entirely on Capital One's Gravity design system components — form fields, badges, checkboxes, and buttons — so the focus stayed on the data governance workflow itself rather than the UI kit.</p>
+      <p>Built entirely on Exchange design system components — form fields, badges, checkboxes, and buttons — so the focus stayed on the data governance workflow itself rather than the UI kit.</p>
     </div>
   </div>
 </div>
