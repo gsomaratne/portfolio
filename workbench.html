@@ -667,26 +667,161 @@
     margin: 1.5rem 0 2rem;
   }
   .metric {
-    border: 1px solid rgba(245,243,238,0.08);
+    border: 1px solid rgba(200,184,240,0.3);
+    background: var(--highlight);
     border-radius: 8px;
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
   }
-  .metric-num { font-family: var(--serif); font-size: 2.5rem; line-height: 1; color: var(--white); }
+  .results-head {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 220px;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  .results-head h2 { margin-bottom: 0; }
+  .metric-num { font-family: var(--serif); font-size: 2.5rem; line-height: 1; color: #c8b8f0; }
   .metric-cap { font-size: 0.82rem; color: rgba(245,243,238,0.55); line-height: 1.45; }
 
   .cs-section ul li strong { color: var(--white); font-weight: 500; }
+
+  /* CAROUSEL */
+  .carousel {
+    margin-top: 1.75rem;
+    position: relative;
+  }
+
+  .carousel-track-wrap {
+    overflow: hidden;
+    border-radius: 6px;
+    transition: height 0.3s ease;
+  }
+
+  .carousel-track {
+    display: flex;
+    align-items: flex-start;
+    transition: transform 0.35s ease;
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Cap image height so square/tall images don't fill the screen; the box shrinks to the image */
+  .carousel-img {
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .carousel-img img {
+    width: auto;
+    max-width: 100%;
+    max-height: 460px;
+    height: auto;
+    display: block;
+  }
+
+  .carousel-img.is-mobile {
+    display: flex;
+    justify-content: center;
+    background: rgba(245,243,238,0.02);
+  }
+
+  .carousel-img.is-mobile img {
+    width: auto;
+    max-width: 320px;
+    max-height: 460px;
+  }
+
+  .carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.3rem;
+  }
+
+  /* Arrows sit over the left and right edges of the image; JS centers them vertically on it */
+  .carousel-arrows {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    height: 0;
+    pointer-events: none;
+  }
+
+  .carousel-arrow {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid rgba(245,243,238,0.15);
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+  }
+
+  .carousel-arrows .carousel-arrow {
+    position: absolute;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    transform: translateY(-50%);
+    background: rgba(10,10,10,0.6);
+    border-color: rgba(245,243,238,0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    pointer-events: auto;
+  }
+
+  .carousel-arrows .carousel-arrow:first-child { left: 0.75rem; }
+  .carousel-arrows .carousel-arrow:last-child { right: 0.75rem; }
+
+  .carousel-arrow:hover { background: rgba(10,10,10,0.85); border-color: rgba(245,243,238,0.5); }
+  .carousel-arrow svg { width: 13px; height: 13px; }
+
+  .carousel-dots { display: flex; gap: 0.4rem; }
+
+  .carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(245,243,238,0.2);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s;
+  }
+
+  .carousel-dot.active { background: #c8b8f0; }
+
+  .text-with-image .carousel { margin-top: 0; }
 
   p.carousel-caption {
     font-size: 0.78rem;
     color: rgba(245,243,238,0.45);
     line-height: 1.55;
     font-weight: 300;
+    letter-spacing: 0.01em;
+    padding: 0 0.1rem;
     margin-top: 0.9rem;
     margin-bottom: 0;
   }
+
+  p.carousel-caption strong { font-weight: 500; }
+
+  p.carousel-caption + ul, .carousel + ul { margin-top: 1.5rem; }
 
   .two-up {
     display: grid;
@@ -696,9 +831,42 @@
   }
   .two-up .cs-hero-img { margin-top: 0; }
 
+  .text-with-image {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: start;
+    margin-top: 1rem;
+  }
+  .text-with-image .cs-hero-img { margin-top: 0; }
+  .effort-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.25rem;
+    padding: 0 0.5rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+    border-radius: 999px;
+    border: 1px solid rgba(245,243,238,0.2);
+    color: rgba(245,243,238,0.6);
+    vertical-align: 0.15em;
+    margin: 0 0.15rem;
+    font-weight: 400;
+  }
+  .effort-tag.effort-medium { border-color: rgba(200,184,240,0.35); color: rgba(200,184,240,0.8); }
+  .effort-tag.effort-high { border-color: rgba(200,184,240,0.6); color: #c8b8f0; background: rgba(200,184,240,0.1); }
+  .two-up + ul { margin-top: 1.5rem; }
+  .text-with-image + .text-with-image { margin-top: 2rem; }
+  .text-with-image ul { margin-bottom: 0; }
+
   @media (max-width: 768px) {
     .two-up { grid-template-columns: 1fr; }
+    .text-with-image { grid-template-columns: 1fr; gap: 1.5rem; }
     .metrics-strip { grid-template-columns: 1fr; }
+    .results-head { grid-template-columns: 1fr; gap: 1.25rem; }
     .prototype-cta { flex-direction: column; align-items: flex-start; }
     .prototype-cta-btn { width: 100%; text-align: center; }
     nav { padding: 1rem 1.5rem; }
@@ -797,7 +965,11 @@
     <p class="cs-section-label">Problem</p>
     <h2>A new governance tool would replace spreadsheets for modeling data products. It just had no design support.</h2>
     <p>Spreadsheets had no versioning, audit trail, validation, or visibility for the governance reviewers who signed off on what got published, and modeling a data product in them required scanning rows of attributes across many columns of metadata, which led to fatigue and cognitive overload. Collaboration was also difficult, since comments got lost in the sheet or glossed over. A small platform team in Enterprise Data set out to build a real tool to replace them — but it was conceived and built entirely by engineering, with a product partner driving scope.</p>
-    <p>When I learned about Workbench, I raised it with my manager, and we agreed it was an experience risk: a governance-facing tool, built without UX involvement, heading toward a real launch. There was no plan to staff design, and I already had a working relationship with the product partner, so I picked it up side of desk, on top of my assigned projects, rather than let it ship with no design input at all.</p>
+    <p>When I learned about Workbench, I raised it with my manager, and we agreed it was an experience risk: a governance-facing tool, built without UX involvement, heading toward a real launch. There was no plan to staff design, and I already had a working relationship with the product partner.</p>
+    <div class="research-callout">
+      <p class="rc-title">The call I made</p>
+      <p>I picked the project up side of desk — informal design work layered on top of my assigned projects — because the alternative was a governance tool shipping with no design input at all.</p>
+    </div>
   </div>
 
   <hr class="cs-divider">
@@ -805,7 +977,7 @@
   <!-- Approach -->
   <div class="cs-section">
     <p class="cs-section-label">Approach</p>
-    <h2>Starting small, then following the problem.</h2>
+    <h2>One modal grew into a full redesign once a failed review exposed serious experience gaps.</h2>
     <p>The scope didn't start as "redesign the platform." It started as a single, well-defined ask, and grew because the problems underneath it didn't stop at one screen.</p>
 
     <div class="insights-list">
@@ -839,47 +1011,93 @@
   <!-- Design review -->
   <div class="cs-section">
     <p class="cs-section-label">Design review</p>
-    <h2>Auditing the build before designing anything.</h2>
-    <p>Before jumping into screens, I put together a design review of the existing build for the product partner and engineering team. It walked through the original UI against Gravity's foundations and the Exchange design system, and I tagged every recommendation as low, medium, or high level of effort so the team could ship quick wins while planning the bigger changes.</p>
+    <h2>Before designing, I audited the build and prioritized fixes by effort, from quick type changes to a new structure.</h2>
+    <p>Before jumping into screens, I put together a design review of the existing build for the product partner and engineering team. It walked through the original UI against Gravity's foundations and the Exchange design system, and I tagged every recommendation by level of effort so the team could ship quick wins while planning the bigger structural changes.</p>
 
-    <h3>Low effort: quick wins</h3>
+    <h3>Landing page</h3>
     <div class="cs-hero-img" style="margin-top: 1rem;"><img src="images/WorkbenchOrigLanding.png" alt="Original Workbench landing page: a grid of modeling set cards, each with a full-width primary View button"></div>
-    <p class="carousel-caption">The original landing page: every card had a full-width primary "View" button competing with "Create New Modeling Set."</p>
+    <p class="carousel-caption">The original landing page: heavy bold type, and every card had a full-width primary "View" button competing with "Create New Modeling Set."</p>
     <ul>
-      <li><strong>Font weights.</strong> The build leaned heavily on bold. Following Gravity's foundations, I recommended using only regular and semibold for both text and numbers.</li>
-      <li><strong>One primary action.</strong> "Create new modeling set" became the only primary CTA, moved to the top right to match the Gravity standard, with "View" demoted to a narrower secondary button on each card.</li>
-      <li><strong>Breadcrumbs.</strong> Each page had only a back button. Breadcrumbs show users where they are in the hierarchy and let them jump back more than one level.</li>
-      <li><strong>Clearer labels.</strong> "Modeling set details" held progress stats, not details, so I recommended "Metrics," with stats segmented by standardized attribute and data entity and a small visualization of review times.</li>
-      <li><strong>Table and form cleanup.</strong> Consistent font sizes across inputs and lookups, and pagination and sort icons hidden unless they're actually needed.</li>
+      <li><strong>Typography:</strong> <span class="effort-tag effort-low">Low effort</span> The build leaned heavily on bold. Following Gravity's foundations, I recommended using only regular and semibold for both text and numbers, with consistent font sizes across inputs and lookups.</li>
+      <li><strong>One primary action:</strong> <span class="effort-tag effort-low">Low effort</span> "Create new modeling set" became the only primary CTA, moved to the top right to match the Gravity standard, with "View" demoted to a narrower secondary button.</li>
+      <li><strong>A table instead of cards:</strong> <span class="effort-tag effort-low">Low effort</span> I recommended listing modeling sets in a table rather than a card grid, matching how other assets are listed on the Exchange and making it easier to scan and compare sets as the list grows.</li>
     </ul>
 
-    <h3>Medium effort: modeling and guardrails</h3>
+    <h3>Registration</h3>
+    <div class="two-up" style="margin-top: 1rem;">
+      <div>
+        <div class="cs-hero-img"><img src="images/WorkbenchOrigCreateModal.png" alt="Original Create Modeling Set modal with name, description, owner, modelers, and reviewers stacked in one scrolling form"></div>
+        <p class="carousel-caption">The original registration: everything stacked in a single scrolling modal.</p>
+      </div>
+      <div>
+        <div class="cs-hero-img"><img src="images/WorkbenchSketchRegistration.jpg" alt="Hand sketch of a full-page registration flow with a milestone panel: build, details, owners, import, review"></div>
+        <p class="carousel-caption">My sketch: full-page registration with a milestone panel.</p>
+      </div>
+    </div>
+    <ul>
+      <li><strong>Template registration:</strong> <span class="effort-tag effort-high">High effort</span> Registration had too many steps and actions for a modal. I recommended moving it to full pages that follow the Exchange's standard registration template, with a milestone panel so users know how many steps are left and helper text explaining the purpose of each field.</li>
+    </ul>
+
+    <h3>Modeling set page</h3>
+    <div class="carousel" style="margin-top: 1rem;">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="modelingSetCarouselTrack">
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/WorkbenchOrigModelingSet.png" alt="Original modeling set page with a Back button, View TTL and Edit Modeling Set at the top level, a Modeling Set Details accordion, and tabs"></div>
+            <p class="carousel-caption">The original modeling set page: a back button, secondary actions at the top level, and a details accordion stacked above tabs.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/WorkbenchOrigDetails.png" alt="Original Modeling Set Details accordion expanded to show counts, average review times, and progress bars"></div>
+            <p class="carousel-caption">"Modeling Set Details," expanded: it actually held counts, review times, and progress.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/WorkbenchSketchSidebar.jpg" alt="Hand sketch of the modeling set page with sidebar navigation: Manage, Model, and Metrics"></div>
+            <p class="carousel-caption">My sketch of the recommended side nav: Manage, Model, and Metrics.</p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <div class="carousel-dots" id="modelingSetCarouselDots">
+          <button class="carousel-dot active" aria-label="Slide 1"></button>
+          <button class="carousel-dot" aria-label="Slide 2"></button>
+          <button class="carousel-dot" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" aria-label="Previous slide" onclick="prevSlide('modelingSetCarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="carousel-arrow" aria-label="Next slide" onclick="nextSlide('modelingSetCarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <ul>
+      <li><strong>Breadcrumbs:</strong> <span class="effort-tag effort-low">Low effort</span> Each page had only a back button. Breadcrumbs show users where they are in the hierarchy and let them jump back more than one level.</li>
+      <li><strong>Clearer labels:</strong> <span class="effort-tag effort-low">Low effort</span> Since "Modeling Set Details" held progress stats, not details, I recommended calling it "Metrics," with stats segmented by standardized attribute and data entity and a small visualization of review times.</li>
+      <li><strong>Information hierarchy:</strong> <span class="effort-tag effort-high">High effort</span> Modeling is the main job on this page, yet "View TTL" and "Edit Modeling Set" sat at the top level, and metrics hid in a dropdown above the tabs. I recommended the Exchange design system's asset layout instead: a standard side nav grouped into Manage (details and team), Model (attributes, entities, and reviews), and Metrics.</li>
+    </ul>
+
+    <h3>Modeling and review</h3>
     <div class="cs-hero-img" style="margin-top: 1rem;"><img src="images/WorkbenchOrigEditAttribute.png" alt="Original Edit Standardized Attribute modal with source element info above a long form of attribute fields"></div>
     <p class="carousel-caption">The original attribute editor: source element info scrolled away as soon as modelers started filling in fields.</p>
     <ul>
-      <li><strong>Sticky source element.</strong> Moving the source element name and description into a sticky header, so modelers can see what they're modeling while filling in attribute fields.</li>
-      <li><strong>AI transparency.</strong> An informational banner flagging definitions generated by the ML recommendation model, so modelers know to review them.</li>
-      <li><strong>Deleting drafts.</strong> There was no way to delete a modeling set draft.</li>
+      <li><strong>Sticky source element:</strong> <span class="effort-tag effort-medium">Medium effort</span> Moving the source element name and description into a sticky header, so modelers can see what they're modeling while filling in attribute fields.</li>
     </ul>
-
-    <h3>High effort: rethinking the structure</h3>
-    <div class="cs-hero-img" style="margin-top: 1rem;"><img src="images/WorkbenchOrigCreateModal.png" alt="Original Create Modeling Set modal with name, description, owner, modelers, and reviewers stacked in one scrolling form" style="max-height: 460px; width: auto; margin: 0 auto;"></div>
-    <p class="carousel-caption">The original registration: name, description, owner, modelers, and reviewers stacked in a single scrolling modal.</p>
+    <div class="cs-hero-img" style="margin-top: 2rem;"><img src="images/WorkbenchAIBanner.png" alt="Edit Standardized Attribute modal with an informational banner under the definition field: This definition was generated by our ML recommendation model based on the source element."></div>
+    <p class="carousel-caption">The recommended banner: labeling definitions generated by the ML recommendation model.</p>
     <ul>
-      <li><strong>Full pages instead of modals.</strong> Registration and modeling had too many actions for a modal. Both warranted full pages with navigation.</li>
-      <li><strong>Template registration.</strong> Aligning with the Exchange's other registration flows: a milestone panel so users know how many steps are left, and helper text explaining the purpose of each field.</li>
-      <li><strong>Asset layout with a sidebar.</strong> Once a modeling set is registered, attributes, entities, and reviews move out of tabs and into the Exchange design system's asset layout, with a sidebar grouped into Manage (details and team), Model (attributes, entities, and reviews), and Metrics.</li>
+      <li><strong>AI transparency:</strong> <span class="effort-tag effort-low">Low effort</span> Workbench pre-filled definitions with an ML recommendation model, but nothing told modelers where they came from. I recommended an informational banner under the definition field, so modelers know to review generated definitions rather than accept them as written.</li>
     </ul>
-    <div class="two-up">
-      <div>
-        <div class="cs-hero-img"><img src="images/WorkbenchSketchRegistration.jpg" alt="Hand sketch of a full-page registration flow with a milestone panel: build, details, owners, import, review"></div>
-        <p class="carousel-caption">Sketch: full-page registration with a milestone panel.</p>
-      </div>
-      <div>
-        <div class="cs-hero-img"><img src="images/WorkbenchSketchSidebar.jpg" alt="Hand sketch of the modeling set page with sidebar navigation: Manage, Model, and Metrics"></div>
-        <p class="carousel-caption">Sketch: sidebar navigation for a registered modeling set.</p>
-      </div>
-    </div>
+    <div class="cs-hero-img" style="margin-top: 2rem;"><img src="images/WorkbenchOrigReviewChanges.png" alt="Original Review Changes modal with attribute fields on the left and a discussion thread on the right, with Request Changes and Approve buttons"></div>
+    <p class="carousel-caption">The original review flow: attribute fields and a discussion thread squeezed side by side in a modal.</p>
+    <ul>
+      <li><strong>Full-page modeling and review:</strong> <span class="effort-tag effort-high">High effort</span> Editing and reviewing an attribute packed fields, a discussion thread, and approval actions into a modal. I recommended making modeling attributes and entities and reviewing changes full-page actions within the modeling set, rather than overlays.</li>
+    </ul>
   </div>
 
   <hr class="cs-divider">
@@ -887,7 +1105,7 @@
   <!-- Final design -->
   <div class="cs-section" id="final-design">
     <p class="cs-section-label">Final design</p>
-    <h2>Designing the modeling set experience.</h2>
+    <h2>The redesign covers registering a modeling set, managing its attributes, and guarding against destructive actions.</h2>
     <p>The core object in Workbench is a <em>data product modeling set</em> — a registered group of standardized attributes owned by a team. The redesign covers the end-to-end experience around it: registering a new set, populating it with standardized attributes, and building in guardrails so destructive actions can't happen by accident. Click into each area below.</p>
 
     <div class="process-cards">
@@ -946,17 +1164,8 @@
   <!-- Results -->
   <div class="cs-section">
     <p class="cs-section-label">Results</p>
-    <h2>The team's biggest win of the year.</h2>
-
-    <div class="metrics-strip">
-      <div class="metric">
-        <span class="metric-num">0</span>
-        <span class="metric-cap">Design hours formally staffed at the start</span>
-      </div>
-      <div class="metric">
-        <span class="metric-num">1</span>
-        <span class="metric-cap">Innersourcing review failed before the redesign</span>
-      </div>
+    <div class="results-head">
+      <h2>Workbench passed review, launched, and became the team's biggest win of the year.</h2>
       <div class="metric">
         <span class="metric-num">35</span>
         <span class="metric-cap">Data products onboarded in about six months</span>
@@ -964,7 +1173,7 @@
     </div>
 
     <p>The rebuilt experience passed the innersourcing review, and Workbench launched on the Exchange. From there, adoption moved fast: 35 data products were modeled through the tool within about six months of the pilot going live.</p>
-    <p>By the time that growth was visible, I'd rotated onto my next assignment. The side-of-desk work had already set the foundation, and the product partner carried it forward. By their account, it became the team's largest success of the year.</p>
+    <p>By the time that growth was visible, I'd rotated onto my next assignment and handed the work off to a newly staffed designer three levels above me. The side-of-desk work had set the foundation for a project that now had formal design support, and by the product partner's account, it became the team's largest success of the year.</p>
   </div>
 
   <hr class="cs-divider">
@@ -972,16 +1181,9 @@
   <!-- Takeaways -->
   <div class="cs-section">
     <p class="cs-section-label">Takeaways</p>
-    <h2>What this project taught me.</h2>
+    <h2>Naming a risk isn't enough; someone has to own it.</h2>
     <p>A tool built with zero staffed design time still had to clear a bar that only design work could get it past. Naming a risk is the first step; someone still has to own it. Next time, I'd push earlier for that conversation to end in a resourcing decision, so the work doesn't depend on whoever has the capacity to absorb it informally.</p>
     <p>No formal user testing was ever conducted. With informal staffing and no research support, there wasn't a path to run it properly, and I decided shipping a compliant, usable tool mattered more than delaying for research I couldn't resource. The pilot's success is real, but it isn't the same as validated confidence, and it's the clearest gap in this project.</p>
-    <p>My role, specifically:</p>
-    <ul>
-      <li><strong>Interaction and UI design</strong> — the attribute modeling modal, hierarchy views, registration wizard, and delete/archive flows.</li>
-      <li><strong>Design system alignment</strong> — redesigning the existing build to use Exchange design system components correctly and clear the innersourcing review.</li>
-      <li><strong>Compliance advocacy</strong> — identifying what the review actually required and turning that into a design plan.</li>
-      <li><strong>Not in scope</strong> — formal user research or usability testing.</li>
-    </ul>
   </div>
 
 </div>
@@ -990,7 +1192,7 @@
 <div class="cs-next">
   <div>
     <p>Next case study</p>
-    <a href="kairos.html">Capital One — Kairos Policy-as-code →</a>
+    <a href="kairos.html">Capital One — DESIGN.md →</a>
   </div>
   <a href="index.html" style="font-size:0.85rem; color: rgba(245,243,238,0.4); text-decoration:none;">← All work</a>
 </div>
@@ -1124,6 +1326,83 @@
       });
     }
   });
+
+  // ===== Carousel logic (supports multiple carousels) =====
+  var carouselState = {};
+
+  function initCarousels() {
+    document.querySelectorAll('.carousel-track').forEach(function(track) {
+      var id = track.id;
+      var slides = track.querySelectorAll('.carousel-slide');
+      carouselState[id] = { index: 0, count: slides.length };
+      var dotsContainer = document.getElementById(id.replace('Track', 'Dots'));
+      if (dotsContainer) {
+        dotsContainer.querySelectorAll('.carousel-dot').forEach(function(dot, i) {
+          dot.addEventListener('click', function() { goToSlide(id, i); });
+        });
+      }
+      updateCarouselUI(id);
+
+      track.querySelectorAll('.carousel-img img').forEach(function(img) {
+        if (img.complete) return;
+        img.addEventListener('load', function() { updateCarouselUI(id); });
+      });
+    });
+  }
+
+  function refreshCarouselHeights() {
+    Object.keys(carouselState).forEach(function(id) { updateCarouselUI(id); });
+  }
+
+  window.addEventListener('load', refreshCarouselHeights);
+  var carouselResizeTimer;
+  window.addEventListener('resize', function() {
+    clearTimeout(carouselResizeTimer);
+    carouselResizeTimer = setTimeout(refreshCarouselHeights, 100);
+  });
+
+  function updateCarouselUI(id) {
+    var state = carouselState[id];
+    var track = document.getElementById(id);
+    track.style.transform = 'translateX(-' + (state.index * 100) + '%)';
+    var dotsContainer = document.getElementById(id.replace('Track', 'Dots'));
+    if (dotsContainer) {
+      dotsContainer.querySelectorAll('.carousel-dot').forEach(function(dot, i) {
+        dot.classList.toggle('active', i === state.index);
+      });
+    }
+    var wrap = track.parentElement;
+    var activeSlide = track.children[state.index];
+    if (wrap && activeSlide) {
+      wrap.style.height = activeSlide.offsetHeight + 'px';
+    }
+    var carousel = track.closest('.carousel');
+    var arrows = carousel && carousel.querySelector('.carousel-arrows');
+    var img = activeSlide && activeSlide.querySelector('.carousel-img');
+    if (arrows && img) {
+      var imgRect = img.getBoundingClientRect();
+      arrows.style.top = (imgRect.top - carousel.getBoundingClientRect().top + imgRect.height / 2) + 'px';
+    }
+  }
+
+  function nextSlide(id) {
+    var state = carouselState[id];
+    state.index = (state.index + 1) % state.count;
+    updateCarouselUI(id);
+  }
+
+  function prevSlide(id) {
+    var state = carouselState[id];
+    state.index = (state.index - 1 + state.count) % state.count;
+    updateCarouselUI(id);
+  }
+
+  function goToSlide(id, i) {
+    carouselState[id].index = i;
+    updateCarouselUI(id);
+  }
+
+  initCarousels();
 </script>
 
 </body>

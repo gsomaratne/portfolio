@@ -453,6 +453,8 @@
     margin-bottom: 0;
   }
 
+  p.carousel-caption strong { font-weight: 500; }
+
   .carousel-caption-quote {
     font-family: var(--serif);
     font-style: italic;
@@ -1029,14 +1031,15 @@
   /* Headline numbers */
   .metrics-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0 0; }
   .metric {
-    border: 1px solid rgba(245,243,238,0.08);
+    border: 1px solid rgba(200,184,240,0.3);
+    background: var(--highlight);
     border-radius: 8px;
     padding: 1.25rem;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
   }
-  .metric-num { font-family: var(--serif); font-size: 2.4rem; line-height: 1; color: var(--white); }
+  .metric-num { font-family: var(--serif); font-size: 2.4rem; line-height: 1; color: #c8b8f0; }
   .metric-cap { font-size: 0.82rem; color: rgba(245,243,238,0.55); line-height: 1.45; }
 
   @media (max-width: 768px) {
@@ -1105,7 +1108,7 @@
       <span class="prototype-cta-title">Walk through the final prototype yourself</span>
       <span class="prototype-cta-sub">Click through the full questionnaire-to-recommendation flow in Figma.</span>
     </div>
-    <a href="https://www.figma.com/proto/LseZn5v4Na1NlMgHVAg2ut/BluePrint--Personal---Copy-?node-id=650-20633&p=f&t=j07BCbI2Ul3ngfjI-8&scaling=scale-down&content-scaling=fixed&page-id=325%3A8555&starting-point-node-id=650%3A20633&hotspot-hints=0&hide-ui=1" target="_blank" rel="noopener" class="prototype-cta-btn">Open in Figma →</a>
+    <a href="https://www.figma.com/proto/LseZn5v4Na1NlMgHVAg2ut/BluePrint--Personal---Copy-?node-id=650-20633&p=f&t=j07BCbI2Ul3ngfjI-8&scaling=scale-down&content-scaling=fixed&page-id=325%3A8555&starting-point-node-id=650%3A20633&hotspot-hints=1&hide-ui=1" target="_blank" rel="noopener" class="prototype-cta-btn">Open in Figma →</a>
   </div>
 
   <!-- META BAR — moved below the prototype CTA -->
@@ -1120,7 +1123,7 @@
     </div>
     <div class="meta-item">
       <span class="meta-label">Role</span>
-      <span class="meta-value">Sole UX designer</span>
+      <span class="meta-value">UX designer</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Team</span>
@@ -1156,7 +1159,7 @@
   <!-- Design Process -->
   <div class="cs-section">
     <p class="cs-section-label">Design process</p>
-    <h2>From user flow to high-fidelity prototype.</h2>
+    <h2>Mapping the happy path and sketching early exposed missing requirements before high fidelity.</h2>
     <p>Building upon requirements set forth by my product team, I ideated on the design of a platform that takes application intent and requirements and provides suggested architectural patterns. I evolved the concept from a user flow diagram to a high-fidelity prototype. Click any card below for a closer look.</p>
 
     <div class="process-cards">
@@ -1232,7 +1235,7 @@
   <!-- Research -->
   <div class="cs-section">
     <p class="cs-section-label">User research</p>
-    <h2>Moderated usability testing with 6 target users.</h2>
+    <h2>I tested the high-fidelity prototype with six target users before the MVP launched.</h2>
     <p>To evaluate the proposed UI design and information architecture, I conducted moderated usability testing with associates who were familiar with app architecture or had expressed interest in BluePrint:</p>
     <ul>
       <li>1 cloud policy engineer</li>
@@ -1372,7 +1375,7 @@
   <!-- Final design -->
   <div class="cs-section" id="final-design">
     <p class="cs-section-label">Final design</p>
-    <h2>From the MVP to an AI-powered BluePrint.</h2>
+    <h2>The MVP questionnaire evolved into a conversational AI that recommends a pattern in seconds.</h2>
     <h3>The MVP</h3>
     <div class="cs-video">
       <video src="images/BluePrintPrototype.mp4" poster="images/BluePrintPrototypePoster.jpg" autoplay muted loop playsinline aria-label="Walkthrough of the BluePrint MVP, from login through a questionnaire to a pattern recommendation"></video>
@@ -1450,7 +1453,7 @@
   <!-- Takeaways -->
   <div class="cs-section">
     <p class="cs-section-label">Takeaways</p>
-    <h2>What this project taught me.</h2>
+    <h2>Evidence, not an individual's preference, is what shifts a product team's roadmap.</h2>
     <p>The biggest lesson was how to advocate when what users need conflicts with a product team's initial direction. Editing, deleting, and sharing questionnaires were deliberately left out of the MVP because the team worried users would game the recommendation engine. Participants wanted them anyway. Instead of arguing preference, I brought the testing evidence and reframed the risk: BluePrint is a guide, not a gate, so letting people revise their answers makes the recommendations more useful, not less trustworthy. That shifted the roadmap.</p>
     <p>In hindsight, I'd bring my product partner into synthesis from the start. Seeing the evidence firsthand would have given them richer context earlier and made that advocacy far less of an uphill conversation.</p>
   </div>

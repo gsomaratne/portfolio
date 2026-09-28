@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kairos Policy-as-Code — Griffin Somaratne</title>
+<title>DESIGN.md — Griffin Somaratne</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
@@ -395,6 +395,8 @@
     margin-bottom: 0;
   }
 
+  p.carousel-caption strong { font-weight: 500; }
+
   .carousel-controls {
     display: flex;
     align-items: center;
@@ -693,16 +695,71 @@
     margin: 1.5rem 0 2rem;
   }
   .metric {
-    border: 1px solid rgba(245,243,238,0.08);
+    border: 1px solid rgba(200,184,240,0.3);
+    background: var(--highlight);
     border-radius: 8px;
     padding: 1.1rem;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
   }
-  .metric-num { font-family: var(--serif); font-size: 2.1rem; line-height: 1; color: var(--white); }
+  .metric-num { font-family: var(--serif); font-size: 2.1rem; line-height: 1; color: #c8b8f0; }
   .metric-cap { font-size: 0.78rem; color: rgba(245,243,238,0.55); line-height: 1.45; }
 
+  .migration-pair {
+    display: grid;
+    grid-template-columns: minmax(0, 2.063fr) minmax(0, 0.726fr);
+    gap: 1rem;
+    align-items: start;
+    margin-top: 1.5rem;
+  }
+  .migration-pair img { width: 100%; height: auto; }
+  .migration-pair .cs-hero-img { margin-top: 0; }
+  .cs-section h3 {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.4;
+    margin: 2.75rem 0 0.6rem;
+  }
+  .step-label {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c8b8f0;
+    margin: 2.25rem 0 0.9rem;
+  }
+  .step-label + .carousel, .step-label + .migration-pair, .step-label + .cs-hero-img { margin-top: 0; }
+  .step-label + p { margin-top: 0; }
+  .cs-section p + .carousel, .cs-section p + .cs-hero-img { margin-top: 0.5rem; }
+  .file-tree + .carousel-caption + .step-label { margin-top: 2.25rem; }
+  /* Doc structure file tree */
+  .file-tree {
+    margin-top: 2rem;
+    border: 1px solid rgba(245,243,238,0.1);
+    border-radius: 8px;
+    background: #111113;
+    overflow: hidden;
+  }
+  .file-tree-bar { display: flex; gap: 6px; padding: 0.7rem 0.9rem; border-bottom: 1px solid rgba(245,243,238,0.07); }
+  .file-tree-bar span { width: 9px; height: 9px; border-radius: 50%; background: rgba(245,243,238,0.15); }
+  .file-tree pre {
+    margin: 0; padding: 1.1rem 1.25rem 1.25rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 0.8rem; line-height: 1.75;
+    color: rgba(245,243,238,0.8);
+    overflow-x: auto;
+  }
+  .ft-branch { color: rgba(245,243,238,0.3); }
+  .ft-dir { color: rgba(245,243,238,0.9); }
+  .ft-root { color: #c8b8f0; }
+  .ft-new { color: #c8b8f0; }
+  .ft-file { display: inline-block; min-width: 26ch; }
+  .ft-root { min-width: 34ch; }
+  .ft-note { color: rgba(245,243,238,0.35); }
   /* Phase status cards */
   .phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1.5rem 0 2rem; }
   .phase-card { border: 1px solid rgba(245,243,238,0.08); border-radius: 8px; padding: 1.25rem; }
@@ -729,6 +786,7 @@
   @media (max-width: 768px) {
     .metrics-strip { grid-template-columns: repeat(2, 1fr); }
     .phase-grid, .pov-grid { grid-template-columns: 1fr; }
+    .migration-pair { grid-template-columns: 1fr; }
     nav { padding: 1rem 1.5rem; }
     .cs-hero { padding: 7rem 1.5rem 0; }
     .cs-body { padding: 0 1.5rem 5rem; }
@@ -760,17 +818,11 @@
     Back to work
   </a>
 
-  <div class="cs-tags">
-    <span class="tag tag-ui">UI design</span>
-    <span class="tag tag-eng">Engineering</span>
-    <span class="tag tag-strategy">Strategy</span>
-  </div>
-
-  <h1 class="cs-title">Kairos — Policy-as-Code</h1>
+  <h1 class="cs-title">DESIGN.md</h1>
 
   <!-- Hero image -->
   <div class="cs-hero-img">
-    <div class="hero-img-fallback">add a screenshot of agent-generated Kairos UI (e.g. the Rego rule builder)</div>
+    <img src="images/KairosHeroComposite.png" alt="The design-system docs file tree beside the agent-generated Kairos Anomaly Detection page">
   </div>
 
   <!-- META BAR -->
@@ -781,11 +833,11 @@
     </div>
     <div class="meta-item">
       <span class="meta-label">Timeline</span>
-      <span class="meta-value">Ongoing — 3 versions to date</span>
+      <span class="meta-value">Ongoing</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Role</span>
-      <span class="meta-value">Embedded product designer</span>
+      <span class="meta-value">Product designer and strategist</span>
     </div>
     <div class="meta-item">
       <span class="meta-label">Team</span>
@@ -800,8 +852,8 @@
   <!-- Overview -->
   <div class="cs-section">
     <p class="cs-section-label">Overview</p>
-    <p>Kairos is Capital One's enterprise policy-as-code platform: tenants author and deploy Rego policies, governance owners approve requirement changes, and downstream systems consume enforcement decisions. The team builds it with heavy use of Claude Code, which accelerated development past the point where design could keep pace by reviewing every screen.</p>
-    <p>Rather than wait for Capital One's Gravity design system to ship a machine-readable, agentic layer, I co-authored <code>DESIGN.md</code> with the Kairos tech team — a design markdown that lets a coding agent generate UI to real design standards today, with design judgment encoded as rules it can check itself against.</p>
+    <p>Kairos is Capital One's enterprise policy-as-code platform: tenants author and deploy Rego policies, governance owners approve requirement changes, and downstream systems consume enforcement decisions. The team builds it with heavy use of Claude Code, which has accelerated development past the point where design can keep pace and review every screen.</p>
+    <p>Rather than wait for Capital One's Gravity design system to ship a machine-readable, agentic layer, I wrote <code>DESIGN.md</code> and a set of supporting design docs, drafting them with Claude. The docs encode design standards and principles as rules a coding agent follows while generating UI then checks its output against.</p>
   </div>
 
   <hr class="cs-divider">
@@ -810,8 +862,8 @@
   <div class="cs-section">
     <p class="cs-section-label">Problem</p>
     <h2>A dev team shipping UI faster than design could keep up with.</h2>
-    <p>No single design system was enforced across the app, and it showed: corner radii, hover states, fonts, and even button and tag styles varied page to page. An engineer prompting an agent to "build the requirements table" isn't hand-rolling divs — they're delegating the UI decision entirely, and the agent has to decide on its own what a compliant button, badge, or modal looks like, with no designer in the room.</p>
-    <p>An audit of the Kairos repo showed what happens without any guardrail:</p>
+    <p>No single design system was enforced across the Kairos platform, and it showed: corner radii, hover states, fonts, and even button and tag styles varied page to page. By handing every UI decision to the agent, the dev team relied on its judgment to figure out which components to use and when, the kind of design reasoning current models still lack.</p>
+    <p>Kairos could draw on two Capital One design systems: Gravity, the enterprise standard, whose web components have been slow to develop, and Omni, an older and somewhat outdated system created as a stopgap for Gravity web. Nothing pointed the agent toward either, and an audit of the Kairos repo showed the result:</p>
 
     <div class="metrics-strip">
       <div class="metric">
@@ -824,7 +876,7 @@
       </div>
       <div class="metric">
         <span class="metric-num">36</span>
-        <span class="metric-cap">Hallucinated components; 21 have a direct Gravity or Omni counterpart</span>
+        <span class="metric-cap">Hallucinated components; 21 had a direct Gravity or Omni counterpart</span>
       </div>
       <div class="metric">
         <span class="metric-num">111</span>
@@ -832,38 +884,147 @@
       </div>
     </div>
 
-    <p>"Hallucinated" is the precise word: each of those 36 components was the agent independently inventing a UI primitive that Gravity or Omni already shipped, because nothing told it otherwise. 28 were built on headless libraries like Radix, shadcn, and Recharts; 8 were built from scratch. Every one is visual debt, plus compute and context spent generating something redundant that later has to be found and fixed.</p>
+    <p>Each of those 36 hallucinated components was the agent independently inventing a UI primitive that Gravity or Omni already shipped because nothing told it otherwise. 28 were built on headless libraries like Radix, shadcn, and Recharts; 8 were built from scratch. Every one is visual debt, plus compute and context spent generating something redundant that later has to be found and fixed.</p>
 
     <div class="research-callout">
       <p class="rc-title">The reframe</p>
-      <p>I can't hand a developer my taste, and a manual migration of the whole app onto a design system was never going to be the roadmap. But I can hand an agent a document precise enough that it doesn't need taste to follow it — and that raises the floor of what ships, whether I'm in the loop on the prompt or only see the result afterward.</p>
+      <p>I cannot quickly train developers to practice proper judgment with UI design, and a manual migration of the whole app onto a design system is a difficult sell considering other high-priority enhancements. Moreover, until models improve at reasoning with components, a back-and-forth between designer and agent, or between developer and agent with a designer in the loop, is still required. However, handing agents these documents raises the baseline for usability, visual design, and design standard adherence.</p>
     </div>
   </div>
 
   <hr class="cs-divider">
 
-  <!-- Approach -->
+  <!-- Process -->
   <div class="cs-section">
-    <p class="cs-section-label">Approach</p>
-    <h2>Why a design markdown, and why now.</h2>
+    <p class="cs-section-label">Process</p>
+    <h2>Rather than wait for Gravity, I wrote design docs agents can follow today, refined over three versions.</h2>
     <p>A design markdown is a plain markdown file that gives AI coding agents structured design tokens and visual rules: a YAML front-matter block of machine-readable tokens (color, typography, shape, spacing, components), paired with a prose body that expands each one with rationale an agent can act on.</p>
-    <p>The better long-term answer is a mature agentic design system that serves this context on demand, and Gravity is expected to ship one — but it isn't ready yet. A markdown file is readable by people, parseable by machines, easy to version and diff in a pull request, and drops into a repo with no new tooling. That made it worth building as a stopgap rather than waiting.</p>
+    <p>The better long-term answer is a mature agentic design system that serves this context on demand. Gravity is expected to ship one, but it isn't ready yet. A markdown file is readable by people, parseable by machines, easy to version and diff in a pull request, and drops into a repo with no new tooling. That made it worth building as a stopgap rather than waiting.</p>
     <p>It was meant to do three things: generate new UI in Gravity and Omni styling, audit existing UI for drift, and migrate existing UI onto the system. It took three versions to get the first one working.</p>
 
-    <div class="insights-list">
-      <div class="insight-item">
-        <span class="insight-num">1</span>
-        <p class="insight-text"><strong>v1, developer-led: right components, haphazard everything else.</strong> A developer installed Gravity tokens and Omni components and gave the agent a preference order: use them first, and fall back to Tailwind or local components only if neither covered the case. It generated the correct components and component-level styling (color, corner radius, border width), but spacing and text alignment were haphazard, producing a disjointed interface.</p>
+
+    <h3>v1, developer-led: correct use of components, haphazard with everything else.</h3>
+    <p>A developer installed Gravity tokens and Omni components and gave the agent a preference order: use them first, and fall back to Tailwind or local components only if neither covered the case. It generated the correct components and component-level styling (color, corner radius, border width), but spacing and text alignment were haphazard, producing a disjointed interface.</p>
+
+    <h3>v2, designer-led: orchestrator and foundation docs.</h3>
+    <p>I took over the document, adding spacing and typography tokens and bringing in Gravity's foundations — its standards for page layout, spacing, typography, color, and data visualization. <code>DESIGN.md</code> became an orchestrating file that routes agents to <code>docs/design-system/</code>, with one file per foundation — colors, spacing, typography, elevation, corner radius, border, iconography, illustrations, and data visualization — each holding tokens, do's and don'ts, and notes specific to this repo. An agent jumps straight to the rule it needs instead of parsing one long file.</p>
+    <h4 class="step-label">Generation</h4>
+    <p>A Rego rule builder generated with v2, with form fields, a live code preview, and condition rows, reads clean and on-brand.</p>
+    <div class="cs-hero-img"><img src="images/KairosRegoBuilder.png" alt="Agent-generated Kairos Rego rule builder: a form for rule name, resource type, action, decision, and conditions beside a live Generated Rego code preview"></div>
+    <p class="carousel-caption">New UI generated with v2 of the design markdown. Note the delete icon sitting below its condition row instead of aligned with it.</p>
+
+    <h4 class="step-label">Migration</h4>
+    <p>Migration was the harder half. Asked to bring the existing Requirements Registry onto Gravity, the agent produced haphazard margins and layout, rendered contextual menus and modals with transparent backgrounds instead of solid fills, and mishandled hidden interactions like drawers and expandable rows, because nothing in the document told it how those patterns should work.</p>
+    <p style="margin-top: 1.5rem;">Before:</p>
+    <div class="carousel">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="registryCarouselTrack">
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/KairosRegistryOriginal.png" alt="The existing Requirements Registry: summary counts, filters, and a table of requirements"></div>
+            <p class="carousel-caption">The existing Requirements Registry.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/KairosRegistryExpanded.png" alt="The existing Requirements Registry with a row expanded to show its lineage diagram, requirement details, and integration point"></div>
+            <p class="carousel-caption">Each row expands to reveal the requirement's lineage, details, and integration point.</p>
+          </div>
+        </div>
       </div>
-      <div class="insight-item">
-        <span class="insight-num">2</span>
-        <p class="insight-text"><strong>v2, designer and developer: better new UI, migration still fails.</strong> I worked with the tech team to add spacing and typography tokens and bring in Gravity's foundations — its standards for page layout, spacing, typography, color, and data visualization. New UI came out with the right components and much better styling. But pointed at an existing screen and asked to migrate it, the same document made inappropriate component and styling choices.</p>
-      </div>
-      <div class="insight-item">
-        <span class="insight-num">3</span>
-        <p class="insight-text"><strong>v3, orchestrator and topic docs (current).</strong> <code>DESIGN.md</code> became an orchestrating file that routes agents to <code>docs/design-system/</code>, with one file per foundation — colors, spacing, typography, elevation, corner radius, border, iconography, illustrations, animation, and data visualization — each holding tokens, do's and don'ts, and notes specific to this repo. An agent jumps straight to the rule it needs instead of parsing one long file. This version has a tech commitment for the next PI, and developers are testing it now.</p>
+      <div class="carousel-controls">
+        <div class="carousel-dots" id="registryCarouselDots">
+          <button class="carousel-dot active" aria-label="Slide 1"></button>
+          <button class="carousel-dot" aria-label="Slide 2"></button>
+        </div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" aria-label="Previous slide" onclick="prevSlide('registryCarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="carousel-arrow" aria-label="Next slide" onclick="nextSlide('registryCarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
+    <p style="margin-top: 2rem;">After:</p>
+    <div class="cs-hero-img"><img src="images/KairosRegistryV2Full.png" alt="The v2 migration of the Requirements Registry: restyled header, filters, and table, with expanded rows showing mostly empty lineage diagrams"></div>
+    <p class="carousel-caption">Migrated Requirements Registry whose expanded rows have not been updated with proper styling.</p>
+    <div class="migration-pair" style="margin-top: 1.5rem;">
+      <div>
+        <div class="cs-hero-img"><img src="images/KairosRegistryMigrated.png" alt="The agent's migrated Requirements Registry: content pushed against the left edge with no page margins and no expandable rows"></div>
+        <p class="carousel-caption">Content runs flush to the left edge with no page margins.</p>
+      </div>
+      <div>
+        <div class="cs-hero-img"><img src="images/KairosRegistryDropdown.png" alt="A migrated filter dropdown with a transparent background, its options overlapping the table text behind it"></div>
+        <p class="carousel-caption">Filter menus render with transparent backgrounds.</p>
+      </div>
+    </div>
+
+
+    <h3>v3, templates and component usage (current).</h3>
+    <p>I added a templates doc covering general page layout (headings, subheaders, and margins) and tables, plus a component usage doc that gives context for every component. The docs are also improved with each invocation: agents are instructed to log gaps in a table, whether a component is missing from Gravity or an existing component lacks functionality, and to push what they learn from back-and-forth with developers into the templates and component usage docs. Developers are testing this version now.</p>
+    <div class="file-tree" role="img" aria-label="File tree: DESIGN.md at the root, with foundation, template, and component usage docs in docs/design-system">
+      <div class="file-tree-bar"><span></span><span></span><span></span></div>
+      <pre><span class="ft-file ft-root">DESIGN.md</span><span class="ft-note"># orchestrator: routes agents to the right doc</span>
+<span class="ft-dir">docs/</span>
+<span class="ft-branch">└── </span><span class="ft-dir">design-system/</span>
+<span class="ft-branch">    ├── </span><span class="ft-file">border.md</span><span class="ft-note"># foundation</span>
+<span class="ft-branch">    ├── </span><span class="ft-file">colors.md</span><span class="ft-note"># foundation</span>
+<span class="ft-branch">    ├── </span><span class="ft-file">component-usage-notes.md</span><span class="ft-note"># components &amp; layout</span>
+<span class="ft-branch">    ├── </span><span class="ft-file">corner-radius.md</span><span class="ft-note"># foundation</span>
+<span class="ft-branch">    ├── </span><span class="ft-file">data-visualization.md</span><span class="ft-note"># foundation</span>
+<span class="ft-branch">    ├── </span><span class="ft-file">elevation.md</span><span class="ft-note"># foundation</span>
+<span class="ft-branch">    ├── </span><span class="ft-file">iconography.md</span><span class="ft-note"># foundation</span>
+<span class="ft-branch">    ├── </span><span class="ft-file">illustrations.md</span><span class="ft-note"># foundation</span>
+<span class="ft-branch">    ├── </span><span class="ft-file">spacing.md</span><span class="ft-note"># foundation</span>
+<span class="ft-branch">    ├── </span><span class="ft-file">templates.md</span><span class="ft-note"># components &amp; layout</span>
+<span class="ft-branch">    ├── </span><span class="ft-file">typography.md</span><span class="ft-note"># foundation</span>
+<span class="ft-branch">    └── </span><span class="ft-file">web-components.md</span><span class="ft-note"># components &amp; layout</span></pre>
+    </div>
+    <p class="carousel-caption">How the docs are organized: <code>DESIGN.md</code> at the root routes agents to foundation, component, and layout docs.</p>
+
+    <h4 class="step-label">Generation</h4>
+    <p>An Anomaly Detection page generated with v3 goes further, with summary counts, filters, and a grid of anomalies with trend lines. Gaps remain: the agent defaults to cards for content groups and deviates from rules at times, leading to mistakes such as misaligned content or hyperlinked text without the proper color token.</p>
+    <div class="cs-hero-img"><img src="images/KairosAnomalyDetection.png" alt="Agent-generated Kairos Anomaly Detection page: summary counts for open, critical, warning, and resolved anomalies above a grid of anomaly cards with sparklines and status badges"></div>
+    <p class="carousel-caption">A net-new Anomaly Detection page generated with v3. The components and styling are on-brand, but the agent still defaulted to cards for every anomaly where a table might scan better.</p>
+
+    <h4 class="step-label">Migration</h4>
+    <p>With v3 and several rounds of back-and-forth between me and the agent, the migration got much closer: consistent page margins, filters that show what's applied as removable chips, and the expandable rows reworked into a side drawer that houses each requirement's lineage and details. It still needed a designer steering it, and gaps remain, like the Requirement ID column rendering only version numbers.</p>
+    <div class="carousel" style="margin-top: 1rem;">
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="registryV3CarouselTrack">
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/KairosRegistryV3.png" alt="Requirements Registry migrated with v3: consistent margins, filter chips, and a clean table"></div>
+            <p class="carousel-caption">Consistent margins and applied filters shown as chips, though the Requirement ID column shows only versions.</p>
+          </div>
+          <div class="carousel-slide">
+            <div class="carousel-img"><img src="images/KairosRegistryV3Drawer.png" alt="Requirements Registry with a side drawer open showing a requirement's lineage and details"></div>
+            <p class="carousel-caption">The expandable rows became a side drawer with each requirement's lineage and details.</p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <div class="carousel-dots" id="registryV3CarouselDots">
+          <button class="carousel-dot active" aria-label="Slide 1"></button>
+          <button class="carousel-dot" aria-label="Slide 2"></button>
+        </div>
+        <div class="carousel-arrows">
+          <button class="carousel-arrow" aria-label="Previous slide" onclick="prevSlide('registryV3CarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="carousel-arrow" aria-label="Next slide" onclick="nextSlide('registryV3CarouselTrack')">
+            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2l5 5-5 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <hr class="cs-divider">
@@ -871,49 +1032,26 @@
   <!-- Current state -->
   <div class="cs-section" id="current-state">
     <p class="cs-section-label">Current state</p>
-    <h2>Generation works. Migration doesn't yet.</h2>
+    <h2>Generation works autonomously; migration still needs a designer in the loop.</h2>
 
     <div class="phase-grid">
       <div class="phase-card">
         <span class="phase-status done">Phase 1 · Complete</span>
         <p class="phase-title">Generate new UI</p>
-        <p>Instructions for agents to adopt Gravity and Omni tokens, styles, and components in new UI. This is the phase that works.</p>
+        <p>Instructions for agents to adopt Gravity and Omni tokens, styles, and components in new UI.</p>
       </div>
       <div class="phase-card">
         <span class="phase-status progress">Phase 2 · In progress</span>
-        <p class="phase-title">Templates and migration</p>
-        <p>Page-level templates (list, detail, dashboard) so agents start from a known layout, plus more precise instructions for migrating existing UI.</p>
+        <p class="phase-title">Migrate existing UI</p>
+        <p>More precise instructions for migrating existing UI, so agents need less back-and-forth with a designer, plus page-level templates (list, detail, dashboard) so they start from a known layout.</p>
       </div>
       <div class="phase-card">
         <span class="phase-status">Phase 3 · Not started</span>
         <p class="phase-title">Converge with Gravity</p>
-        <p>Build on Gravity's agentic design system once it ships. This work is meant to be superseded, not permanent.</p>
+        <p>Build on Gravity's agentic design system once it ships. This work is meant to be superseded.</p>
       </div>
     </div>
 
-    <p>A generated Rego rule builder — form fields, live code preview, condition rows — reads clean and on-brand, evidence the v1 to v2 progression worked for new screens. Gaps remain even there: alignment can slip, the agent defaults to cards for content groups even when a card isn't the right fit, and rules aren't always followed — hyperlinked text isn't always styled in the interactive color token.</p>
-    <div class="cs-hero-img" style="margin-top: 1.5rem;">
-      <div class="hero-img-fallback">add the agent-generated Rego rule builder</div>
-    </div>
-    <p class="carousel-caption">New UI generated with v2 of the design markdown.</p>
-
-    <p style="margin-top: 1.75rem;">Migration is the harder, unsolved half. Asked to bring the existing Requirements Registry onto Gravity, the agent produced haphazard margins and layout, rendered contextual menus and modals with transparent backgrounds instead of solid fills, and missed hidden interactions like drawers and expandable rows entirely — because nothing in the document told it those patterns existed on the page.</p>
-    <div class="cs-hero-img" style="margin-top: 1.5rem;">
-      <div class="hero-img-fallback">add the Requirements Registry migration attempt</div>
-    </div>
-    <p class="carousel-caption">An existing screen migrated by the agent — the spacing, fill, and hidden-interaction problems described above.</p>
-
-    <p style="margin-top: 1.75rem;">Two alternatives are complementary rather than competing, and worth revisiting once Phase 2 succeeds or stalls:</p>
-    <div class="pov-grid">
-      <div class="research-callout">
-        <p class="rc-title">Build-time lint rules</p>
-        <p>Block hardcoded hex, arbitrary Tailwind values, and raw HTML in favor of Gravity and Omni. Enforces the standard whether or not the doc is read and catches drift before merge — but it's real engineering work to tune, risks false positives, and only prevents new violations, not the ~2,500 already in the app.</p>
-      </div>
-      <div class="research-callout">
-        <p class="rc-title">A dedicated migration initiative</p>
-        <p>Migrate existing screens on a known timeline for a clean baseline — but it costs tech-team bandwidth, competes with feature work, needs product prioritization, and if agent-led, inherits the same reliability problem this effort hasn't solved yet.</p>
-      </div>
-    </div>
   </div>
 
   <hr class="cs-divider">
@@ -921,7 +1059,7 @@
   <!-- Open questions -->
   <div class="cs-section">
     <p class="cs-section-label">Open questions</p>
-    <h2>What's still unresolved.</h2>
+    <h2>Consistency and optimal doc structure have yet to be determined.</h2>
     <ul>
       <li>The illustrations doc has agents generate placeholder SVGs for a person to swap with real Gravity illustrations. Is there a better way to point agents at illustration files directly — a folder convention, or a change-management process?</li>
       <li>How can the document format itself be optimized, independent of what's in it?</li>
@@ -935,17 +1073,9 @@
   <!-- Takeaways -->
   <div class="cs-section">
     <p class="cs-section-label">Takeaways</p>
-    <h2>A stopgap, on purpose.</h2>
-    <p>Only generating new UI works so far. Auditing existing UI for drift and migrating it onto Gravity are both still open, and I'd rather say that plainly than round it up.</p>
-    <p>This isn't the end state either way. A truly agentic design system would expose component contracts, accessibility rules, and usage guidance as structured, queryable data — not prose an agent has to parse and hope it interpreted correctly. Every rule in <code>DESIGN.md</code> is something Gravity's platform could eventually serve on demand. Writing it by hand is what's possible now.</p>
-    <p>It's still worth doing. I can't be in every prompt, and I can't teach every developer taste in one sitting. But I can write down enough of that taste, as explicit, checkable rules, that the floor for AI-generated UI is meaningfully higher.</p>
-    <p>My role, specifically:</p>
-    <ul>
-      <li><strong>The v2 collaboration</strong> — introducing spacing and typography tokens and Gravity's foundations, which is what made new-UI generation reliable.</li>
-      <li><strong>The v3 restructure</strong> — co-designing the orchestrator-plus-topic-docs split with the tech team once one flat file couldn't hold generation, audit, and migration guidance at once.</li>
-      <li><strong>Encoding design judgment as rules</strong> — when a hallucinated component is really a Gravity primitive in disguise, why a card isn't always the right container, and why hidden interactions like drawers have to be named explicitly.</li>
-      <li><strong>Not in scope</strong> — the Gravity and Omni component libraries themselves, or a manual migration of the app.</li>
-    </ul>
+    <h2>A stopgap on purpose: the DESIGN.md raises the floor for AI-generated UI until Gravity can serve these rules itself.</h2>
+    <p>This isn't the end state; a truly agentic design system would surface component contracts, accessibility rules, and usage guidance as structured, queryable data — not prose you feed to an agent to parse and hope it interprets it correctly. Every rule in <code>DESIGN.md</code> and its supporting docs is something Gravity's platform could eventually serve on demand.</p>
+    <p>In the meantime, this work is still valuable. I can't be in every prompt, nor can I pass my design taste to every developer in one fell swoop, but I can write explicit instructions and rules to evaluate against so the minimum bar for AI-generated UI is raised.</p>
   </div>
 
 </div>
