@@ -311,9 +311,9 @@
     <p class="contact-sub">Open to new opportunities, collaborations, and interesting conversations.</p>
 
     <div class="contact-links">
-      <a href="mailto:777gdis@gmail.com" class="contact-link">
+      <a href="mailto:777gdis@gmail.com" class="contact-link" id="email-link">
         <div class="contact-link-label">
-          <span class="contact-link-name">Email</span>
+          <span class="contact-link-name" id="email-link-name">Email</span>
           <span class="contact-link-detail">777gdis@gmail.com</span>
         </div>
         <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -355,5 +355,20 @@
   <p>Designed & built from scratch</p>
 </footer>
 
+<script>
+  const emailLink = document.getElementById('email-link');
+  const emailLinkName = document.getElementById('email-link-name');
+  if (emailLink && emailLinkName) {
+    emailLink.addEventListener('click', () => {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText('777gdis@gmail.com').then(() => {
+          const original = emailLinkName.textContent;
+          emailLinkName.textContent = 'Copied!';
+          setTimeout(() => { emailLinkName.textContent = original; }, 1500);
+        }).catch(() => {});
+      }
+    });
+  }
+</script>
 </body>
 </html>

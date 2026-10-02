@@ -164,33 +164,17 @@
     display: block;
   }
 
-  .process-thumb img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  .modal-img-placeholder img,
-  .modal-shot-img img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-
-  /* PLACEHOLDER FALLBACK — used until real screenshots are added */
-  .hero-img-fallback {
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: rgba(245,243,238,0.04);
-    border-radius: 6px;
+  .cs-video {
     display: flex;
-    align-items: center;
     justify-content: center;
-    color: rgba(245,243,238,0.25);
-    font-size: 0.82rem;
-    font-style: italic;
-    text-align: center;
-    padding: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .cs-video video {
+    display: block;
+    max-width: 100%;
+    max-height: 720px;
+    height: auto;
   }
 
   /* SECTION BLOCKS */
@@ -254,80 +238,6 @@
     color: var(--muted);
     font-size: 0.8rem;
   }
-
-  /* PROCESS CARDS */
-  .process-cards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    margin-top: 1.5rem;
-  }
-
-  .process-card {
-    padding: 0;
-    border: 1px solid rgba(245,243,238,0.08);
-    border-radius: 6px;
-    background: rgba(245,243,238,0.02);
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    overflow: hidden;
-    transition: border-color 0.2s, background 0.2s, transform 0.2s;
-  }
-
-  .process-card:hover {
-    border-color: rgba(200,184,240,0.35);
-    background: rgba(245,243,238,0.04);
-    transform: translateY(-2px);
-  }
-
-  .process-card:focus-visible {
-    outline: 2px solid rgba(200,184,240,0.5);
-    outline-offset: 2px;
-  }
-
-  .process-thumb {
-    width: 100%;
-    aspect-ratio: 1072 / 657;
-    background: rgba(245,243,238,0.04);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .process-card-body {
-    padding: 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-    flex: 1;
-  }
-
-  .process-card-title {
-    font-family: var(--serif);
-    font-size: 1rem;
-    color: var(--white);
-    line-height: 1.3;
-  }
-
-  .process-card-desc {
-    font-size: 0.8rem;
-    color: rgba(245,243,238,0.45);
-    line-height: 1.6;
-    font-weight: 300;
-  }
-
-  .process-card-link {
-    font-size: 0.8rem;
-    color: #c8b8f0;
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    margin-top: auto;
-    transition: opacity 0.2s;
-  }
-
-  .process-card:hover .process-card-link { opacity: 0.7; }
-  .process-card-link svg { width: 12px; height: 12px; }
 
   /* RESEARCH CALLOUT */
   .research-callout {
@@ -395,95 +305,14 @@
 
   .cs-next a:hover { opacity: 0.65; }
 
-  /* ===== MODALS ===== */
-  .modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.78);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    z-index: 1000;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1.25rem;
-  }
-
-  .modal-box {
-    background: #111111;
-    border: 1px solid rgba(245,243,238,0.1);
-    border-radius: 10px;
-    max-width: 760px;
-    width: 100%;
-    max-height: 86vh;
-    overflow-y: auto;
-    padding: 2.5rem;
-    position: relative;
-    animation: modalIn 0.25s ease;
-  }
-
-  @keyframes modalIn {
-    from { opacity: 0; transform: translateY(12px) scale(0.98); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-
-  .modal-close {
-    position: absolute;
-    top: 1.25rem;
-    right: 1.25rem;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 1px solid rgba(245,243,238,0.15);
-    background: transparent;
-    color: var(--white);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s;
-  }
-
-  .modal-close:hover { background: rgba(245,243,238,0.08); }
-  .modal-close svg { width: 14px; height: 14px; }
-
-  .modal-label {
-    font-size: 0.72rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #c8b8f0;
-    margin-bottom: 0.6rem;
-  }
-
-  .modal-title {
-    font-family: var(--serif);
-    font-size: clamp(1.6rem, 3vw, 2.1rem);
-    font-weight: 400;
-    margin-bottom: 1.1rem;
-    padding-right: 2rem;
-  }
-
-  .modal-desc {
-    font-size: 0.92rem;
-    color: rgba(245,243,238,0.6);
-    line-height: 1.8;
-    margin-bottom: 1.75rem;
-    font-weight: 300;
-  }
-
   .modal-shots-grid {
     display: flex;
     flex-direction: column;
-    gap: 1.75rem;
-    margin-bottom: 1.75rem;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
   }
 
-  .modal-shot { display: flex; flex-direction: column; gap: 0.5rem; }
-
-  .modal-shot-img {
-    border-radius: 6px;
-    overflow: hidden;
-  }
+  .modal-shot { display: flex; flex-direction: column; gap: 0.3rem; }
 
   .modal-shot-label {
     font-size: 0.85rem;
@@ -644,6 +473,38 @@
   .jump-link:hover { background: rgba(200,184,240,0.1); border-color: rgba(200,184,240,0.6); }
 
   #final-design { scroll-margin-top: 5rem; }
+
+  .cs-details {
+    margin-top: 1rem;
+    border: 1px solid rgba(245,243,238,0.08);
+    border-radius: 6px;
+    padding: 0.9rem 1.1rem;
+  }
+
+  .cs-details[open] { padding-bottom: 1.3rem; }
+
+  .cs-details summary {
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #c8b8f0;
+    font-weight: 400;
+    list-style: none;
+  }
+
+  .cs-details summary::-webkit-details-marker { display: none; }
+
+  .cs-details summary::before {
+    content: '▸';
+    display: inline-block;
+    margin-right: 0.5rem;
+    transition: transform 0.15s;
+    font-size: 0.7rem;
+  }
+
+  .cs-details[open] summary::before { transform: rotate(90deg); }
+
+  .cs-details .modal-shots-grid,
+  .cs-details .modal-callout { margin-top: 1.1rem; }
 
   /* Numbered steps (matches the CDs results list) */
   .insights-list { display: flex; flex-direction: column; margin-top: 1rem; }
@@ -872,10 +733,8 @@
     nav { padding: 1rem 1.5rem; }
     .cs-hero { padding: 7rem 1.5rem 0; }
     .cs-body { padding: 0 1.5rem 5rem; }
-    .process-cards { grid-template-columns: 1fr; }
     .cs-meta-bar { display: flex; flex-wrap: wrap; }
     .meta-item { display: block; flex: 1 1 45%; border-right: none; border-bottom: 1px solid rgba(245,243,238,0.08); }
-    .modal-box { padding: 1.75rem; max-height: 90vh; }
     .cs-next { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
   }
 
@@ -923,7 +782,7 @@
       <span class="prototype-cta-title">View the source Figma file</span>
       <span class="prototype-cta-sub">Explore the full modeling set flow, component states, and annotations.</span>
     </div>
-    <a href="https://www.figma.com/design/NdQ2JmkS6zL35c9eY9wRDR/Workbench---8-18--Copy-" target="_blank" rel="noopener" class="prototype-cta-btn">Open in Figma →</a>
+    <a href="https://www.figma.com/proto/RVDh9vz7Ljak8l2ozPSVNI/Portfolio--Copy-?node-id=397-14124&viewport=-1372%2C580%2C0.03&t=e7WlM5azVkgQ8Slr-8&scaling=scale-down&content-scaling=fixed&starting-point-node-id=397%3A14124&page-id=107%3A1824&disable-default-keyboard-nav=1&hide-ui=1" target="_blank" rel="noopener" class="prototype-cta-btn">Open in Figma →</a>
   </div>
 
   <!-- META BAR -->
@@ -974,9 +833,9 @@
 
   <hr class="cs-divider">
 
-  <!-- Approach -->
+  <!-- Process -->
   <div class="cs-section">
-    <p class="cs-section-label">Approach</p>
+    <p class="cs-section-label">Process</p>
     <h2>One modal grew into a full redesign once a failed review exposed serious experience gaps.</h2>
     <p>The scope didn't start as "redesign the platform." It started as a single, well-defined ask, and grew because the problems underneath it didn't stop at one screen.</p>
 
@@ -999,11 +858,6 @@
       </div>
     </div>
 
-    <p style="margin-top: 1.75rem;">Because this was side-of-desk work, iteration happened in the open, directly on the exploration boards: annotated call-outs on breadcrumb placement, CTA hierarchy, table row alignment, and overflow states, worked through with the product partner in real time rather than in a formal review cycle.</p>
-    <div class="cs-hero-img" style="margin-top: 1.5rem;">
-      <div class="hero-img-fallback">add ideation &amp; annotation board export (Figma frame 985-39157)</div>
-    </div>
-    <p class="carousel-caption">Working notes against the standardized-attributes table — breadcrumb, CTA, and table-alignment fixes called out directly on the canvas.</p>
   </div>
 
   <hr class="cs-divider">
@@ -1106,110 +960,13 @@
   <div class="cs-section" id="final-design">
     <p class="cs-section-label">Final design</p>
     <h2>The redesign covers registering a modeling set, managing its attributes, and guarding against destructive actions.</h2>
-    <p>The core object in Workbench is a <em>data product modeling set</em> — a registered group of standardized attributes owned by a team. The redesign covers the end-to-end experience around it: registering a new set, populating it with standardized attributes, and building in guardrails so destructive actions can't happen by accident. Click into each area below.</p>
+    <p>The core object in Workbench is a <em>data product modeling set</em> — a registered group of standardized attributes owned by a team. The redesign covers the end-to-end experience around it: registering a new set, populating it with standardized attributes, and building in guardrails so destructive actions can't happen by accident.</p>
 
-    <div class="process-cards">
-      <div class="process-card" tabindex="0" role="button" aria-label="View registration flow details" onclick="openModal('modal-registration')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-registration')}">
-        <div class="process-thumb">
-          <img src="images/WorkbenchThumbRegistration.png" alt="Redesigned registration: milestone panel and modeling set details step">
-        </div>
-        <div class="process-card-body">
-          <span class="process-card-title">Registering a modeling set</span>
-          <p class="process-card-desc">A guided, multi-step wizard for defining basic info, ownership, and team permissions before submitting for review.</p>
-          <span class="process-card-link">
-            View details
-            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-        </div>
-      </div>
-
-      <div class="process-card" tabindex="0" role="button" aria-label="View standardized attribute management details" onclick="openModal('modal-attributes')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-attributes')}">
-        <div class="process-thumb">
-          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add modeling set detail table screenshot</div>
-        </div>
-        <div class="process-card-body">
-          <span class="process-card-title">Managing standardized attributes</span>
-          <p class="process-card-desc">A dense data table plus a detailed form for defining an attribute's type, quality rules, privacy classification, and hierarchy.</p>
-          <span class="process-card-link">
-            View details
-            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-        </div>
-      </div>
-
-      <div class="process-card" tabindex="0" role="button" aria-label="View guardrails and AI transparency details" onclick="openModal('modal-guardrails')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openModal('modal-guardrails')}">
-        <div class="process-thumb">
-          <div class="hero-img-fallback" style="aspect-ratio:1072/657;">add delete / archive or AI definition banner screenshot</div>
-        </div>
-        <div class="process-card-body">
-          <span class="process-card-title">Guardrails and AI transparency</span>
-          <p class="process-card-desc">Confirmation flows for deleting attributes and archiving sets, plus a banner that flags definitions generated by an ML model so modelers know to review them.</p>
-          <span class="process-card-link">
-            View details
-            <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </span>
-        </div>
-      </div>
+    <h3>Registering a modeling set</h3>
+    <div class="cs-video">
+      <video src="images/WorkbenchRegistrationDemo.mp4" poster="images/WorkbenchRegistrationDemoPoster.jpg" autoplay muted loop playsinline aria-label="Walkthrough of registering a modeling set, from the dashboard through the wizard to review and submit" onmouseenter="this.setAttribute('controls','')" onmouseleave="this.removeAttribute('controls')"></video>
     </div>
-  </div>
-
-  <hr class="cs-divider">
-
-  <!-- Results -->
-  <div class="cs-section">
-    <p class="cs-section-label">Results</p>
-    <div class="results-head">
-      <h2>Workbench passed review, launched, and became the team's biggest win of the year.</h2>
-      <div class="metric">
-        <span class="metric-num">35</span>
-        <span class="metric-cap">Data products onboarded in about six months</span>
-      </div>
-    </div>
-
-    <p>The rebuilt experience passed the innersourcing review, and Workbench launched on the Exchange. From there, adoption moved fast: 35 data products were modeled through the tool within about six months of the pilot going live.</p>
-    <p>By the time that growth was visible, I'd rotated onto my next assignment and handed the work off to a newly staffed designer three levels above me. The side-of-desk work had set the foundation for a project that now had formal design support, and by the product partner's account, it became the team's largest success of the year.</p>
-  </div>
-
-  <hr class="cs-divider">
-
-  <!-- Takeaways -->
-  <div class="cs-section">
-    <p class="cs-section-label">Takeaways</p>
-    <h2>Naming a risk isn't enough; someone has to own it.</h2>
-    <p>A tool built with zero staffed design time still had to clear a bar that only design work could get it past. Naming a risk is the first step; someone still has to own it. Next time, I'd push earlier for that conversation to end in a resourcing decision, so the work doesn't depend on whoever has the capacity to absorb it informally.</p>
-    <p>No formal user testing was ever conducted. With informal staffing and no research support, there wasn't a path to run it properly, and I decided shipping a compliant, usable tool mattered more than delaying for research I couldn't resource. The pilot's success is real, but it isn't the same as validated confidence, and it's the clearest gap in this project.</p>
-  </div>
-
-</div>
-
-<!-- NEXT CASE -->
-<div class="cs-next">
-  <div>
-    <p>Next case study</p>
-    <a href="kairos.html">Capital One — DESIGN.md →</a>
-  </div>
-  <a href="index.html" style="font-size:0.85rem; color: rgba(245,243,238,0.4); text-decoration:none;">← All work</a>
-</div>
-
-<!-- ===================== MODALS ===================== -->
-
-<!-- REGISTRATION MODAL -->
-<div class="modal-overlay" id="modal-registration">
-  <div class="modal-box">
-    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-registration')">
-      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <p class="modal-label">Workbench</p>
-    <h3 class="modal-title">Registering a modeling set</h3>
-    <p class="modal-desc">Creating a new modeling set is a four-step wizard, with a persistent side panel tracking progress and a help link out to the team's Slack channel for questions along the way.</p>
+    <p style="margin-top: 1.5rem;">Creating a new modeling set is a guided, four-step wizard — basic info, ownership, and team permissions — with a persistent side panel tracking progress and a help link out to the team's Slack channel for questions along the way.</p>
     <div class="modal-steps">
       <div class="modal-step">
         <span class="modal-step-num">1</span>
@@ -1228,105 +985,97 @@
         <p class="modal-step-text"><strong>Review</strong> — a read-only summary of everything before submitting.</p>
       </div>
     </div>
-    <div class="modal-shots-grid">
-      <div class="modal-shot">
-        <div class="modal-shot-img"><img src="images/WorkbenchRegistrationDetails.png" alt="Redesigned registration wizard on the details step, with the milestone panel on the left"></div>
-        <span class="modal-shot-label">Registration wizard</span>
-        <p class="modal-shot-desc">Basic info → ownership → team → review, with a milestone tracker in the side panel.</p>
+
+    <h3 style="margin-top: 2.5rem;">Managing standardized attributes</h3>
+    <div class="cs-video">
+      <video src="images/WorkbenchAttributesDemo.mp4" poster="images/WorkbenchAttributesDemoPoster.jpg" autoplay muted loop playsinline aria-label="Walkthrough of importing source elements and managing standardized attributes, including ML-suggested attribute names" onmouseenter="this.setAttribute('controls','')" onmouseleave="this.removeAttribute('controls')"></video>
+    </div>
+    <p style="margin-top: 1.5rem;">Each modeling set's detail page is a dense data table of its standardized attributes, with search, pagination, and a side navigation for jumping between sections of the set. Adding a new one opens a detailed form covering everything governance needs to know about it — an attribute's type, quality rules, privacy classification, and hierarchy. Workbench also pre-fills attribute definitions using an ML recommendation model, so I added an informational banner that labels generated definitions and prompts modelers to review them rather than accept them blindly.</p>
+    <details class="cs-details">
+      <summary>More on managing attributes</summary>
+      <div class="modal-shots-grid">
+        <div class="modal-shot">
+          <span class="modal-shot-label">Modeling set detail table</span>
+          <p class="modal-shot-desc">Standardized attributes list with search, row-level actions, and bulk selection.</p>
+        </div>
+        <div class="modal-shot">
+          <span class="modal-shot-label">New standardized feature</span>
+          <p class="modal-shot-desc">Source elements, naming (logical, operational, and analytical), data type, data quality rules, human/PII data flags, privacy classification, attribute hierarchy, and calculation logic with a lightweight rich-text editor.</p>
+        </div>
+        <div class="modal-shot">
+          <span class="modal-shot-label">Attribute hierarchy</span>
+          <p class="modal-shot-desc">Defining how a new attribute relates to a parent standardized attribute, so governance and lineage stay intact as the set grows.</p>
+        </div>
+        <div class="modal-shot">
+          <span class="modal-shot-label">Multiple source elements</span>
+          <p class="modal-shot-desc">Handling attributes that roll up from more than one source system — a state the original build hadn't accounted for.</p>
+        </div>
+        <div class="modal-shot">
+          <span class="modal-shot-label">AI definition banner</span>
+          <p class="modal-shot-desc">An informational banner under the definition field: "This definition was generated by our ML recommendation model based on the source element."</p>
+        </div>
+      </div>
+    </details>
+
+    <h3 style="margin-top: 2.5rem;">Guardrails</h3>
+    <div class="cs-video">
+      <video src="images/WorkbenchDeletionDemo.mp4" poster="images/WorkbenchDeletionDemoPoster.jpg" autoplay muted loop playsinline aria-label="Walkthrough of the delete confirmation flow for a standardized attribute" onmouseenter="this.setAttribute('controls','')" onmouseleave="this.removeAttribute('controls')"></video>
+    </div>
+    <p style="margin-top: 1.5rem;">Deleting a standardized attribute can affect every data product that references it, so I designed confirmation flows that adapt to the situation — individual vs. bulk, whether the attribute is still actively modeled elsewhere, and archiving a full modeling set.</p>
+    <details class="cs-details">
+      <summary>More on guardrails</summary>
+      <div class="modal-shots-grid">
+        <div class="modal-shot">
+          <span class="modal-shot-label">Delete and archive confirmations</span>
+          <p class="modal-shot-desc">Distinct messaging for individual vs. multiple deletions, for attributes with no source elements modeled versus several, and for archiving a whole set.</p>
+        </div>
+      </div>
+      <div class="modal-callout">
+        <p class="rc-title">Design system</p>
+        <p>Built entirely on Exchange design system components — form fields, badges, checkboxes, and buttons — so the focus stayed on the data governance workflow itself rather than the UI kit.</p>
+      </div>
+    </details>
+  </div>
+
+  <hr class="cs-divider">
+
+  <!-- Results -->
+  <div class="cs-section">
+    <p class="cs-section-label">Results</p>
+    <div class="results-head">
+      <h2>Workbench passed review, launched, and became the team's biggest win of the year.</h2>
+      <div class="metric">
+        <span class="metric-num">35</span>
+        <span class="metric-cap">Data products onboarded in about six months</span>
       </div>
     </div>
+
+    <p>The rebuilt experience passed the innersourcing review, and Workbench launched on the Exchange. A pilot with two teams modeled their data products in 28 days — over a month faster than before — and from there, adoption moved fast: 35 data products were modeled through the tool within about six months of the pilot going live.</p>
+    <p>By the time that growth was visible, I'd rotated onto my next assignment and handed the work off to a newly staffed designer three levels above me. The side-of-desk work had set the foundation for a project that now had formal design support, and by the product partner's account, it became the team's largest success of the year.</p>
   </div>
+
+  <hr class="cs-divider">
+
+  <!-- Takeaways -->
+  <div class="cs-section">
+    <p class="cs-section-label">Takeaways</p>
+    <h2>Naming a risk isn't enough; someone has to own it.</h2>
+    <p>A tool built with zero staffed design time still had to clear a bar that only design work could get it past. Naming a risk is the first step; someone still has to own it. Next time, I'd push earlier for that conversation to end in a resourcing decision, so the work doesn't depend on whoever has the capacity to absorb it informally.</p>
+    <p>Had I not rotated off before Workbench shipped, I would have tested it with users directly rather than handing off a design that had only been validated informally.</p>
+  </div>
+
 </div>
 
-<!-- ATTRIBUTES MODAL -->
-<div class="modal-overlay" id="modal-attributes">
-  <div class="modal-box">
-    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-attributes')">
-      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <p class="modal-label">Workbench</p>
-    <h3 class="modal-title">Managing standardized attributes</h3>
-    <p class="modal-desc">Each modeling set's detail page is a data table of its standardized attributes, with search, pagination, and a side navigation for jumping between sections of the set. Adding a new one opens a detailed form covering everything governance needs to know about it.</p>
-    <div class="modal-shots-grid">
-      <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add modeling set detail table screenshot</div></div>
-        <span class="modal-shot-label">Modeling set detail table</span>
-        <p class="modal-shot-desc">Standardized attributes list with search, row-level actions, and bulk selection.</p>
-      </div>
-      <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add new standardized feature modal screenshot</div></div>
-        <span class="modal-shot-label">New standardized feature</span>
-        <p class="modal-shot-desc">Source elements, naming (logical, operational, and analytical), data type, data quality rules, human/PII data flags, privacy classification, attribute hierarchy, and calculation logic with a lightweight rich-text editor.</p>
-      </div>
-      <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add attribute hierarchy screenshot</div></div>
-        <span class="modal-shot-label">Attribute hierarchy</span>
-        <p class="modal-shot-desc">Defining how a new attribute relates to a parent standardized attribute, so governance and lineage stay intact as the set grows.</p>
-      </div>
-      <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add multiple source elements screenshot</div></div>
-        <span class="modal-shot-label">Multiple source elements</span>
-        <p class="modal-shot-desc">Handling attributes that roll up from more than one source system — a state the original build hadn't accounted for.</p>
-      </div>
-    </div>
+<!-- NEXT CASE -->
+<div class="cs-next">
+  <div>
+    <p>Next case study</p>
+    <a href="index.html">Back to all work →</a>
   </div>
-</div>
-
-<!-- GUARDRAILS MODAL -->
-<div class="modal-overlay" id="modal-guardrails">
-  <div class="modal-box">
-    <button class="modal-close" aria-label="Close" onclick="closeModal('modal-guardrails')">
-      <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-      </svg>
-    </button>
-    <p class="modal-label">Workbench</p>
-    <h3 class="modal-title">Guardrails and AI transparency</h3>
-    <p class="modal-desc">Deleting a standardized attribute can affect every data product that references it, so I designed confirmation flows that adapt to the situation — individual vs. bulk, whether the attribute is still actively modeled elsewhere, and archiving a full modeling set. Separately, Workbench pre-fills attribute definitions using an ML recommendation model, so I added an informational banner that labels generated definitions and prompts modelers to review them rather than accept them blindly.</p>
-    <div class="modal-shots-grid">
-      <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add delete &amp; archive confirmation screenshots</div></div>
-        <span class="modal-shot-label">Delete and archive confirmations</span>
-        <p class="modal-shot-desc">Distinct messaging for individual vs. multiple deletions, for attributes with no source elements modeled versus several, and for archiving a whole set.</p>
-      </div>
-      <div class="modal-shot">
-        <div class="modal-shot-img"><div class="hero-img-fallback">add AI definition banner screenshot</div></div>
-        <span class="modal-shot-label">AI definition banner</span>
-        <p class="modal-shot-desc">An informational banner under the definition field: "This definition was generated by our ML recommendation model based on the source element."</p>
-      </div>
-    </div>
-    <div class="modal-callout">
-      <p class="rc-title">Design system</p>
-      <p>Built entirely on Exchange design system components — form fields, badges, checkboxes, and buttons — so the focus stayed on the data governance workflow itself rather than the UI kit.</p>
-    </div>
-  </div>
+  <a href="index.html" style="font-size:0.85rem; color: rgba(245,243,238,0.4); text-decoration:none;">← All work</a>
 </div>
 
 <script>
-  // ===== Modal logic =====
-  function openModal(id) {
-    document.getElementById(id).style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal(id) {
-    document.getElementById(id).style.display = 'none';
-    document.body.style.overflow = '';
-  }
-  document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
-    overlay.addEventListener('click', function(e) {
-      if (e.target === overlay) closeModal(overlay.id);
-    });
-  });
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
-        if (overlay.style.display === 'flex') closeModal(overlay.id);
-      });
-    }
-  });
-
   // ===== Carousel logic (supports multiple carousels) =====
   var carouselState = {};
 
