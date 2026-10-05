@@ -523,7 +523,7 @@
   /* Headline numbers */
   .metrics-strip {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     margin: 1.5rem 0 2rem;
   }
@@ -536,14 +536,6 @@
     flex-direction: column;
     gap: 0.4rem;
   }
-  .results-head {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 220px;
-    gap: 2rem;
-    align-items: center;
-    margin-bottom: 1.5rem;
-  }
-  .results-head h2 { margin-bottom: 0; }
   .metric-num { font-family: var(--serif); font-size: 2.5rem; line-height: 1; color: #c8b8f0; }
   .metric-cap { font-size: 0.82rem; color: rgba(245,243,238,0.55); line-height: 1.45; }
 
@@ -727,7 +719,6 @@
     .two-up { grid-template-columns: 1fr; }
     .text-with-image { grid-template-columns: 1fr; gap: 1.5rem; }
     .metrics-strip { grid-template-columns: 1fr; }
-    .results-head { grid-template-columns: 1fr; gap: 1.25rem; }
     .prototype-cta { flex-direction: column; align-items: flex-start; }
     .prototype-cta-btn { width: 100%; text-align: center; }
     nav { padding: 1rem 1.5rem; }
@@ -738,9 +729,29 @@
     .cs-next { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
   }
 
+
+  /* ACCESSIBILITY */
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    z-index: 1000;
+    padding: 0.6rem 1rem;
+    background: #f5f3ee;
+    color: #0a0a0a;
+    font-size: 0.85rem;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  .skip-link:focus { top: 1rem; }
+  :where(a, button, [tabindex], video):focus-visible {
+    outline: 2px solid #c8b8f0;
+    outline-offset: 3px;
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <nav>
   <a href="index.html" class="nav-logo">Griffin Somaratne</a>
@@ -750,6 +761,8 @@
     <li><a href="about.html">About</a></li>
   </ul>
 </nav>
+
+<main id="main">
 
 <!-- HEADER -->
 <div class="cs-hero">
@@ -964,7 +977,7 @@
 
     <h3>Registering a modeling set</h3>
     <div class="cs-video">
-      <video src="images/WorkbenchRegistrationDemo.mp4" poster="images/WorkbenchRegistrationDemoPoster.jpg" autoplay muted loop playsinline aria-label="Walkthrough of registering a modeling set, from the dashboard through the wizard to review and submit" onmouseenter="this.setAttribute('controls','')" onmouseleave="this.removeAttribute('controls')"></video>
+      <video src="images/WorkbenchRegistrationDemo.mp4" poster="images/WorkbenchRegistrationDemoPoster.jpg" autoplay muted loop playsinline aria-label="Walkthrough of registering a modeling set, from the dashboard through the wizard to review and submit" tabindex="0" onmouseenter="this.setAttribute('controls','')" onmouseleave="if (document.activeElement !== this) this.removeAttribute('controls')" onfocus="this.setAttribute('controls','')" onblur="this.removeAttribute('controls')"></video>
     </div>
     <p style="margin-top: 1.5rem;">Creating a new modeling set is a guided, four-step wizard — basic info, ownership, and team permissions — with a persistent side panel tracking progress and a help link out to the team's Slack channel for questions along the way.</p>
     <div class="modal-steps">
@@ -988,7 +1001,7 @@
 
     <h3 style="margin-top: 2.5rem;">Managing standardized attributes</h3>
     <div class="cs-video">
-      <video src="images/WorkbenchAttributesDemo.mp4" poster="images/WorkbenchAttributesDemoPoster.jpg" autoplay muted loop playsinline aria-label="Walkthrough of importing source elements and managing standardized attributes, including ML-suggested attribute names" onmouseenter="this.setAttribute('controls','')" onmouseleave="this.removeAttribute('controls')"></video>
+      <video src="images/WorkbenchAttributesDemo.mp4" poster="images/WorkbenchAttributesDemoPoster.jpg" autoplay muted loop playsinline aria-label="Walkthrough of importing source elements and managing standardized attributes, including ML-suggested attribute names" tabindex="0" onmouseenter="this.setAttribute('controls','')" onmouseleave="if (document.activeElement !== this) this.removeAttribute('controls')" onfocus="this.setAttribute('controls','')" onblur="this.removeAttribute('controls')"></video>
     </div>
     <p style="margin-top: 1.5rem;">Each modeling set's detail page is a dense data table of its standardized attributes, with search, pagination, and a side navigation for jumping between sections of the set. Adding a new one opens a detailed form covering everything governance needs to know about it — an attribute's type, quality rules, privacy classification, and hierarchy. Workbench also pre-fills attribute definitions using an ML recommendation model, so I added an informational banner that labels generated definitions and prompts modelers to review them rather than accept them blindly.</p>
     <details class="cs-details">
@@ -1019,7 +1032,7 @@
 
     <h3 style="margin-top: 2.5rem;">Guardrails</h3>
     <div class="cs-video">
-      <video src="images/WorkbenchDeletionDemo.mp4" poster="images/WorkbenchDeletionDemoPoster.jpg" autoplay muted loop playsinline aria-label="Walkthrough of the delete confirmation flow for a standardized attribute" onmouseenter="this.setAttribute('controls','')" onmouseleave="this.removeAttribute('controls')"></video>
+      <video src="images/WorkbenchDeletionDemo.mp4" poster="images/WorkbenchDeletionDemoPoster.jpg" autoplay muted loop playsinline aria-label="Walkthrough of the delete confirmation flow for a standardized attribute" tabindex="0" onmouseenter="this.setAttribute('controls','')" onmouseleave="if (document.activeElement !== this) this.removeAttribute('controls')" onfocus="this.setAttribute('controls','')" onblur="this.removeAttribute('controls')"></video>
     </div>
     <p style="margin-top: 1.5rem;">Deleting a standardized attribute can affect every data product that references it, so I designed confirmation flows that adapt to the situation — individual vs. bulk, whether the attribute is still actively modeled elsewhere, and archiving a full modeling set.</p>
     <details class="cs-details">
@@ -1042,16 +1055,21 @@
   <!-- Results -->
   <div class="cs-section">
     <p class="cs-section-label">Results</p>
-    <div class="results-head">
-      <h2>Workbench passed review, launched, and became the team's biggest win of the year.</h2>
+    <h2>Workbench passed review, launched, and became the team's biggest win of the year.</h2>
+    <p>The rebuilt experience passed the innersourcing review, and Workbench launched on the Exchange. A pilot with two teams proved out the new flow, and from there, adoption moved fast.</p>
+
+    <div class="metrics-strip">
+      <div class="metric">
+        <span class="metric-num">28 days</span>
+        <span class="metric-cap">Pilot time-to-model, over a month faster than before</span>
+      </div>
       <div class="metric">
         <span class="metric-num">35</span>
         <span class="metric-cap">Data products onboarded in about six months</span>
       </div>
     </div>
 
-    <p>The rebuilt experience passed the innersourcing review, and Workbench launched on the Exchange. A pilot with two teams modeled their data products in 28 days — over a month faster than before — and from there, adoption moved fast: 35 data products were modeled through the tool within about six months of the pilot going live.</p>
-    <p>By the time that growth was visible, I'd rotated onto my next assignment and handed the work off to a newly staffed designer three levels above me. The side-of-desk work had set the foundation for a project that now had formal design support, and by the product partner's account, it became the team's largest success of the year.</p>
+    <p style="margin-top: 1.75rem;">By the time that growth was visible, I'd rotated onto my next assignment and handed the work off to a newly staffed designer three levels above me. The side-of-desk work had set the foundation for a project that now had formal design support, and by the product partner's account, it became the team's largest success of the year.</p>
   </div>
 
   <hr class="cs-divider">
@@ -1075,7 +1093,18 @@
   <a href="index.html" style="font-size:0.85rem; color: rgba(245,243,238,0.4); text-decoration:none;">← All work</a>
 </div>
 
+</main>
+
 <script>
+  // ===== Respect reduced motion: don't autoplay demo videos =====
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('video[autoplay]').forEach(function(v) {
+      v.pause();
+      v.removeAttribute('autoplay');
+      v.setAttribute('controls', '');
+    });
+  }
+
   // ===== Carousel logic (supports multiple carousels) =====
   var carouselState = {};
 

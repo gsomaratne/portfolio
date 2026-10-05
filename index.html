@@ -211,6 +211,16 @@
     overflow: hidden;
   }
 
+  .hero-sparkles {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+
   .hero-img-single img {
     width: 100%;
     height: 100%;
@@ -429,7 +439,7 @@
   }
 
   .case-link svg { width: 14px; height: 14px; transition: transform 0.2s; }
-  .case-card:hover .case-link svg { transform: translate(2px, -2px); }
+  .case-card:hover .case-link svg { transform: translateX(3px); }
 
   /* FRIDGE DOOR SECTION */
   .section-fridge {
@@ -581,9 +591,29 @@
   @media (min-width: 901px) and (max-width: 1200px) {
     .case-grid { grid-template-columns: repeat(2, 1fr); }
   }
+
+  /* ACCESSIBILITY */
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    z-index: 1000;
+    padding: 0.6rem 1rem;
+    background: #f5f3ee;
+    color: #0a0a0a;
+    font-size: 0.85rem;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  .skip-link:focus { top: 1rem; }
+  :where(a, button, [tabindex], video):focus-visible {
+    outline: 2px solid #c8b8f0;
+    outline-offset: 3px;
+  }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 <nav>
   <a href="index.html" class="nav-logo">Griffin Somaratne</a>
@@ -594,8 +624,11 @@
   </ul>
 </nav>
 
+<main id="main">
+
 <!-- HERO -->
 <section class="hero">
+  <canvas class="hero-sparkles" aria-hidden="true"></canvas>
   <div class="hero-left">
     <span class="hero-eyebrow">Designer, Strategist, &amp; Problem Solver</span>
     <h1 class="hero-headline">
@@ -615,7 +648,7 @@
   </div>
   <div class="hero-right">
     <div class="hero-img-single">
-      <img src="images/PortfolioArtwork.png" alt="Abstract chalk-style illustration of a hooded figure surrounded by stars">
+      <img src="images/PortfolioArtworkBase.png" alt="Chalk-style illustration of a figure with flowing dark hair floating in a burst of white light, surrounded by hand-drawn stars">
     </div>
   </div>
 </section>
@@ -654,14 +687,14 @@
         <span class="case-link">
           View case study
           <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span class="case-read-time">11 min read</span>
         </span>
       </div>
     </a>
 
-    <a href="kairos.html" class="case-card" data-tags="Service design,Strategy,Design systems,Engineering">
+    <a href="design-md.html" class="case-card" data-tags="Service design,Strategy,Design systems,Engineering">
       <div class="case-thumb">
         <img src="images/KairosThumbnailComposite.png" alt="Design-system docs beside the agent-generated Kairos UI">
       </div>
@@ -677,7 +710,7 @@
         <span class="case-link">
           View case study
           <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span class="case-read-time">7 min read</span>
         </span>
@@ -699,7 +732,7 @@
         <span class="case-link">
           View case study
           <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span class="case-read-time">6 min read</span>
         </span>
@@ -719,7 +752,7 @@
         <span class="case-link">
           View case study
           <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
           <span class="case-read-time">7 min read</span>
         </span>
@@ -740,7 +773,7 @@
         <span class="case-link">
           View case study
           <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </span>
       </div>
@@ -748,6 +781,8 @@
 
   </div>
 </section>
+
+</main>
 
 <!-- NEXT CASE placeholder for footer -->
 <footer>
@@ -787,6 +822,279 @@
     });
   });
   applyFilters();
+
+  // ===== Hero sparkles: the hand-drawn stars from the artwork, set in motion =====
+  (() => {
+    // 'orbit': sparkles the cursor passes near get caught circling it, and drift home once it moves away
+    // 'hide': sparkles the cursor comes near shrink away, then fade back in a few seconds later
+    // 'drift': sparkles get pushed away from the cursor and spring back
+    const MOTION = 'orbit';
+
+    const canvas = document.querySelector('.hero-sparkles');
+    const hero = document.querySelector('.hero');
+    const art = document.querySelector('.hero-img-single');
+    const text = document.querySelector('.hero-left');
+    if (!canvas || !hero || !art) return;
+    const ctx = canvas.getContext('2d');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Cut from PortfolioArtwork.png: [atlas x, atlas y, width, height, x in artwork, y in artwork]
+    const ART_WIDTH = 2732;
+    const SPRITES = [[0, 0, 64, 79, 1771, 101],
+      [68, 0, 62, 78, 1915, 260],
+      [134, 0, 67, 78, 655, 271],
+      [205, 0, 48, 57, 716, 319],
+      [257, 0, 60, 76, 655, 366],
+      [321, 0, 46, 65, 2058, 281],
+      [371, 0, 66, 86, 1969, 421],
+      [441, 0, 61, 84, 641, 604],
+      [506, 0, 53, 47, 2001, 812],
+      [563, 0, 43, 36, 523, 721],
+      [610, 0, 69, 80, 600, 833],
+      [683, 0, 67, 81, 1993, 1032],
+      [754, 0, 38, 41, 2110, 1152],
+      [796, 0, 50, 63, 2024, 1311],
+      [850, 0, 65, 66, 560, 1390],
+      [919, 0, 37, 42, 657, 1415],
+      [960, 0, 55, 73, 715, 1489],
+      [0, 90, 58, 59, 1940, 1582],
+      [62, 90, 52, 57, 617, 1589],
+      [118, 90, 75, 83, 2041, 1640],
+      [197, 90, 57, 57, 1860, 1695],
+      [258, 90, 64, 77, 1935, 1284],
+      [326, 90, 81, 110, 2001, 696],
+      [411, 90, 57, 69, 677, 1156],
+      [472, 90, 43, 43, 737, 1154]];
+    const atlas = new Image();
+    atlas.src = 'images/PortfolioSparkles.png';
+
+    // Seeded random so the scattered copies land in the same place on every visit
+    let seed = 11;
+    const rand = () => {
+      seed = (seed + 0x6D2B79F5) | 0;
+      let r = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      r = (r + Math.imul(r ^ (r >>> 7), 61 | r)) ^ r;
+      return ((r ^ (r >>> 14)) >>> 0) / 4294967296;
+    };
+
+    // Radii of the ring the original sparkles sit on, in artwork pixels
+    const RING_X = ART_WIDTH * 0.42, RING_Y = 1024 * 0.95;
+
+    const makeSparkle = (sprite, ax, ay, scale, rot, alpha) => ({
+      sprite, ax, ay, scale, rot, alpha, // home, in artwork pixels from the artwork's center
+      x: 0, y: 0, vis: 1, dx: 0, dy: 0, vx: 0, vy: 0,
+      goneAt: -Infinity, // when the cursor last made it vanish, in seconds
+      caught: false, orbitAngle: 0, orbitRadius: 0, // 'orbit': circling the cursor
+      phase: rand() * Math.PI * 2,
+    });
+
+    // The originals, exactly where they were drawn
+    const sparkles = SPRITES.map(s =>
+      makeSparkle(s, s[4] + s[2] / 2 - ART_WIDTH / 2, s[5] + s[3] / 2 - 1024, 1, 0, 1));
+
+    // Copies of the same drawings, scattered further out beyond the artwork.
+    // Placed on rings around the artwork's center: packed tight near the art, thinning and fading outward.
+    for (let tries = 0; sparkles.length < SPRITES.length + 80 && tries < 6000; tries++) {
+      const angle = rand() * Math.PI * 2;
+      const out = rand() ** 2.6; // 0 = the edge of the original sparkles, 1 = farthest out
+      const ring = 1 + out * 1.7;
+      const ax = Math.cos(angle) * RING_X * ring;
+      const ay = Math.sin(angle) * RING_Y * ring;
+      // Spacing grows with distance, so copies crowd close to the art and spread out further away
+      const spacing = 120 + out * 260;
+      if (sparkles.some(s => Math.hypot(s.ax - ax, s.ay - ay) < spacing)) continue;
+      const sprite = SPRITES[Math.floor(rand() * SPRITES.length)];
+      sparkles.push(makeSparkle(sprite, ax, ay, 0.95 - out * 0.35 + rand() * 0.2, (rand() - 0.5) * 1.2, 0.9 - out * 0.55));
+    }
+
+    let w = 0, h = 0, unit = 1, textBox = null;
+    const pointer = { x: -1e4, y: -1e4 };
+    let reachScale = 1; // taps reach twice as far as the mouse, since a fingertip can't sweep
+
+    // 0–1: copies fade out as they near the hero's edges or the headline; the originals always show
+    const SOFT = 40;
+    function visibility(s, r) {
+      if (s.alpha === 1) return 1;
+      let v = Math.min(s.x - r, w - s.x - r, s.y - r - 64, h - s.y - r) / SOFT;
+      if (textBox) {
+        const ox = Math.max(textBox.left - (s.x + r), (s.x - r) - textBox.right);
+        const oy = Math.max(textBox.top - (s.y + r), (s.y - r) - textBox.bottom);
+        v = Math.min(v, Math.max(ox, oy) / SOFT);
+      }
+      return Math.max(0, Math.min(1, v));
+    }
+
+
+    function layout() {
+      const heroRect = hero.getBoundingClientRect();
+      const artRect = art.getBoundingClientRect();
+      const textRect = text ? text.getBoundingClientRect() : null;
+      const dpr = window.devicePixelRatio || 1;
+      w = heroRect.width; h = heroRect.height;
+      canvas.width = Math.round(w * dpr);
+      canvas.height = Math.round(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      unit = artRect.width / ART_WIDTH;
+      const cx = artRect.left - heroRect.left + artRect.width / 2;
+      const cy = artRect.top - heroRect.top + artRect.height / 2;
+      const margin = 24;
+      textBox = textRect && {
+        left: textRect.left - heroRect.left - margin, right: textRect.right - heroRect.left + margin,
+        top: textRect.top - heroRect.top - margin, bottom: textRect.bottom - heroRect.top + margin,
+      };
+      for (const s of sparkles) {
+        s.x = cx + s.ax * unit;
+        s.y = cy + s.ay * unit;
+        s.vis = visibility(s, Math.max(s.sprite[2], s.sprite[3]) * s.scale * unit / 2);
+      }
+      draw(performance.now());
+    }
+
+    function draw(now) {
+      ctx.clearRect(0, 0, w, h);
+      if (!atlas.complete) return;
+      const t = now / 1000;
+      for (const s of sparkles) {
+        if (s.vis === 0) continue;
+        const [sx, sy, sw, sh] = s.sprite;
+        const dw = sw * s.scale * unit, dh = sh * s.scale * unit;
+        let bob = 0, glow, size = 1, fade = 1;
+        if (reduceMotion) {
+          glow = 1;
+        } else if (MOTION === 'hide') {
+          const since = t - s.goneAt;
+          if (since < VANISH) {
+            // Shrink to nothing
+            const k = 1 - since / VANISH;
+            size = k * k;
+          } else if (since < VANISH + GONE) {
+            continue;
+          } else if (since < VANISH + GONE + RETURN) {
+            // Fade and grow back in where it was
+            const k = (since - VANISH - GONE) / RETURN;
+            size = 0.6 + 0.4 * k;
+            fade = k * k * (3 - 2 * k);
+          }
+          glow = fade * (0.75 + 0.25 * Math.sin(t * 1.6 + s.phase * 2));
+        } else {
+          if (MOTION === 'drift') bob = Math.sin(t * 0.8 + s.phase) * dh * 0.08;
+          glow = 0.75 + 0.25 * Math.sin(t * 1.6 + s.phase * 2);
+        }
+        ctx.save();
+        ctx.translate(s.x + s.dx, s.y + s.dy + bob);
+        ctx.rotate(s.rot + s.vx * 0.015);
+        ctx.globalAlpha = s.alpha * s.vis * glow;
+        ctx.scale(size, size);
+        ctx.drawImage(atlas, sx, sy, sw, sh, -dw / 2, -dh / 2, dw, dh);
+        ctx.restore();
+      }
+    }
+
+    // Timings for 'hide', in seconds
+    const VANISH = 0.25, GONE = 1.5, RETURN = 0.8;
+    // 'orbit': speed around the cursor (radians per second), and how softly they follow (0–1, lower = softer)
+    const ORBIT_SPEED = 1.1, FOLLOW = 0.08;
+    let lastStep = 0;
+
+    function step(now) {
+      const t = now / 1000;
+      const radius = Math.max(120, ART_WIDTH * unit * 0.2) * reachScale;
+      if (MOTION === 'hide') {
+        for (const s of sparkles) {
+          if (s.vis === 0 || t - s.goneAt < VANISH + GONE + RETURN) continue;
+          if (Math.hypot(s.x - pointer.x, s.y - pointer.y) < radius / 2) s.goneAt = t;
+        }
+        return;
+      }
+      if (MOTION === 'orbit') {
+        const dt = Math.min(0.05, t - lastStep);
+        lastStep = t;
+        for (const s of sparkles) {
+          if (s.vis === 0) continue;
+          const homeDist = Math.hypot(s.x - pointer.x, s.y - pointer.y);
+          // Caught inside half the radius; let go once the cursor is a full radius away from its home
+          if (!s.caught && homeDist < radius / 2) {
+            const cx = s.x + s.dx - pointer.x, cy = s.y + s.dy - pointer.y;
+            s.caught = true;
+            s.orbitAngle = Math.atan2(cy, cx);
+            s.orbitRadius = Math.max(16, Math.hypot(cx, cy));
+          } else if (s.caught && homeDist > radius) {
+            s.caught = false;
+          }
+          let tx = 0, ty = 0; // target offset from home
+          if (s.caught) {
+            // Closer sparkles circle a little faster
+            s.orbitAngle += dt * ORBIT_SPEED * Math.min(2, 40 / s.orbitRadius + 0.6);
+            tx = pointer.x + Math.cos(s.orbitAngle) * s.orbitRadius - s.x;
+            ty = pointer.y + Math.sin(s.orbitAngle) * s.orbitRadius - s.y;
+          }
+          s.dx += (tx - s.dx) * FOLLOW;
+          s.dy += (ty - s.dy) * FOLLOW;
+        }
+        return;
+      }
+      // Spring physics: pushed away inside the cursor radius, pulled back home
+      for (const s of sparkles) {
+        if (s.vis === 0) continue;
+        const ex = s.x + s.dx - pointer.x, ey = s.y + s.dy - pointer.y;
+        const dist = Math.hypot(ex, ey);
+        if (dist < radius && dist > 0.01) {
+          const force = (1 - dist / radius) ** 2 * 2.2;
+          s.vx += (ex / dist) * force;
+          s.vy += (ey / dist) * force;
+        }
+        s.vx = (s.vx - s.dx * 0.03) * 0.88;
+        s.vy = (s.vy - s.dy * 0.03) * 0.88;
+        s.dx += s.vx;
+        s.dy += s.vy;
+      }
+    }
+
+    let running = false;
+    function frame(now) {
+      if (!running) return;
+      step(now);
+      draw(now);
+      requestAnimationFrame(frame);
+    }
+    function start() {
+      if (running || reduceMotion) return;
+      running = true;
+      requestAnimationFrame(frame);
+    }
+    function stop() { running = false; }
+
+    hero.addEventListener('pointermove', e => {
+      if (e.pointerType === 'touch') return; // a moving finger is scrolling the page
+      const rect = hero.getBoundingClientRect();
+      pointer.x = e.clientX - rect.left;
+      pointer.y = e.clientY - rect.top;
+      reachScale = 1;
+    });
+    hero.addEventListener('pointerleave', e => {
+      if (e.pointerType === 'touch') return; // fires on every lift of the finger
+      pointer.x = pointer.y = -1e4;
+    });
+
+    // On touch screens, a tap catches nearby sparkles for a couple of seconds, then lets them go home
+    let tapTimer = null;
+    hero.addEventListener('pointerdown', e => {
+      if (e.pointerType !== 'touch') return;
+      const rect = hero.getBoundingClientRect();
+      pointer.x = e.clientX - rect.left;
+      pointer.y = e.clientY - rect.top;
+      reachScale = 2;
+      clearTimeout(tapTimer);
+      tapTimer = setTimeout(() => { pointer.x = pointer.y = -1e4; }, 2200);
+    });
+
+    atlas.addEventListener('load', () => draw(performance.now()));
+    // Only animate while the hero is on screen
+    new IntersectionObserver(([entry]) => entry.isIntersecting ? start() : stop()).observe(hero);
+    new ResizeObserver(layout).observe(hero);
+    // Re-measure once the hero's fade-up finishes, since it shifts the artwork while running
+    document.querySelector('.hero-right').addEventListener('animationend', layout);
+  })();
 </script>
 
 </body>

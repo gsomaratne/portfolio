@@ -614,6 +614,22 @@
 
   .insight-text strong { color: var(--white); font-weight: 500; }
 
+  /* METRICS */
+  .metrics-strip { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1.5rem 0 0; }
+
+  .metric {
+    border: 1px solid rgba(200,184,240,0.3);
+    background: var(--highlight);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .metric-num { font-family: var(--serif); font-size: 2.4rem; line-height: 1; color: #c8b8f0; }
+  .metric-cap { font-size: 0.82rem; color: rgba(245,243,238,0.55); line-height: 1.45; }
+
   /* QUOTE */
   .cs-quote {
     border-left: 2px solid rgba(200,184,240,0.4);
@@ -1167,6 +1183,7 @@
     .cs-hero { padding: 7rem 1.5rem 0; }
     .cs-body { padding: 0 1.5rem 5rem; }
     .process-cards { grid-template-columns: 1fr; }
+    .metrics-strip { grid-template-columns: 1fr; }
     .cs-meta-bar { display: flex; flex-wrap: wrap; }
     .meta-item { display: block; flex: 1 1 45%; border-right: none; border-bottom: 1px solid rgba(245,243,238,0.08); }
     .modal-box { padding: 1.75rem; max-height: 90vh; }
@@ -1177,9 +1194,30 @@
     .cs-next { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
   }
 
+
+  /* ACCESSIBILITY */
+  .skip-link {
+    position: absolute;
+    top: -100px;
+    left: 1rem;
+    z-index: 1000;
+    padding: 0.6rem 1rem;
+    background: #f5f3ee;
+    color: #0a0a0a;
+    font-size: 0.85rem;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  .skip-link:focus { top: 1rem; }
+  :where(a, button, [tabindex], video):focus-visible {
+    outline: 2px solid #c8b8f0;
+    outline-offset: 3px;
+  }
+  .zoomable:focus-visible .modal-img-zoom-icon { opacity: 1; }
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
 
 
 
@@ -1191,6 +1229,8 @@
     <li><a href="about.html">About</a></li>
   </ul>
 </nav>
+
+<main id="main">
 
 <!-- HEADER -->
 <div class="cs-hero">
@@ -1294,15 +1334,15 @@
             <p class="carousel-caption">Maturity options dashboard on web translated to mobile.</p>
           </div>
           <div class="carousel-slide">
-            <div class="carousel-img"><img src="images/WebMobile2.1.png" alt="Maturity options dashboard on web translated to mobile"></div>
+            <div class="carousel-img"><img src="images/WebMobile2.1.png" alt="Mobile transfer modal for choosing an internal or external account to receive the CD balance at maturity"></div>
             <p class="carousel-caption">Choose account flow — Transfer modal: choosing an internal or external account to transfer the CD balance into upon maturity.</p>
           </div>
           <div class="carousel-slide">
-            <div class="carousel-img"><img src="images/WebMobile2.2.png" alt="Maturity options dashboard on web translated to mobile"></div>
+            <div class="carousel-img"><img src="images/WebMobile2.2.png" alt="Mobile 360 Performance Savings interstitial offering a new savings account before an external transfer"></div>
             <p class="carousel-caption">Choose account flow — 360 PS interstitial: an upsell to open a 360 Performance Savings account before transferring funds externally.</p>
           </div>
           <div class="carousel-slide">
-            <div class="carousel-img"><img src="images/WebMobile2.3.png" alt="Maturity options dashboard on web translated to mobile"></div>
+            <div class="carousel-img"><img src="images/WebMobile2.3.png" alt="Mobile review modal confirming account number, deposit, close date, and transfer destination"></div>
             <p class="carousel-caption">Choose account flow — Review modal: a final confirmation step showing account number, deposit, close date, and transfer destination.</p>
           </div>
         </div>
@@ -1329,8 +1369,17 @@
       </div>
     </div>
 
-    <p style="margin-top: 1.75rem;">Customers were sent email campaigns that directed them to the mobile or web experience depending on the device they were reading the email on. Mobile accounted for roughly 40% of maturity selections made between release (Q3) and Q4. As of April 2, 2024, $28.96 billion had matured, and 81.2% of it — $23.5 billion — was retained (most of it in new or renewed CDs, and the rest in other Capital One accounts).</p>
-    <p>External attrition came in at 18.8%, roughly $5.4 billion, about half of the $10 billion projected.</p>
+    <p style="margin-top: 1.75rem;">Customers were sent email campaigns that directed them to the mobile or web experience depending on the device they were reading the email on. Mobile accounted for roughly 40% of maturity selections made between release (Q3) and Q4.</p>
+    <div class="metrics-strip">
+      <div class="metric">
+        <span class="metric-num">81.2%</span>
+        <span class="metric-cap">Of the $28.96B that matured by April 2, 2024 was retained — $23.5B, mostly in new or renewed CDs</span>
+      </div>
+      <div class="metric">
+        <span class="metric-num">18.8%</span>
+        <span class="metric-cap">External attrition — about $5.4B, roughly half of the $10B originally projected</span>
+      </div>
+    </div>
   </div>
 
   <hr class="cs-divider">
@@ -1607,7 +1656,7 @@
     </ul>
 
     <div class="cs-video">
-      <video src="images/CDPrototype.mp4" poster="images/CDPrototypePoster.jpg" autoplay muted loop playsinline aria-label="Prototype walkthrough of the final CD experience, from first-time use through selecting a maturity plan" onmouseenter="this.setAttribute('controls','')" onmouseleave="this.removeAttribute('controls')"></video>
+      <video src="images/CDPrototype.mp4" poster="images/CDPrototypePoster.jpg" autoplay muted loop playsinline aria-label="Prototype walkthrough of the final CD experience, from first-time use through selecting a maturity plan" tabindex="0" onmouseenter="this.setAttribute('controls','')" onmouseleave="if (document.activeElement !== this) this.removeAttribute('controls')" onfocus="this.setAttribute('controls','')" onblur="this.removeAttribute('controls')"></video>
     </div>
 
     <p style="margin-top: 1.75rem;">The experience follows the CD journey through three stages: the first-time user experience, approaching maturity, and after a maturity plan is selected. Click into each for details.</p>
@@ -1623,7 +1672,7 @@
           <span class="process-card-link">
             View details
             <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </span>
         </div>
@@ -1639,7 +1688,7 @@
           <span class="process-card-link">
             View details
             <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </span>
         </div>
@@ -1655,7 +1704,7 @@
           <span class="process-card-link">
             View details
             <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M2 12L12 2M12 2H5M12 2v7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M2 7h10M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </span>
         </div>
@@ -1682,10 +1731,12 @@
 <div class="cs-next">
   <div>
     <p>Next case study</p>
-    <a href="kairos.html">Capital One — DESIGN.md →</a>
+    <a href="design-md.html">Capital One — DESIGN.md →</a>
   </div>
   <a href="index.html" style="font-size:0.85rem; color: rgba(245,243,238,0.4); text-decoration:none;">← All work</a>
 </div>
+
+</main>
 
 <!-- ===================== MODALS ===================== -->
 
@@ -1778,38 +1829,75 @@
 </div>
 
 <!-- LIGHTBOX -->
-<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image" onclick="closeLightbox()">
   <button class="modal-close lightbox-close" aria-label="Close" onclick="closeLightbox()">
     <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M2 2l10 10M12 2L2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
     </svg>
   </button>
   <div class="lightbox-viewport" id="lightboxViewport">
-    <img id="lightboxImg" src="" alt="Zoomed image">
+    <img id="lightboxImg" src="" alt="" tabindex="0">
   </div>
 </div>
 
 <script>
+  // ===== Respect reduced motion: don't autoplay demo videos =====
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('video[autoplay]').forEach(function(v) {
+      v.pause();
+      v.removeAttribute('autoplay');
+      v.setAttribute('controls', '');
+    });
+  }
+
   // ===== Modal logic =====
+  var FOCUSABLE = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+  var returnFocus = {};
+
+  // Keep Tab / Shift+Tab cycling inside an open dialog
+  function trapFocus(container, e) {
+    var items = Array.prototype.filter.call(container.querySelectorAll(FOCUSABLE), function(el) {
+      return el.offsetParent !== null && !el.closest('[inert]');
+    });
+    if (!items.length) return;
+    var first = items[0], last = items[items.length - 1];
+    if (!container.contains(document.activeElement)) { e.preventDefault(); first.focus(); }
+    else if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+
   function openModal(id) {
-    document.getElementById(id).style.display = 'flex';
+    var overlay = document.getElementById(id);
+    returnFocus[id] = document.activeElement;
+    overlay.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    overlay.querySelector('.modal-close').focus();
   }
   function closeModal(id) {
     document.getElementById(id).style.display = 'none';
     document.body.style.overflow = '';
+    if (returnFocus[id]) returnFocus[id].focus();
   }
   document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+    var title = overlay.querySelector('.modal-title');
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    if (title) {
+      title.id = overlay.id + '-title';
+      overlay.setAttribute('aria-labelledby', title.id);
+    }
     overlay.addEventListener('click', function(e) {
       if (e.target === overlay) closeModal(overlay.id);
     });
   });
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
-        if (overlay.style.display === 'flex') closeModal(overlay.id);
-      });
-    }
+    // The lightbox sits above modals and handles its own keys
+    if (document.getElementById('lightbox').style.display === 'flex') return;
+    document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
+      if (overlay.style.display !== 'flex') return;
+      if (e.key === 'Escape') closeModal(overlay.id);
+      else if (e.key === 'Tab') trapFocus(overlay, e);
+    });
   });
 
   // ===== Carousel logic (supports multiple carousels) =====
@@ -1856,6 +1944,10 @@
         dot.classList.toggle('active', i === state.index);
       });
     }
+    // Keep off-screen slides out of the tab order and screen reader
+    Array.prototype.forEach.call(track.children, function(slide, i) {
+      slide.inert = i !== state.index;
+    });
     var wrap = track.parentElement;
     var activeSlide = track.children[state.index];
     if (wrap && activeSlide) {
@@ -1892,43 +1984,61 @@
   // ===== Lightbox logic (click a spot to zoom in there, click again to zoom out) =====
   var lightboxZoomed = false;
 
-  function openLightbox(src) {
+  var lightboxReturnFocus = null;
+
+  function openLightbox(src, alt) {
     var overlay = document.getElementById('lightbox');
     var img = document.getElementById('lightboxImg');
+    lightboxReturnFocus = document.activeElement;
     img.src = src;
+    img.alt = alt || 'Enlarged image';
     img.classList.remove('zoomed');
     img.style.transformOrigin = '50% 50%';
     lightboxZoomed = false;
     overlay.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    overlay.querySelector('.lightbox-close').focus();
   }
 
   function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
+    var overlay = document.getElementById('lightbox');
+    if (overlay.style.display !== 'flex') return;
+    overlay.style.display = 'none';
     var modalOpen = Array.prototype.some.call(document.querySelectorAll('.modal-overlay'), function(o) { return o.style.display === 'flex'; });
     document.body.style.overflow = modalOpen ? 'hidden' : '';
+    if (lightboxReturnFocus) lightboxReturnFocus.focus();
   }
 
-  document.getElementById('lightboxImg').addEventListener('click', function(e) {
-    e.stopPropagation();
-    var img = this;
+  function toggleLightboxZoom(img, xPct, yPct) {
     if (lightboxZoomed) {
       img.classList.remove('zoomed');
       lightboxZoomed = false;
       return;
     }
-    var rect = img.getBoundingClientRect();
-    var xPct = ((e.clientX - rect.left) / rect.width) * 100;
-    var yPct = ((e.clientY - rect.top) / rect.height) * 100;
     img.style.transformOrigin = xPct + '% ' + yPct + '%';
     img.classList.add('zoomed');
     lightboxZoomed = true;
+  }
+
+  document.getElementById('lightboxImg').addEventListener('click', function(e) {
+    e.stopPropagation();
+    var rect = this.getBoundingClientRect();
+    toggleLightboxZoom(this, ((e.clientX - rect.left) / rect.width) * 100, ((e.clientY - rect.top) / rect.height) * 100);
+  });
+
+  // Enter / Space zooms into the center
+  document.getElementById('lightboxImg').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleLightboxZoom(this, 50, 50);
+    }
   });
 
   document.addEventListener('keydown', function(e) {
     var overlay = document.getElementById('lightbox');
     if (overlay.style.display !== 'flex') return;
     if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'Tab') trapFocus(overlay, e);
   });
 
   // ===== Auto-wire zoom on hero + carousel images =====
@@ -1982,8 +2092,18 @@
       icon.innerHTML = zoomIconSVG();
       container.appendChild(icon);
 
+      container.setAttribute('tabindex', '0');
+      container.setAttribute('role', 'button');
+      container.setAttribute('aria-label', 'Enlarge image: ' + img.alt);
+
       container.addEventListener('click', function() {
-        openLightbox(img.currentSrc || img.src);
+        openLightbox(img.currentSrc || img.src, img.alt);
+      });
+      container.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openLightbox(img.currentSrc || img.src, img.alt);
+        }
       });
 
       applyIconContrast(img, icon);
